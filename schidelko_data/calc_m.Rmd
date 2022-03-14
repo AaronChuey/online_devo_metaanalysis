@@ -1,0 +1,53 @@
+---
+title: "cal_m"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(here)
+
+d_1 <- read_csv(here("d_1.csv"))
+```
+
+```{r}
+d_1 %>% 
+  group_by(Alter_Jahre, setting) %>% 
+  summarise(n = n(), 
+            mean_age = mean(age_months))
+```
+
+```{r}
+d_1 %>% 
+  mutate(proportion_correct = (fb1 + fb2) / 2) %>% 
+  group_by(Alter_Jahre, setting) %>% 
+  summarise(
+    m_proportion_corret = mean(proportion_correct), 
+    sd_proportion_correct = sd(proportion_correct)
+  )
+```
+
+```{r}
+d_2 <- read_csv(here("d_2.csv"))
+```
+
+```{r}
+d_2 %>% 
+  group_by(setting) %>% 
+  summarise(n = n(), 
+            mean_age = mean(age_months))
+```
+```{r}
+d_2 %>% 
+  mutate(
+    fb_proportion = (fb1 + fb2) / 2, 
+    tb_proportion = (tb1 + tb2) / 2) %>% 
+  group_by(setting) %>% 
+  summarise(
+    fb_mean = mean(fb_proportion), 
+    fb_sd = sd(fb_proportion), 
+    tb_mean = mean(tb_proportion), 
+    tb_sd = sd(tb_proportion)
+  )
+```
+

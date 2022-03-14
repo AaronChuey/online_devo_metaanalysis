@@ -1,0 +1,7 @@
+"0","d_1 %>% "
+"0","  group_by(Alter_Jahre, setting) %>% "
+"0","  summarise(n = n(), "
+"0","            mean_age = mean(age_months))"
+"1","[38;5;232m`summarise()` has grouped output by 'Alter_Jahre'. You can
+override using the `.groups` argument.[39m
+"
