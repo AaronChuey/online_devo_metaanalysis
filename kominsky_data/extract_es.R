@@ -55,3 +55,17 @@ log(online_or)*sqrt(3)/pi
 
 inperson_or <- 53 * 14 / (48 * 9)
 log(inperson_or)*sqrt(3)/pi
+
+# following log odds method from leonard data instead
+# except that the glm needs a logit link
+# these d's line up with above! 
+library(effectsize)
+for_mod <- dat.long %>% mutate(insides.bin=ifelse(Choice == "E", 0, 1),
+                               animate.bin=ifelse(Item=="Inert", 0, 1))
+online_mod <- glm(animate.bin ~ insides.bin, family=binomial(), data=for_mod %>% filter(Loc=="Online"))
+
+online_diff_es <- logoddsratio_to_d(online_mod[1]$coefficients[2])
+
+inperson_mod <- glm(animate.bin ~ insides.bin, family=binomial(), data=for_mod %>% filter(Loc=="in-person"))
+
+inperson_diff_es <- logoddsratio_to_d(inperson_mod[1]$coefficients[2])
