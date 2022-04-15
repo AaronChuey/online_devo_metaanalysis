@@ -60,9 +60,19 @@ d_calc <- d |>
 
     bind_cols(df,es)
   })
-
-View(d_calc)
 ```
+
+Check effect size computation against hand-computed where available. 
+
+```{r}
+ggplot(d_calc, 
+       aes(x = d, y = d_calc)) + 
+  geom_pointrange(aes(ymin = d_calc - d_var_calc, ymax = d_calc + d_var_calc)) +
+  geom_errorbarh(aes(xmin = d - d_var, xmax = d + d_var)) +
+  geom_abline(lty =2) + 
+  ggrepel::geom_label_repel(aes(label = paper_ID))
+```
+
 
 
 
