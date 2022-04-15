@@ -35,19 +35,37 @@ dat.long <- study %>%
   mutate(choiceLabel = ifelse(Choice=="B","Biological",ifelse(Choice=="M","Mechanical","Empty"))) %>%
   mutate(Item = ifelse(Item=="SPResp", "Self-propelled","Inert"))
 
-study1.bin <- dat.long %>%
-  mutate(insides=ifelse(Choice == "E", 0, 1))
+study1.bin <- dat.long %>% 
+  mutate(insides=ifelse(Choice == "E", "empty", "stuff")) %>% 
+  ungroup() %>% 
+  select(Loc,Item, insides) %>% 
+  group_by(Loc, Item, insides) %>% 
+  tally() %>% 
+  pivot_wider(names_from=insides, values_from=n) %>% 
+  mutate(checksum=empty+stuff)
 
-mod0_lab <- glmer(insides~(1|snum), data=study1.bin %>% filter(Loc=="in-person"), 
-              family=binomial(link="logit"))
-mod1_lab <- glmer(insides~Item + (1|snum), data=study1.bin %>% filter(Loc=="in-person"), 
-              family=binomial(link="logit"))
+# messing around with odds ratio
+# [(self-propelled & stuff)x(inert & empty)] / [(self-propelled & empty) x (inert & stuff) ] 
+# congruent / incongruent
 
-anova(mod1_lab, mod0_lab)
+# according to https://www.escal.site/ the conversion log odds = d * pi / root(3)
+#online or
+online_or <- 19 * 17 / (11* 13)
+log(online_or)*sqrt(3)/pi
 
-mod0_online <- glmer(insides~(1|snum), data=study1.bin %>% filter(Loc=="Online"), 
-                  family=binomial(link="logit"))
-mod1_online <- glmer(insides~Item + (1|snum), data=study1.bin %>% filter(Loc=="Online"), 
-                  family=binomial(link="logit"))
+inperson_or <- 53 * 14 / (48 * 9)
+log(inperson_or)*sqrt(3)/pi
 
-anova(mod1_online, mod0_online)
+# following log odds method from leonard data instead
+# except that the glm needs a logit link
+# these d's line up with above! 
+library(effectsize)
+for_mod <- dat.long %>% mutate(insides.bin=ifelse(Choice == "E", 0, 1),
+                               animate.bin=ifelse(Item=="Inert", 0, 1))
+online_mod <- glm(animate.bin ~ insides.bin, family=binomial(), data=for_mod %>% filter(Loc=="Online"))
+
+online_diff_es <- logoddsratio_to_d(online_mod[1]$coefficients[2])
+
+inperson_mod <- glm(animate.bin ~ insides.bin, family=binomial(), data=for_mod %>% filter(Loc=="in-person"))
+
+inperson_diff_es <- logoddsratio_to_d(inperson_mod[1]$coefficients[2])
