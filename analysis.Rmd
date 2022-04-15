@@ -1,0 +1,125 @@
+---
+title: "Meta-analytic results"
+author: "online testing meta-analysis group"
+date: "4/7/2022"
+output: html_document
+---
+
+# Preliminaries and data prep
+
+Meta-analysis inclusion spreadsheet at 
+
+Data file at [https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0]()
+
+```{r setup}
+library(tidyverse)
+library(googledrive)
+library(readxl)
+library(metafor)
+library(assertthat)
+```
+
+Download data.
+
+```{r}
+f <- googledrive::as_dribble("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
+googledrive::drive_download(f, overwrite = TRUE)
+d <- readxl::read_xlsx("Effect size coding (online testing MA).xlsx")
+```
+
+# Data prep and descriptives
+
+```{r}
+DT::datatable(d)
+```
+How many effect sizes do we have? 
+
+```{r}
+d |>
+  summarise(n = n(), 
+            n_es = sum(!is.na(d)), 
+            n_es_var = sum(!is.na(d_var)))
+
+
+```
+
+
+Attempt to perform effect size computation. 
+
+```{r}
+source("scripts/compute_es.R")
+
+d_calc <- d |>
+  mutate(idx = 1:n()) %>%
+  split(.$idx) |>
+  map_df(function (df) {
+    es <- compute_es(participant_design = df$participant_design, 
+                     x_1 = df$x_1, x_2 = df$x_2, 
+                     SD_1 = df$SD_1, SD_2 = df$SD_2, n_1 = df$n_1, n_2 = df$n_2,
+                     t = df$t, f = df$F, d = df$d, d_var = df$d_var)
+
+    bind_cols(df,es)
+  })
+
+View(d_calc)
+```
+
+
+
+
+# Main analysis
+
+## Confirmatory meta-analysis
+
+from prereg:
+
+> Following Chuey et al. (2021), we will use a random effects meta-analytic model with a further grouping factor for each experiment pair (lab vs. online) to account for methodological grouping, e.g.:  effect size ~ online_offline + (1 |  experiment).
+
+Note that we group by experimental paradigm (`experiment_ID`) in our preregistration, but this step does not eliminate the dependency between multiple measurements from the same children (e.g., both eye-tracking and video coding of the same data from the same children) if they contribute multiple effect sizes. In order to deal with this, we include a random effect grouping term (`same_infant`). 
+
+
+```{r}
+main_mod <- rma.mv(yi = d, 
+                   V = d_var,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = title, 
+                   data = d)
+summary(main_mod)
+```
+
+```{r}
+forest(main_mod)
+```
+
+
+
+>We will consider the following moderators in independent, separate moderated models:
+The type of online method: 
+Moderated / Synchronous method (e.g., using Zoom/Skype with an experimenter)
+Unmoderated / Asynchronous (e.g. using platform such as LookIt)
+Mean age of the children participated in the study (months)
+Response Mode 
+Looking (e.g., looking time, looking location, eye-tracking, lookaways, etc.)
+Non-looking (e.g. Verbal response, pointing, etc) 
+
+```{r}
+
+```
+
+## Exploratory meta-analysis
+
+>We will also code the following fields for exploratory analysis: 
+>Attrition rate: the proportion of children participated in the study but not included in the final analysis.
+>Number of trials: the number trials included in the experiment. 
+>Matching response mode: whether the in-person experiment and the online method has the matching response mode. 
+
+>As an exploratory step we will consider the inclusion of publication-bias diagnostics, but we do not focus on these methods here because 1) our primary hypothesis of interest is not about individual effects but about the contrast between effects, and 2) we are not certain whether the bias would be to publish pairs of effects that are different or similar. 
+
+
+
+
+```{r}
+
+```
+
