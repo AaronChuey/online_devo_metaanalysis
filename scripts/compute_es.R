@@ -29,6 +29,11 @@ compute_es <- function(participant_design, x_1 = NA, x_2 = NA, x_dif = NA,
   # depending on which data is available, effect sizes are calculated differently
   # switches on participant_design = "between", "within_two", or "within_one"
   
+  if (participant_design == "precomputed") {
+    d_calc <- d
+    d_var_calc <- d_var
+  }
+  
   ####### BETWEEN ########
   if (participant_design == "between") {
     es_method  <- "between"

@@ -17,6 +17,7 @@ library(googledrive)
 library(readxl)
 library(metafor)
 library(assertthat)
+library(glue)
 ```
 
 Download data.
@@ -30,17 +31,22 @@ d <- readxl::read_xlsx("Effect size coding (online testing MA).xlsx")
 # Data prep and descriptives
 
 ```{r}
+d <- d |>
+  rowwise() |>
+  mutate(short_cite = paste(str_c(str_split(authors, pattern = ",")[[1]][1], 
+                                  collapse = " "), ":",
+                            paste(str_split(title, pattern = " ")[[1]][1:2], 
+                                  collapse = " ")))
 DT::datatable(d)
 ```
 How many effect sizes do we have? 
 
 ```{r}
 d |>
+  ungroup() |>
   summarise(n = n(), 
             n_es = sum(!is.na(d)), 
             n_es_var = sum(!is.na(d_var)))
-
-
 ```
 
 
@@ -50,16 +56,19 @@ Attempt to perform effect size computation.
 source("scripts/compute_es.R")
 
 d_calc <- d |>
-  mutate(idx = 1:n()) %>%
-  split(.$idx) |>
-  map_df(function (df) {
+  ungroup() |>
+  mutate(idx = 1:n()) |>
+  group_by(idx) |>
+  nest() |>
+  mutate(data = map(data, function (df) {
     es <- compute_es(participant_design = df$participant_design, 
                      x_1 = df$x_1, x_2 = df$x_2, 
                      SD_1 = df$SD_1, SD_2 = df$SD_2, n_1 = df$n_1, n_2 = df$n_2,
                      t = df$t, f = df$F, d = df$d, d_var = df$d_var)
-
+    
     bind_cols(df,es)
-  })
+  })) |>
+  unnest(cols = c(data))
 ```
 
 Check effect size computation against hand-computed where available. 
@@ -89,12 +98,13 @@ Note that we group by experimental paradigm (`experiment_ID`) in our preregistra
 
 
 ```{r}
-main_mod <- rma.mv(yi = d, 
-                   V = d_var,
+d_calc$d_calc
+main_mod <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
                    mods = as.factor(expt_condition),
                    random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
-                   slab = title, 
-                   data = d)
+                   slab = short_cite, 
+                   data = d_calc)
 summary(main_mod)
 ```
 
@@ -102,6 +112,25 @@ summary(main_mod)
 forest(main_mod)
 ```
 
+This forest plot looks terrible. We might consider plotting difference scores? 
+
+```{r}
+d_diff <- d_calc |>
+  group_by(paper_ID, experiment_ID) %>%
+  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE)) 
+
+d_diff <- d_diff |>
+  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
+
+ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point() + 
+  coord_flip() + 
+  geom_hline(yintercept = 0, lty = 2) + 
+  ylab("SMD difference (online - in-person)") + 
+  xlab("")
+  
+```
 
 
 >We will consider the following moderators in independent, separate moderated models:
