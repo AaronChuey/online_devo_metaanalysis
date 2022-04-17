@@ -18,6 +18,7 @@ library(readxl)
 library(metafor)
 library(assertthat)
 library(glue)
+library(wesanderson)
 ```
 
 Download data.
@@ -108,11 +109,27 @@ main_mod <- rma.mv(yi = d_calc,
 summary(main_mod)
 ```
 
+model w/ online vs in-person, looking vs non-looking, moderated vs unmoderated, and mean age as moderators
+```{r}
+d_calc$d_calc
+full_mod <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = ~ as.factor(expt_condition) 
+                   + as.factor(response_mode)
+                   + as.factor(method)
+                   + mean_age_1,
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = short_cite, 
+                   data = d_calc)
+summary(full_mod)
+```
+
+
 ```{r}
 forest(main_mod)
 ```
 
-This forest plot looks terrible. We might consider plotting difference scores? 
+Forest plot w/ no grouping
 
 ```{r}
 d_diff <- d_calc |>
@@ -132,6 +149,70 @@ ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   
 ```
 
+Forest plot organized by response mode (looking vs non-looking)
+
+```{r}
+d_diff <- d_calc |>
+  group_by(paper_ID, experiment_ID, response_mode) %>%
+  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE)) 
+
+d_diff <- d_diff |>
+  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
+
+ggplot(d_diff, aes(x = short_cite, y = d_diff, color = response_mode)) + 
+  geom_point() + 
+  coord_flip() + 
+  scale_color_manual(values = wes_palette("Chevalier1", n = 2)) +
+  geom_hline(yintercept = 0, lty = 2) + 
+  ylab("SMD difference (online - in-person)") + 
+  xlab("")
+  
+```
+
+Forest plot organized by method (moderated vs unmoderated)
+
+```{r}
+d_diff <- d_calc |>
+  group_by(paper_ID, experiment_ID) %>%
+  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
+            method = method[expt_condition == "online"]) 
+
+d_diff <- d_diff |>
+  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
+
+ggplot(d_diff, aes(x = short_cite, y = d_diff, color = method)) + 
+  geom_point() + 
+  coord_flip() + 
+  scale_color_manual(values = wes_palette("Chevalier1", n = 2)) +
+  geom_hline(yintercept = 0, lty = 2) + 
+  ylab("SMD difference (online - in-person)") + 
+  xlab("")
+  
+```
+
+Forest plot organized by mean age
+
+```{r}
+d_diff <- d_calc |>
+  group_by(paper_ID, experiment_ID) %>%
+  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
+            mean_age = mean_age_1) 
+
+d_diff <- d_diff |>
+  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
+
+d_diff
+ggplot(d_diff, aes(x = short_cite, y = d_diff, color = mean_age)) + 
+  geom_point() + 
+  coord_flip() + 
+  geom_hline(yintercept = 0, lty = 2) + 
+  ylab("SMD difference (online - in-person)") + 
+  xlab("")
+  
+```
 
 >We will consider the following moderators in independent, separate moderated models:
 The type of online method: 
