@@ -19,6 +19,8 @@ library(metafor)
 library(assertthat)
 library(glue)
 library(wesanderson)
+
+source("scripts/compute_es.R")
 ```
 
 Download data.
@@ -36,7 +38,7 @@ d <- d |>
   rowwise() |>
   mutate(short_cite = paste(str_c(str_split(authors, pattern = ",")[[1]][1], 
                                   collapse = " "), ":",
-                            paste(str_split(title, pattern = " ")[[1]][1:2], 
+                            paste(str_split(main_title, pattern = " ")[[1]][1:2], 
                                   collapse = " ")))
 DT::datatable(d)
 ```
@@ -50,12 +52,34 @@ d |>
             n_es_var = sum(!is.na(d_var)))
 ```
 
-
-Attempt to perform effect size computation. 
+Number of papers and experiments.
 
 ```{r}
-source("scripts/compute_es.R")
+d |>
+  group_by(experiment_ID) |>
+  count() %>%
+  group_by(n) %>%
+  count() %>%
+  rename(n_experiments = n, 
+         n_papers = nn)
+```
 
+Age distribution. 
+
+```{r}
+ggplot(d %>% 
+         group_by(same_infant) %>% 
+         summarise(mean_age_1 = mean(mean_age_1)), 
+       aes(x = mean_age_1/12)) + 
+  geom_histogram(binwidth = 1) +
+  xlab("Mean age (years)") +
+  ylab("N groups")
+```
+
+
+Attempt to perform effect size computation. Note that `compute_es.R` is from MetaLab and was used in Bergmann et al. (2018), Child Dev. 
+
+```{r}
 d_calc <- d |>
   ungroup() |>
   mutate(idx = 1:n()) |>
@@ -69,7 +93,8 @@ d_calc <- d |>
     
     bind_cols(df,es)
   })) |>
-  unnest(cols = c(data))
+  unnest(cols = c(data)) |>
+  filter(!is.na(d_calc))
 ```
 
 Check effect size computation against hand-computed where available. 
@@ -80,11 +105,9 @@ ggplot(d_calc,
   geom_pointrange(aes(ymin = d_calc - d_var_calc, ymax = d_calc + d_var_calc)) +
   geom_errorbarh(aes(xmin = d - d_var, xmax = d + d_var)) +
   geom_abline(lty =2) + 
-  ggrepel::geom_label_repel(aes(label = paper_ID))
+  ggrepel::geom_label_repel(aes(label = short_cite))
 ```
-
-
-
+This confirms that -- when we have a hand-computed ES -- it matches the `compute_es.R` ES. 
 
 
 # Main analysis
@@ -99,7 +122,6 @@ Note that we group by experimental paradigm (`experiment_ID`) in our preregistra
 
 
 ```{r}
-d_calc$d_calc
 main_mod <- rma.mv(yi = d_calc, 
                    V = d_var_calc,
                    mods = as.factor(expt_condition),
@@ -109,122 +131,115 @@ main_mod <- rma.mv(yi = d_calc,
 summary(main_mod)
 ```
 
-model w/ online vs in-person, looking vs non-looking, moderated vs unmoderated, and mean age as moderators
+Check unweighted means. This incorrect approach is a good way to spot check if something is badly wrong. Indeed the mean difference is that online study ES are around .19 smaller. But a lot of the smallest ES are grouped within specific studies...
+
 ```{r}
-d_calc$d_calc
-full_mod <- rma.mv(yi = d_calc, 
-                   V = d_var_calc,
-                   mods = ~ as.factor(expt_condition) 
-                   + as.factor(response_mode)
-                   + as.factor(method)
-                   + mean_age_1,
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
-                   slab = short_cite, 
-                   data = d_calc)
-summary(full_mod)
+d_calc |>
+  group_by(expt_condition) |>
+  summarise(n = n(), 
+            d = mean(d_calc))
 ```
+
 
 
 ```{r}
 forest(main_mod)
 ```
 
-Forest plot w/ no grouping
+Plot of effect size differences (subtracted SMD). 
 
 ```{r}
 d_diff <- d_calc |>
   group_by(paper_ID, experiment_ID) %>%
   summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
-              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE)) 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE), 
+            age = mean(mean_age_1)) 
 
+# need to be careful with this because this merge can add rows
 d_diff <- d_diff |>
-  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
+  left_join(d_calc |> 
+              ungroup() |>
+              select(paper_ID, experiment_ID, short_cite) |> 
+              distinct())
 
 ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
-  geom_point() + 
-  coord_flip() + 
+  geom_point(alpha = .5, width = .25, height = 0) + 
+  coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   ylab("SMD difference (online - in-person)") + 
   xlab("")
-  
 ```
 
-Forest plot organized by response mode (looking vs non-looking)
 
-```{r}
-d_diff <- d_calc |>
-  group_by(paper_ID, experiment_ID, response_mode) %>%
-  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
-              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE)) 
-
-d_diff <- d_diff |>
-  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
-
-ggplot(d_diff, aes(x = short_cite, y = d_diff, color = response_mode)) + 
-  geom_point() + 
-  coord_flip() + 
-  scale_color_manual(values = wes_palette("Chevalier1", n = 2)) +
-  geom_hline(yintercept = 0, lty = 2) + 
-  ylab("SMD difference (online - in-person)") + 
-  xlab("")
-  
-```
-
-Forest plot organized by method (moderated vs unmoderated)
-
-```{r}
-d_diff <- d_calc |>
-  group_by(paper_ID, experiment_ID) %>%
-  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
-              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
-            method = method[expt_condition == "online"]) 
-
-d_diff <- d_diff |>
-  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
-
-ggplot(d_diff, aes(x = short_cite, y = d_diff, color = method)) + 
-  geom_point() + 
-  coord_flip() + 
-  scale_color_manual(values = wes_palette("Chevalier1", n = 2)) +
-  geom_hline(yintercept = 0, lty = 2) + 
-  ylab("SMD difference (online - in-person)") + 
-  xlab("")
-  
-```
-
-Forest plot organized by mean age
-
-```{r}
-d_diff <- d_calc |>
-  group_by(paper_ID, experiment_ID) %>%
-  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
-              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
-            mean_age = mean_age_1) 
-
-d_diff <- d_diff |>
-  left_join(d_calc |> select(paper_ID, experiment_ID, short_cite))
-
-d_diff
-ggplot(d_diff, aes(x = short_cite, y = d_diff, color = mean_age)) + 
-  geom_point() + 
-  coord_flip() + 
-  geom_hline(yintercept = 0, lty = 2) + 
-  ylab("SMD difference (online - in-person)") + 
-  xlab("")
-  
-```
+## Confirmatory moderators
 
 >We will consider the following moderators in independent, separate moderated models:
-The type of online method: 
-Moderated / Synchronous method (e.g., using Zoom/Skype with an experimenter)
-Unmoderated / Asynchronous (e.g. using platform such as LookIt)
-Mean age of the children participated in the study (months)
-Response Mode 
-Looking (e.g., looking time, looking location, eye-tracking, lookaways, etc.)
-Non-looking (e.g. Verbal response, pointing, etc) 
+* The type of online method:Moderated / Synchronous method (e.g., using Zoom/Skype with an experimenter) vs.Unmoderated / Asynchronous (e.g. using platform such as LookIt)
+* Response Mode: Looking (e.g., looking time, looking location, eye-tracking, lookaways, etc.) vs.Non-looking (e.g. Verbal response, pointing, etc) 
+* Mean age of the children participated in the study (months)
+
+### Moderated vs. synchronous
+
+The structure of this model is that we create an additional dummy-coded predictor, which is 1 for unmoderated online experiments and 0 otherwise. 
 
 ```{r}
+moderated_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        + as.factor(method),
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+summary(moderated_mod)
+```
+Sanity check of these estimated with unweighted means. Obviously incorrect, but if this looks different, we should debug. 
 
+```{r}
+d_calc |>
+  group_by(expt_condition, method) |>
+  summarise(d = mean(d_calc), 
+            n = n())
+```
+### Looking time vs. non-looking time
+
+Same approach as above, except that we need an interaction term because some of the in-person effect sizes have a looking time measure as well.
+
+```{r}
+looking_mod <- rma.mv(yi = d_calc, 
+                      V = d_var_calc, 
+                      mods = ~ as.factor(expt_condition) 
+                      * as.factor(response_mode),
+                      random = ~1 | as.factor(experiment_ID) + 
+                        as.factor(same_infant), 
+                      slab = short_cite, 
+                      data = d_calc)
+summary(looking_mod)
+```
+Sanity check of these estimated with unweighted means. Obviously incorrect, but if this looks different, we should debug. 
+
+```{r}
+d_calc |>
+  group_by(expt_condition, response_mode) |>
+  summarise(d = mean(d_calc), 
+            n = n())
+```
+
+### Age as moderator
+
+To test age, we again look at the interaction, this time of `age` and `expt_condition`. Need to center age. 
+
+```{r}
+d_calc$age_centered_mo <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
+age_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        * age_centered_mo,
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+summary(age_mod)
 ```
 
 ## Exploratory meta-analysis
@@ -235,11 +250,3 @@ Non-looking (e.g. Verbal response, pointing, etc)
 >Matching response mode: whether the in-person experiment and the online method has the matching response mode. 
 
 >As an exploratory step we will consider the inclusion of publication-bias diagnostics, but we do not focus on these methods here because 1) our primary hypothesis of interest is not about individual effects but about the contrast between effects, and 2) we are not certain whether the bias would be to publish pairs of effects that are different or similar. 
-
-
-
-
-```{r}
-
-```
-
