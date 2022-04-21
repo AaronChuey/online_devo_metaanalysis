@@ -333,13 +333,6 @@ m_plot
 a_plot
 ```
 
-short cites
-```{r}
-d_diff %>% 
-  group_by(short_cite) %>% 
-  summarize()
-```
-
 
 ## Exploratory meta-analysis
 
