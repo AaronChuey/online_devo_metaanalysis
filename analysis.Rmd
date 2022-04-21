@@ -19,6 +19,7 @@ library(metafor)
 library(assertthat)
 library(glue)
 library(wesanderson)
+library(gridExtra)
 
 source("scripts/compute_es.R")
 ```
@@ -162,12 +163,13 @@ d_diff <- d_diff |>
               select(paper_ID, experiment_ID, short_cite) |> 
               distinct())
 
-ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+smd_plot1 = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
   geom_point(alpha = .5, width = .25, height = 0) + 
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   ylab("SMD difference (online - in-person)") + 
   xlab("")
+smd_plot1
 ```
 
 
@@ -178,7 +180,7 @@ ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
 * Response Mode: Looking (e.g., looking time, looking location, eye-tracking, lookaways, etc.) vs.Non-looking (e.g. Verbal response, pointing, etc) 
 * Mean age of the children participated in the study (months)
 
-### Moderated vs. synchronous
+### Moderated vs. Unmoderated
 
 The structure of this model is that we create an additional dummy-coded predictor, which is 1 for unmoderated online experiments and 0 otherwise. 
 
@@ -241,6 +243,103 @@ age_mod <- rma.mv(yi = d_calc,
                         data = d_calc)
 summary(age_mod)
 ```
+
+CDS Graphs - SMD by online vs in-person + looking/non-looking + moderated/unmoderated
+```{r}
+d_diff <- d_calc |>
+  group_by(paper_ID, experiment_ID) %>%
+  summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
+              mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
+```
+
+
+```{r}
+Age = mean(mean_age_1),
+            Measure = response_mode[expt_condition == "online"],
+            Online_Method = method[expt_condition == "online"]) 
+
+# need to be careful with this because this merge can add rows
+d_diff <- d_diff |>
+  left_join(d_calc |> 
+              ungroup() |>
+              select(paper_ID, experiment_ID, short_cite) |> 
+              distinct())
+```
+
+```{r}
+blank_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point(alpha=0) +
+  coord_flip() +
+  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite, d_diff, sum)) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  #scale_fill_manual(values = wes_palette("Chevalier1", n = 2), name = "Online method", labels = c("Moderated", "Unmoderated")) +
+  theme_minimal()
+
+vanilla_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point(alpha = 1, width = .25, height = .25, size = 4) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  #scale_fill_manual(values = wes_palette("Chevalier1", n = 2), name = "Online method", labels = c("Moderated", "Unmoderated")) +
+  theme_minimal()
+  #theme(legend.position="none")
+
+om_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point(aes(color = Online_Method), alpha = 1, width = .25, height = .25, size = 4) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online method", labels = c("Moderated", "unmoderated")) +
+  theme_minimal()
+  #theme(legend.position="none")
+
+m_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point(aes(color = Measure), alpha = 1, width = .25, height = .25, size = 4) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Non-looking")) +
+  theme_minimal()
+  #theme(legend.position="none")
+
+a_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
+  geom_point(aes(color = Age), alpha = 1, width = .25, height = .25, size = 4) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  scale_color_continuous(name="Age (Months)") +
+  theme_minimal()
+  #theme(legend.position="none")
+
+blank_plot
+vanilla_plot
+om_plot
+m_plot
+a_plot
+```
+
+short cites
+```{r}
+d_diff %>% 
+  group_by(short_cite) %>% 
+  summarize()
+```
+
 
 ## Exploratory meta-analysis
 
