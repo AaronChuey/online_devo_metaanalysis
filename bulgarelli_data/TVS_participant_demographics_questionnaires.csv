@@ -1,0 +1,172 @@
+Name,Age_days,Sex,Languages,Exclude,Reason,TVCondition,Pair,Order,Race,MatEducation,X12,Parent1Dialect,Parent2Dialect,Experiment,Monitor,SubjectID,WordsUnderstood,WordsProduced
+T006,262,F,English,yes,technical,NA,NA,NA,5,K,NA,General,General,1,NA,T006,14,0
+T007,251,M,"English, Lithuanian",yes,technical,NA,NA,NA,5,I,NA,General,General,1,NA,T007,50,0
+T008,250,M,English and Spanish,no,NA,NoVariability,1,1,5,L,NA,General,General,1,NA,T008,3,0
+T009,247,M,"English, Spanish",yes,parent,NA,NA,NA,5,J,NA,General,Southern,1,NA,T009,14,0
+T010,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T010,NA,NA
+T011,227,F,English,yes,premature,NA,NA,NA,5,L,NA,General,General,1,NA,T011,0,0
+T012,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T012,4,1
+T013,221,M,English,no,NA,NoVariability,1,2,5,K,NA,NA,NA,1,NA,T013,4,0
+T014,213,F,English,no,NA,NoVariability,1,1,5,L,NA,General,General,1,NA,T014,0,0
+T015,236,M,English,no,NA,NoVariability,1,1,5,J,NA,Southern,General,1,NA,T015,27,0
+T016,272,M,English,no,NA,NoVariability,1,2,"2,5",J,NA,General,Southern,1,NA,T016,27,0
+T017,252,F,"English, Spanish",yes,language,NA,NA,NA,5,H,NA,NonNative,Southern,1,NA,T017,234,23
+T018,245,M,NA,no,NA,NoVariability,1,1,NA,NA,NA,General,Southern,1,NA,T018,14,0
+T019,219,F,English,no,NA,NoVariability,1,1,5,J,NA,Midwest,Southern,1,NA,T019,10,0
+T020,268,M,English,no,NA,NoVariability,1,2,5,G,NA,Southern,Southern,1,NA,T020,8,0
+T021,220,M,English,no,NA,NoVariability,1,2,5,F,NA,Southern,Southern,1,NA,T021,1,0
+T022,214,M,"English, Arabic, French",no,NA,NoVariability,2,1,"5,6",J,NA,General,General,1,NA,T022,12,0
+T023,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T023,NA,NA
+T024,218,F,English,no,NA,NoVariability,2,2,"3,5",J,NA,General,General,1,NA,T024,20,2
+T025,NA,M,English,yes,fussed,NA,NA,NA,5,J,NA,Southern,General,1,NA,T025,5,0
+T026,331,M,English,yes,premature,NA,NA,NA,5,J,NA,NA,NA,1,NA,T026,NA,NA
+T027,244,M,English,no,NA,NoVariability,2,2,5,I,NA,General,General,1,NA,T027,8,0
+T028,222,M,English,no,NA,NoVariability,2,1,5,J,NA,General,General,1,NA,T028,24,0
+T029,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T029,NA,NA
+T030,250,M,English,no,NA,NoVariability,2,2,5,K,NA,General,General,1,NA,T030,39,0
+T031,262,M,English,no,NA,NoVariability,2,2,"2,5",J,NA,General,General,1,NA,T031,13,0
+T032,267,M,"English, Spanish",yes,technical,NA,NA,NA,5,L,NA,General,General,1,NA,T032,1,0
+T033,215,F,English,no,NA,NoVariability,2,1,5,J,NA,General,General,1,NA,T033,10,0
+T034,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T034,NA,NA
+T035,220,F,English,no,NA,NoVariability,2,1,5,K,NA,General,General,1,NA,T035,47,0
+T036,234,F,"English, Spanish",no,NA,NoVariability,2,2,5,K,NA,General,General,1,NA,T036,0,0
+T037,214,F,English,no,NA,WithinTalker,1,1,"2,5",K,NA,General,General,1,NA,T037,11,1
+T038,214,M,English,no,NA,WithinTalker,1,2,5,J,NA,General,General,1,NA,T038,23,0
+T039,224,M,English,yes,fussed,NA,NA,NA,5,J,NA,General,General,1,NA,T039,11,0
+T040,232,M,English,no,NA,WithinTalker,2,2,5,J,NA,General,Midwest,1,NA,T040,77,1
+T041,254,M,English,no,NA,WithinTalker,1,1,5,K,NA,General,General,1,NA,T041,27,4
+T042,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T042,NA,NA
+T043,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T043,NA,NA
+T044,226,F,English,yes,parent,NA,NA,NA,5,K,NA,General,Southern,1,NA,T044,NA,NA
+T045,271,M,English,yes,fussed,NA,NA,NA,3,K,NA,Southern,Southern,1,NA,T045,22,2
+T046,215,F,English,no,NA,BetweenTalker,1,1,5,K,NA,Midwest,Midwest,1,NA,T046,5,0
+T047,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T047,NA,NA
+T048,268,M,English,yes,fussed,NA,NA,NA,5,E,NA,General,General,1,NA,T048,98,0
+T049,218,M,English,no,NA,BetweenTalker,1,2,5,J,NA,Southern,Southern,1,NA,T049,5,0
+T050,252,M,English,no,NA,BetweenTalker,2,1,5,K,NA,General,General,1,NA,T050,19,5
+T051,274,F,English,yes,fussed,NA,NA,NA,3,I,NA,General,Southern,1,NA,T051,27,0
+T052,274,M,English,no,NA,BetweenTalker,2,2,3,I,NA,General,Southern,1,NA,T052,27,0
+T053,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T053,NA,NA
+T054,273,M,English,no,NA,BetweenTalker,1,1,5,K,NA,General,General,1,NA,T054,11,2
+T055,260,F,English,no,NA,WithinTalker,1,2,5,J,NA,Southern,General,1,NA,T055,26,0
+T056,229,F,English,no,NA,WithinTalker,2,1,5,K,NA,General,General,1,NA,T056,6,0
+T057,273,F,English,no,NA,WithinTalker,2,2,5,K,NA,General,General,1,NA,T057,20,0
+T058,230,F,"English, Spanish, ASL",no,NA,BetweenTalker,1,2,5,J,NA,General,General,1,NA,T058,2,2
+T059,223,F,English,no,NA,WithinTalker,2,1,"3,5",J,NA,Southern,Southern,1,NA,T059,9,2
+T060,256,M,English and Spanish,no,NA,BetweenTalker,2,1,5,K,NA,Midwest,NonNative,1,NA,T060,8,1
+T061,253,F,"English, Mandarin",no,NA,BetweenTalker,1,1,"2,5",L,NA,General,General,1,NA,T061,8,0
+T062,256,F,English,no,NA,WithinTalker,1,1,5,H,NA,General,General,1,NA,T062,21,2
+T063,215,F,English,no,NA,WithinTalker,1,2,5,L,NA,General,General,1,NA,T063,0,0
+T064,261,F,English,no,NA,WithinTalker,2,1,5,K,NA,Midwest,General,1,NA,T064,24,0
+T065,263,M,English,no,NA,BetweenTalker,1,2,5,K,NA,Midwest,General,1,NA,T065,15,0
+T066,224,F,"English, Italian",no,NA,WithinTalker,2,2,5,J,NA,General,General,1,NA,T066,0,0
+T067,224,F,"English, Italian",no,NA,WithinTalker,2,2,5,J,NA,General,General,1,NA,T067,0,0
+T068,269,M,English,no,NA,BetweenTalker,1,2,"2,5",K,NA,NewEngland,UK,1,NA,T068,7,2
+T069,273,M,English,no,NA,BetweenTalker,2,1,5,I,NA,General,General,1,NA,T069,18,0
+T070,265,F,English,no,NA,BetweenTalker,2,2,"2,5",K,NA,General,General,1,NA,T070,0,0
+T071,221,F,English,no,NA,WithinTalker,1,1,5,K,NA,General,General,1,NA,T071,22,0
+T072,221,M,English/Mandarin,no,NA,WithinTalker,2,1,5,K,NA,General,Southern,1,NA,T072,18,1
+T073,254,M,English,no,NA,WithinTalker,1,2,5,J,NA,General,General,1,NA,T073,1,0
+T074,277,M,English,yes,language,NA,NA,NA,5,L,NA,General,General,1,NA,T074,18,3
+T075,218,F,English,no,NA,BetweenTalker,1,1,5,J,NA,Southern,General,1,NA,T075,0,0
+T076,272,M,English,no,NA,BetweenTalker,1,2,5,C,NA,General,General,1,NA,T076,14,0
+T077,260,M,English,no,NA,BetweenTalker,2,1,5,J,NA,Midwest,Midwest,1,NA,T077,12,0
+T078,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T078,25,3
+T079,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T079,16,3
+T080,270,M,English,no,NA,BetweenTalker,2,2,5,J,NA,Midwest,Midwest,1,NA,T080,12,0
+T081,257,F,English,yes,fussed,NA,NA,NA,5,J,NA,Southern,Southern,1,NA,T081,11,0
+T082,273,F,English,no,NA,WithinTalker,1,1,3,J,NA,Southern,Southern,1,NA,T082,0,0
+T083,262,F,English,no,NA,WithinTalker,2,2,5,K,NA,General,General,1,NA,T083,3,1
+T084,264,F,English,no,NA,BetweenTalker,1,1,5,K,NA,General,General,1,NA,T084,24,2
+T086,241,F,English,no,NA,BetweenTalker,2,2,6,E,NA,General,General,1,NA,T086,12,1
+T088,267,F,English,no,NA,NoVariability,1,1,5,E,NA,Southern,Southern,2,NA,T088,5,4
+T090,270,M,English,no,NA,NoVariability,1,2,5,K,NA,NewEngland,Southern,2,NA,T090,35,1
+T0908,238,M,English,no,NA,WithinTalker,1,2,5,K,NA,Southern,General,2,NA,T0908,0,0
+T091,245,F,English,no,NA,NoVariability,2,2,5,J,NA,Midwest,Midwest,2,NA,T091,11,0
+T092,258,F,English,no,NA,WithinTalker,1,1,"2, 5",J,NA,General,General,2,NA,T092,10,2
+T094,266,M,"English, Russian",no,NA,NoVariability,2,2,5,K,NA,Midwest,General,2,NA,T094,21,0
+T100,245,M,English,no,NA,WithinTalker,2,2,5,J,NA,Midwest,General,2,NA,T100,0,0
+T101,273,M,English,no,NA,WithinTalker,2,2,5,L,NA,Southern,Southern,2,NA,T101,8,0
+T109,216,M,"English, Spanish, French",no,NA,NoVariability,1,1,5,H,NA,Southern,Midwest,online,13,T109,3,0
+T110,215,F,English,yes,technical,NoVariability,1,2,NA,NA,NA,NA,NA,online,NA,T110,56,3
+T111,230,F,English,yes,technical,NoVariability,1,1,5,L,NA,NA,NA,online,NA,T111,35,0
+T113,262,F,English,no,NA,NoVariability,1,1,5,J,NA,Southern,Southern,online,13,T113,35,1
+T114,263,M,English,no,NA,NoVariability,1,2,5,K,NA,Midwest,Midwest,online,15,T114,25,0
+T115,228,M,English,no,NA,NoVariability,1,2,5,E,1,Southern,Southern,online,11,T115,34,1
+T116,218,M,English,no,NA,NoVariability,1,1,5,J,NA,Southern,General,online,14,T116,6,2
+T117,262,M,"English, Chinese",yes,technical,NoVariability,1,1,6,I,NA,Midwest,Midwest,online,ipad,T117,4,1
+T118,242,M,English,no,NA,NoVariability,1,2,5,K,NA,General,General,online,13,T118,4,0
+T119,221,M,English,yes,technical,NoVariability,1,2,5,J,NA,NA,NA,online,NA,T119,6,0
+T122,266,F,"English, Spanish",no,NA,NoVariability,1,1,5,L,NA,Midwest,General,online,13,T122,30,0
+T123,266,F,English,no,NA,NoVariability,2,1,5,J,NA,Midwest,Southern,online,13,T123,63,0
+T124,228,F,English,no,NA,NoVariability,2,2,5,L,NA,General,General,online,14,T124,5,0
+T125,222,F,English,no,NA,NoVariability,2,1,5,J,NA,General,General,online,14,T125,2,0
+T126,273,F,English,no,NA,NoVariability,2,2,5,J,NA,Midwest,Midwest,online,13,T126,14,0
+T127,218,F,English,no,NA,NoVariability,2,2,5,L,NA,General,NonNative,online,13,T127,0,0
+T128,255,F,English,no,NA,NoVariability,2,1,5,K,NA,General,General,online,13,T128,23,0
+T130,241,M,NA,yes,technical,NoVariability,2,2,NA,NA,NA,NA,NA,online,NA,T130,NA,NA
+T131,279,M,English,no,NA,NoVariability,2,2,5,J,NA,Midwest,Other,online,13,T131,103,0
+T132,222,F,English,no,NA,NoVariability,2,1,5,J,NA,Midwest,General,online,16,T132,28,0
+T134,251,M,English,no,NA,NoVariability,2,2,5,J,NA,Midwest,Midwest,online,20,T134,40,0
+T135,233,M,English,no,NA,NoVariability,1,2,5,J,NA,Southern,General,2,17,T135,13,3
+T136,217,F,English,no,NA,NoVariability,1,2,5,J,NA,General,General,2,13,T136,10,0
+T138,217,F,English,yes,technical,NoVariability,2,2,5,J,NA,Midwest,General,2,13,T138,32,0
+T139,228,F,"English, Spanish",no,NA,NoVariability,2,1,5,L,NA,Other,Other,2,13,T139,52,0
+T141,238,F,English,no,NA,WithinTalker,1,1,5,L,NA,General,General,2,15,T141,NA,NA
+T142,228,M,English,no,NA,NoVariability,2,2,5,K,NA,Midwest,Midwest,2,13,T142,11,0
+T143,243,M,English,yes,habituation,WithinTalker,1,2,5,L,NA,Other,Other,2,27,T143,4,0
+T145,218,F,English,no,NA,WithinTalker,1,2,5,K,NA,Southern,General,2,14,T145,4,0
+T146,261,F,English,no,NA,BetweenTalker,1,1,5,L,NA,General,General,2,14,T146,7,1
+T147,215,M,English,no,NA,BetweenTalker,1,2,5,K,NA,Midwest,Midwest,2,16,T147,0,0
+T148,232,F,English,no,NA,BetweenTalker,2,1,5,H,NA,General,General,2,15,T148,7,0
+T150,227,F,English,yes,technical,BetweenTalker,2,1,5,K,NA,Other,Southern,2,13,T150,NA,NA
+T152,225,M,English,no,NA,BetweenTalker,1,1,5,L,NA,General,General,2,15,T152,0,0
+T154,220,M,English,no,NA,BetweenTalker,2,2,2,L,NA,General,General,2,13,T154,0,0
+T155,220,F,English,no,NA,BetweenTalker,2,1,5,J,NA,General,General,2,13,T155,3,0
+T156,221,M,"English, Spanish",yes,technical,BetweenTalker,1,2,5,L,1,NewEngland,Southern,2,13,T156,1,0
+T160,250,F,English,yes,habituation,BetweenTalker,1,2,5,H,NA,General,Midwest,2,15,T160,18,0
+T161,225,F,English,no,NA,BetweenTalker,1,2,5,K,NA,General,NewEngland,2,13,T161,21,0
+T162,223,M,English,no,NA,BetweenTalker,2,2,5,L,NA,Midwest,Midwest,2,15,T162,4,1
+T163,237,M,English,no,NA,WithinTalker,2,1,5,J,NA,Midwest,Midwest,2,13,T163,2,0
+T164,232,M,English,no,NA,WithinTalker,2,2,5,K,NA,General,NewEngland,2,15,T164,NA,NA
+T165,226,F,English,no,NA,NoVariability,1,1,5,I,NA,General,General,online,13,T165,1,0
+T166,216,F,English,no,NA,NoVariability,1,2,5,L,NA,General,General,online,13,T166,14,0
+T169,250,M,English,no,NA,NoVariability,1,1,6,J,NA,General,General,2,13,T169,10,0
+T170,241,M,English,no,NA,NoVariability,1,2,5,L,NA,General,General,2,15,T170,0,0
+T183,254,F,"English, Russian",no,NA,NoVariability,2,1,5,L,NA,General,General,2,13,T183,19,0
+T187,225,F,English,yes,technical,NoVariability,2,1,5,J,NA,Southern,General,2,13,T187,3,0
+T191,255,M,English,no,NA,NoVariability,2,2,5,K,NA,General,General,2,13,T191,18,0
+T192,244,M,English,no,NA,WithinTalker,1,1,5,L,NA,General,General,2,22,T192,0,0
+T194,217,F,English,no,NA,WithinTalker,1,2,5,K,NA,General,General,2,15,T194,17,0
+T195,250,M,English,no,NA,WithinTalker,2,1,5,L,NA,Midwest,General,2,13,T195,NA,NA
+T196,241,M,English,no,NA,BetweenTalker,1,1,5,L,NA,Southern,General,2,13,T196,11,0
+T197,236,F,NA,no,NA,WithinTalker,2,2,"2,5",NA,NA,General,Southern,2,13,T197,13,0
+T199,227,F,English,no,NA,BetweenTalker,2,1,5,J,NA,General,General,2,15,T199,29,0
+T200,236,M,English,yes,technical,BetweenTalker,1,2,5,J,NA,NA,NA,2,NA,T200,4,0
+T201,220,F,English,no,NA,BetweenTalker,1,2,5,K,NA,General,General,2,15,T201,NA,NA
+T202,260,F,NA,NA,noshow,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T202,NA,NA
+T203,249,M,English,no,NA,NoVariability,2,1,5,J,NA,Southern,General,2,13,T203,7,0
+T204,239,F,English,no,NA,BetweenTalker,2,2,5,J,NA,General,General,2,12,T204,4,0
+T208,232,F,English,no,NA,NoVariability,1,1,5,J,NA,Southern,General,2,13,T208,3,0
+T209,264,M,English,no,NA,NoVariability,1,2,5,K,NA,General,General,2,15,T209,2,1
+T210,216,F,English,no,NA,NoVariability,2,2,5,L,NA,Southern,General,2,12,T210,19,0
+T211,273,F,English,no,NA,WithinTalker,1,1,5,K,NA,Southern,Southern,2,15,T211,NA,NA
+T212,218,M,NA,NA,noshow,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T212,NA,NA
+T215,231,F,English,no,NA,WithinTalker,1,2,5,NA,NA,Other,General,2,15,T215,8,0
+T216,219,M,English,yes,experimenter,WithinTalker,2,1,"3, 5",J,NA,Southern,Southern,2,19,T216,14,0
+T217,218,M,English,no,NA,WithinTalker,2,2,5,K,NA,Southern,Southern,2,15,T217,29,0
+T218,221,F,English,no,NA,BetweenTalker,1,2,5,K,NA,Southern,General,2,12,T218,4,0
+T220,216,F,English,no,NA,BetweenTalker,1,1,5,K,NA,Southern,General,2,15,T220,33,4
+T221,215,F,English,no,NA,BetweenTalker,2,1,5,K,NA,General,NewEngland,2,17,T221,3,0
+T222,169,M,"Englishs, French",yes,habituation,BetweenTalker,2,2,5,K,NA,Geneal,General,2,15,T222,19,0
+T223,140,M,NA,no,NA,BetweenTalker,2,2,5,NA,NA,Midwest,General,2,15,T223,NA,NA
+T224,213,M,"English, Malayalam",no,NA,NoVariability,1,1,"2, 6",J,NA,General,Southern,2,13,T224,5,0
+T225,227,M,English,no,NA,WithinTalker,2,1,5,K,NA,Southern,Southern,2,13,T225,3,0
+T226,214,F,English,no,NA,NoVariability,2,2,5,L,NA,Southern,Midwest,2,15,T226,0,0
+T227,217,F,English,yes,fussed,BetweenTalker,1,1,"2, 4, 5",L,NA,NA,NA,2,NA,T227,11,0
+T228,227,F,Englsh,no,NA,BetweenTalker,1,1,5,J,NA,General,General,2,13,T228,12,0
+T230,252,F,English,no,NA,WithinTalker,1,2,5,K,1,NewEngland,NewEngland,2,34,T230,7,0
+T231,217,F,English,yes,parent,WithinTalker,2,1,"3,5",K,1,Midwest,Midwest,2,11,T231,2,0
+T232,221,M,English,no,NA,BetweenTalker,2,2,5,K,NA,Southern,Southern,2,12,T232,9,0
+T233,222,M,English,yes,habituation,WithinTalker,2,1,5,L,NA,General,General,2,15,T233,6,0
+T234,227,F,English,no,NA,WithinTalker,2,1,5,L,NA,General,Southern,2,18,T234,11,0
