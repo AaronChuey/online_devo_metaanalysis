@@ -1,0 +1,33 @@
+﻿Subject ID,Condition,CondType,Subject Name,Gender,FamEmo,FamType,CompletionOrder,EmoOrder,DOB,DOT,Age,comments,In-out,Hfirst_fam,Sfirst_fam,HC,HF,SC,SF,propHC,propHF,propSC,propSF,completedeffect,failedeffect,showeditCompleted,showeditFailed,CompleteFirst?
+2,eaeg,o,w,m,H,L,RCPF,SH,8/16/10,7/1/11,319,need to recode first test event (started timing at beginning of trial by accident),1,15.2,15.4,7.4,10.4,8.7,8.4,0.212034384,0.297994269,0.249283668,0.240687679,1.3,2,1,1,1
+3,eaeg,o,e,m,S,L,PCRF,SH,9/2/10,7/5/11,306,good baby. need to recode first test event (started timing at beginning of trial by accident),1,20.1,18.6,15.5,8.7,11.7,8.9,0.345982143,0.194196429,0.261160714,0.198660714,-3.8,-0.2,0,0,1
+6,eaeg,o,c,f,S,L,RFPC,HS,9/22/10,7/15/11,296,good baby. really inattentive during trial 6 (trial 8 in xhab),1,4.7,13,11.6,2.6,8.7,8.1,0.374193548,0.083870968,0.280645161,0.261290323,-2.9,-5.5,0,0,0
+7,eaeg,o,r,m,H,R,RFPC,SH,9/18/10,7/15/11,300,"good baby, attentive",1,18.2,24.1,10.3,6.6,21.7,11.9,0.203960396,0.130693069,0.42970297,0.235643564,11.4,-5.3,1,0,0
+8,eaeg,o,a,f,H,L,PFRC,HS,9/24/10,7/15/11,294,good baby. need to recode first test event (started timing at beginning of trial by accident),1,15.7,14.2,17,12,12.6,4.8,0.36637931,0.25862069,0.271551724,0.103448276,-4.4,7.2,0,1,0
+9,eaeg,o,u,f,S,L,RFPC,SH,10/1/10,7/19/11,291,(originally an ISP baby),1,12.3,15.7,9.6,3.8,9.6,5.1,0.341637011,0.135231317,0.341637011,0.181494662,0,-1.3,1,0,0
+10,eaeg,o,h,m,H,L,PFRC,HS,10/6/10,7/25/11,292,good baby. need to recode first test event (started timing at beginning of trial by accident),1,12.6,2.5,6.8,5.7,24.4,6.9,0.155251142,0.130136986,0.557077626,0.157534247,17.6,-1.2,1,0,0
+11,eaeg,o,c,m,S,L,PCRF,HS,9/22/10,7/26/11,307,good baby,1,23.3,42.7,28.6,17.5,17.3,7.9,0.40112202,0.245441795,0.242636746,0.110799439,-11.3,9.6,0,1,1
+12,eaeg,o,n,m,H,R,RCPF,HS,10/8/10,7/28/11,293,"kinda fussy, but saw all events. trial 8 (test trial 6) needs to be recoded because buttong was messed up. had to stop once in middle to fix coding issue. only got last bit on vhs due to coder error. trials in second set of 4 cut early.",1,15.1,7.5,6.8,13.3,18.1,10.9,0.138492872,0.270875764,0.368635438,0.221995927,11.3,2.4,1,1,1
+13,eaeg,o,p,f,S,R,RCPF,SH,10/11/10,8/1/11,294,"very fussy, stopped after 5 trials because she was crying so much. 5 trials she did might be useable though",1,27.2,41.9,10,11,21.9,5.3,0.20746888,0.228215768,0.454356846,0.109958506,11.9,5.7,1,1,1
+14,eaeg,o,j,m,S,R,PFRC,HS,10/14/10,8/2/11,292,good baby!,1,20.4,23.3,15.3,22.3,17.1,15.9,0.216713881,0.315864023,0.242209632,0.225212465,1.8,6.4,1,1,0
+16,eaeg,o,l,f,S,R,RCPF,HS,10/24/10,8/15/11,295,good baby!,1,26.9,27.7,21.4,21.2,34.4,27.1,0.205571566,0.203650336,0.330451489,0.260326609,13,-5.9,1,0,1
+17,eaeg,o,l,m,H,L,RCPF,SH,10/4/10,8/16/11,316,good baby!,1,24,16.4,17,10.6,5.4,14.3,0.359408034,0.22410148,0.114164905,0.302325581,-11.6,-3.7,0,0,1
+18,eaeg,o,l,m,S,L,RFPC,SH,10/3/10,8/17/11,318,very short looks over all. didn't watch end of trial 8. long latency before look,1,7.8,10.1,4.6,2.7,7.4,3.2,0.25698324,0.150837989,0.413407821,0.17877095,2.8,-0.5,1,0,0
+20,eaeg,o,m,f,H,L,PFRC,SH,11/9/10,9/2/11,297,great baby!,1,29.6,30.4,13.9,26.2,23.1,21.1,0.164887307,0.310794781,0.274021352,0.25029656,9.2,5.1,1,1,0
+21,eaeg,o,c,m,H,L,PFRC,HS,10/27/10,9/7/11,315,good baby!,1,32.2,27.6,23.3,20,10,12.7,0.353030303,0.303030303,0.151515152,0.192424242,-13.3,7.3,0,1,0
+22,eaeg,o,h,f,H,R,RCPF,HS,11/19/10,9/8/11,293,good baby!,1,18.3,5.2,11.5,15.6,7,3,0.309973046,0.420485175,0.188679245,0.080862534,-4.5,12.6,0,1,1
+23,eaeg,o,e,f,H,R,PCRF,SH,11/15/10,9/12/11,301,great baby!,1,14.3,18.7,11.9,15.1,11.5,11,0.24040404,0.305050505,0.232323232,0.222222222,-0.4,4.1,0,1,1
+24,eaeg,o,c,m,S,R,PFRC,SH,11/7/10,9/13/11,310,great baby!,1,18.3,24.1,16.9,10.8,45,8.9,0.207107843,0.132352941,0.551470588,0.109068627,28.1,1.9,1,1,0
+25,eaeg,o,s,m,S,L,PCRF,HS,11/11/10,9/13/11,306,okay baby. a bit fussy especially towards the end. Coding error during trial 7 (xhab trial 9). had to repeat,1,21,44.4,11.3,13.3,12.4,24.7,0.183144246,0.215559157,0.200972447,0.400324149,1.1,-11.4,1,0,1
+26,eaeg,o,s,f,S,R,PFRC,SH,12/3/10,9/19/11,290,good baby,1,18.4,26.3,11.2,9.1,16.5,8.4,0.247787611,0.201327434,0.365044248,0.185840708,5.3,0.7,1,1,0
+27,eaeg,o,t,m,S,L,RFPC,HS,1/8/10,9/20/11,620,good baby!,1,21.2,17.7,9,22,10.6,16.6,0.154639175,0.378006873,0.182130584,0.285223368,1.6,5.4,1,1,0
+28,eaeg,o,e,f,S,R,RCPF,HS,11/25/10,9/20/11,299,last 3 trials crummy. missed a lot of trial 6 and 8 familiarization. should probably exclude these trials,1,12.1,14.6,9.8,11.9,7.4,9.5,0.25388601,0.308290155,0.191709845,0.24611399,-2.4,2.4,0,1,1
+29,eaeg,o,j,f,S,R,PFRC,HS,12/5/10,9/21/11,290,"a bit fussy. some parental caresses. phone rang during last trial (trial 8, 10 in xhab)",1,23.5,3.2,26.6,17,17.3,16.5,0.343669251,0.219638243,0.223514212,0.213178295,-9.3,0.5,0,1,0
+30,eaeg,o,n,f,S,L,PCRF,SH,11/21/10,9/23/11,306,good baby. recode last trial. may have started xhab at wrong time.,1,12.1,23.8,6.8,9.9,11.8,10.3,0.175257732,0.255154639,0.304123711,0.265463918,5,-0.4,1,0,1
+31,eaeg,o,b,m,H,R,RFPC,SH,12/1/10,9/26/11,299,short looks overall,1,16.7,19.9,1.9,7.1,3.6,10,0.084070796,0.314159292,0.159292035,0.442477876,1.7,-2.9,1,0,0
+32,eaeg,o,j,f,H,R,PCRF,HS,11/24/10,9/27/11,307,good baby,1,27.1,23,28.6,14.3,41.2,18.5,0.278752437,0.139376218,0.401559454,0.180311891,12.6,-4.2,1,0,1
+33,eaeg,o,c,f,H,L,PFRC,SH,11/30/10,10/4/11,308,ok baby. last four trials really iffy. seemed distracted by kleenex,1,16.3,9.7,5.9,8.4,7.4,9.3,0.190322581,0.270967742,0.238709677,0.3,1.5,-0.9,1,0,0
+34,eaeg,o,a,m,S,R,RCPF,SH,12/13/10,10/5/11,296,good baby,1,15.9,19.6,3.2,8.5,11.1,8.6,0.101910828,0.270700637,0.353503185,0.27388535,7.9,-0.1,1,0,1
+36,eaeg,o,b,m,H,L,PFRC,HS,12/17/10,10/7/11,294,"bit fussy, but keepable",1,20,45,9.2,10.7,7.9,5.9,0.272997033,0.317507418,0.234421365,0.175074184,-1.3,4.8,0,1,0
+40,eaeg,o,d,f,H,R,PCRF,SH,1/5/11,10/24/11,292,good baby!,1,12.1,3.7,8.3,5.2,9.8,12.8,0.229916898,0.144044321,0.271468144,0.354570637,1.5,-7.6,1,0,1
+41,eaeg,o,s,m,H,R,PCRF,HS,1/3/11,10/24/11,294,good baby!,1,23.5,25.8,7.3,5.5,8.6,9.2,0.238562092,0.179738562,0.281045752,0.300653595,1.3,-3.7,1,0,1
