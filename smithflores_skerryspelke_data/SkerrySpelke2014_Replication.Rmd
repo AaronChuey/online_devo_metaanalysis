@@ -1,0 +1,97 @@
+---
+title: "SkerrySpelke2014_Replication"
+author: "Alexis Smith-Flores"
+date: "5/5/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r Importing, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(gsheet)
+library(ggpubr)
+library(rstatix)
+library(tayloRswift)
+library(scales)
+```
+
+# Importing Data and Condition Information
+This chunk of code imports the original Skerry & Spelke (2014) data with 10 month olds (line 23) and the conceptual replication data with 11 and 17 month olds (line 24).
+
+```{r, include=FALSE}
+#Import Data
+skerry.data <- read_csv(here("Data", "skerry.data.csv"))
+smithflores.data <- read_csv(here("Data", "smithflores.data.csv"))
+```
+
+#Skerry & Spelke (2014)
+Reformatting data to match Smith-Flores data.
+```{r}
+skerry.data = skerry.data%>%
+  select(`Subject ID`, Condition, `CompleteFirst?`, EmoOrder, HC:SF)%>%
+  rename(sub.num = `Subject ID`,
+         experiment = Condition, 
+         block.order = `CompleteFirst?`,
+         test.order = EmoOrder, 
+         complete.happy = HC,
+         complete.sad = SC,
+         failed.happy = HF,
+         failed.sad = SF)%>%
+  pivot_longer(cols = complete.happy:failed.sad, 
+               names_to = "block.type.trial", 
+               values_to = "looking")%>%
+  separate(block.type.trial, into = c("block.type", "trial.type"))%>%
+  mutate(experiment = ifelse(experiment == "eaeg", "skerry"),
+        test.order = ifelse(test.order == "SH", "sad.first", "happy.first"),
+        block.order = ifelse(block.order == 1, "complete.first", "failed.first"),
+        congruency = ifelse(block.type == "complete" & trial.type == "happy" | 
+                              block.type == "failed" & trial.type == "sad", "congruent", "incongruent"))
+```
+
+"To confirm that both age groups exhibit sensitivity to emotional congruency, we conducted a separate repeated measures ANOVA for each age group and found main effects of congruency in the 10-month-old group (F(1, 31) = 4.159, p = 0.050)..."
+
+Effect size: generalized eta squared = 0.013
+```{r}
+skerry.data%>%
+  anova_test(dv = looking, 
+             wid = sub.num, 
+             within = c(congruency, block.type))
+```
+
+# Smith-Flores Conceptual Replications
+In our first pre-registered experiment we conceptually replicated Skerry & Spelke (2014) using an additional agent. The rest of the stimuli was closely matched. Our preregistration and methods can be found here: `https://osf.io/5cf3x`
+
+Using the same repeated measures ANOVA Skerry & Spelke used, we found a main effect of congruency in the 11 month olds (F(1, 29) = 5.870, p = .022). 
+
+Effect size: generalized eta squared = 0.026
+```{r}
+smithflores.data = smithflores.data%>%
+  mutate(congruency = ifelse(block.type == "complete" & trial.type == "happy" | 
+                               block.type == "failed" & trial.type == "sad", 
+                             "congruent", 
+                             "incongruent"))
+
+smithflores.data%>%
+  filter(experiment == "younger")%>%
+  anova_test(dv = looking, 
+             wid = sub.num, 
+             within = c(congruency, block.type))
+
+```
+
+In our second pre-registered experiment we more closely replicated Skerry & Spelke (2014) using an older age group (17-month-olds. Our preregistration and methods can be found here: `https://osf.io/q4t97`
+
+Using the same repeated measures ANOVA Skerry & Spelke used, we found a main effect of congruency in the 11 month olds (F(1, 35) = 5.202, p = .029). 
+
+Effect size: generalized eta squared = 0.015
+```{r}
+
+smithflores.data%>%
+  filter(experiment == "older")%>%
+  anova_test(dv = looking, 
+             wid = sub.num, 
+             within = c(congruency, block.type))
+
+```
