@@ -250,13 +250,10 @@ d_diff <- d_calc |>
   group_by(paper_ID, experiment_ID) %>%
   summarise(d_diff = mean(d_calc[expt_condition == "online"], na.rm=TRUE) - 
               mean(d_calc[expt_condition == "in-person"], na.rm=TRUE),
-```
-
-
-```{r}
-Age = mean(mean_age_1),
+            Age = mean(mean_age_1),
             Measure = response_mode[expt_condition == "online"],
             Online_Method = method[expt_condition == "online"]) 
+d_diff
 
 # need to be careful with this because this merge can add rows
 d_diff <- d_diff |>
@@ -264,13 +261,14 @@ d_diff <- d_diff |>
               ungroup() |>
               select(paper_ID, experiment_ID, short_cite) |> 
               distinct())
+d_diff
 ```
 
 ```{r}
 blank_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
   geom_point(alpha=0) +
   coord_flip() +
-  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  scale_x_discrete(labels = c("Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite, d_diff, sum)) +
   ylab("SMD difference (online - in-person)") + 
@@ -283,7 +281,7 @@ vanilla_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  scale_x_discrete(labels = c("Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
   #scale_fill_manual(values = wes_palette("Chevalier1", n = 2), name = "Online method", labels = c("Moderated", "Unmoderated")) +
@@ -295,7 +293,7 @@ om_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  scale_x_discrete(labels = c("Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
   scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online method", labels = c("Moderated", "unmoderated")) +
@@ -307,7 +305,7 @@ m_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  scale_x_discrete(labels = c("Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
   scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Non-looking")) +
@@ -319,7 +317,7 @@ a_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  scale_x_discrete(labels = c("Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
   scale_color_continuous(name="Age (Months)") +
