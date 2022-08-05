@@ -115,16 +115,25 @@ This confirms that -- when we have a hand-computed ES -- it matches the `compute
 
 ```{r}
 
-rma.mv(d_calc ~ 1,  d_var_calc,
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant))
-                   
+default_mod <- rma.mv(d_calc ~ 1,  
+       V = d_var_calc,
+       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       data = d_calc)
 
-rma.mv(yi = d_calc, 
-                   V = d_var_calc,
-                   mods = as.factor(expt_condition),
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
-                   slab = short_cite, 
-                   data = d_calc)
+
+only_online <- rma.mv(d_calc ~ 1,  
+       V = d_var_calc,
+       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       data = d_calc %>% filter(expt_condition == "online"))
+
+only_inperson <- rma.mv(d_calc ~ 1,  
+       V = d_var_calc,
+       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       data = d_calc %>% filter(expt_condition == "in-person"))
+
+funnel(default_mod)                   
+funnel(only_online)
+funne(only_inperson)
 ```
 
 
