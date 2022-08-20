@@ -110,7 +110,27 @@ ggplot(d_calc,
 ```
 This confirms that -- when we have a hand-computed ES -- it matches the `compute_es.R` ES. 
 
+## create experiment pairs
 
+```{r}
+online <- d |> filter(expt_condition=="online") |> 
+  select(d, d_var, effect_size_group) |> 
+  rename(d_online=d,d_var_online=d_var)
+
+in_person <-  d |> filter(expt_condition=="in-person") |> 
+  select(d, d_var, effect_size_group) |> 
+  rename(d_inperson=d,d_var_inperson=d_var)
+
+pairs <- full_join(online, in_person) |> 
+  mutate(d_diff=d_online-d_inperson,
+         d_diff_var=d_var_online+d_var_inperson)
+
+paired_mod <- rma.mv(d_diff ~ 1,  
+       V = d_diff_var, 
+       data = pairs)
+
+funnel(paired_mod)
+```
 ## funnel plot 
 
 ```{r}
