@@ -151,7 +151,7 @@ funnel(paired_mod)
 
 vanilla_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
-  geom_pointrange(alpha = 1) +
+  geom_pointrange(alpha = .5, position=position_dodge2(width=.5)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
@@ -160,13 +160,13 @@ vanilla_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_
   xlab("") +
   theme_minimal()
 
-age_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+age_plot = ggplot(pairs, aes(x = age, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
-  geom_pointrange(aes(color=age),alpha = 1) +
+  geom_pointrange(aes(color=age),alpha = .5, position=position_dodge2(width=1)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
-  aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+ # aes(x=reorder(short_cite,-d_diff, sum)) +
+  #scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
     scale_color_continuous(name="Age (Months)") +
@@ -174,7 +174,7 @@ age_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
 
 looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
-  geom_pointrange(aes(color=response_mode),alpha = 1) +
+  geom_pointrange(aes(color=response_mode),alpha = .5, position=position_dodge2(width=.5)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
@@ -186,7 +186,7 @@ scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure",
  
 moderated_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
-  geom_pointrange(aes(color=method),alpha = 1) +
+  geom_pointrange(aes(color=method),alpha = .5, position=position_dodge2(width=.5)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
