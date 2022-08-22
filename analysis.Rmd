@@ -113,24 +113,97 @@ This confirms that -- when we have a hand-computed ES -- it matches the `compute
 ## create experiment pairs
 
 ```{r}
-online <- d |> filter(expt_condition=="online") |> 
-  select(d, d_var, effect_size_group) |> 
+online <- d_calc |> ungroup() |> filter(expt_condition=="online") |>
+  mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         online_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         online_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, response_mode, method, short_cite, online_age,online_count) |> 
   rename(d_online=d,d_var_online=d_var)
 
-in_person <-  d |> filter(expt_condition=="in-person") |> 
-  select(d, d_var, effect_size_group) |> 
+in_person <-  d_calc |> ungroup()|> filter(expt_condition=="in-person") |> 
+   mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         inperson_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         inperson_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, inperson_age, inperson_count) |> 
   rename(d_inperson=d,d_var_inperson=d_var)
 
 pairs <- full_join(online, in_person) |> 
   mutate(d_diff=d_online-d_inperson,
-         d_diff_var=d_var_online+d_var_inperson)
+         d_diff_var=d_var_online+d_var_inperson,
+         age=(inperson_age*inperson_count+online_age*online_count)/
+           (online_count+inperson_count))
 
 paired_mod <- rma.mv(d_diff ~ 1,  
        V = d_diff_var, 
        data = pairs)
+```
 
+
+## Plots with experiment pairs
+```{r}
 funnel(paired_mod)
 ```
+
+
+```{r}
+
+vanilla_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(alpha = 1) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  theme_minimal()
+
+age_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(aes(color=age),alpha = 1) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+    scale_color_continuous(name="Age (Months)") +
+  theme_minimal()
+
+looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(aes(color=response_mode),alpha = 1) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Non-looking")) +
+  theme_minimal()
+ 
+moderated_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(aes(color=method),alpha = 1) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online method", labels = c("Moderated", "unmoderated")) +
+  theme_minimal()
+ 
+
+vanilla_plot
+age_plot
+looking_plot
+moderated_plot
+```
+
+
 ## funnel plot 
 
 ```{r}
@@ -153,7 +226,7 @@ only_inperson <- rma.mv(d_calc ~ 1,
 
 funnel(default_mod)                   
 funnel(only_online)
-funne(only_inperson)
+funnel(only_inperson)
 ```
 
 
