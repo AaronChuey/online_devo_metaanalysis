@@ -224,10 +224,25 @@ only_inperson <- rma.mv(d_calc ~ 1,
        V = d_var_calc,
        random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
        data = d_calc %>% filter(expt_condition == "in-person"))
+```
 
+```{r}
 funnel(default_mod)                   
 funnel(only_online)
 funnel(only_inperson)
+```
+
+```{r}
+
+#all data
+regtest(x=d_calc, vi=d_var_calc, data=d_calc)
+
+regtest(x=d_calc, vi=d_var_calc, data=d_calc %>% filter(expt_condition == "online"))
+
+regtest(x=d_calc, vi=d_var_calc, data=d_calc %>% filter(expt_condition == "in-person"))
+
+
+
 ```
 
 
