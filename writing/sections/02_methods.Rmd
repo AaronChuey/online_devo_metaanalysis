@@ -1,0 +1,35 @@
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (CITE). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (insert url).
+
+## Literature Search 
+
+Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott & Schulz, 2017; Scott, Chu, & Schulz, 2017), The Child Lab (Sheskin & Keil, 2018), and Pandas (Rhodes et al, 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society and ICIS listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as several unpublished but complete online replications.
+
+We preregistered several eligibility criteria to filter articles from our search: 
+
+1. The study must be experimental, where participants complete a task with a stimulus. This criterion precludes surveys or purely observational measures. 
+
+2. The studies must report two groups of children, one tested online and another tested in-person. Although the online sample must be collected by the researchers reporting the results, the in-person sample could either be collected at the same time or referenced from an existing publication. 
+
+3. The mean age of the sample should be under six years. This criterion limits the studies to those conducted on relatively younger children for whom online data collection methods have not been traditionally employed. 
+
+4. All data reported or referred to must contain codeable effect sizes. Verbal comparison alone between an online or in-person study or a qualitative description of results is not enough to determine the precise effect size of interest. 
+
+5. Data collection for both the in-person and online sample must be complete; any incomplete or partial samples were not considered.
+
+6. The online and in-person methods must be directly comparable. Some alteration to the study methods is expected when adapting an in-person study to be run online (e.g., changing a preferential reaching measure into a preferential looking measure, having children refer to objects by color instead of pointing, etc). However, we excluded any studies whose methodologies altered the nature of the task or the conclusions that could be drawn from them (e.g., manipulating the identity of an object instead of its location). 
+
+## Data Entry 
+
+All papers (320) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers’ abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age). 
+
+If a paper reported  an effect size in standardized mean difference (SMD), we coded it directly. Otherwise, we calculated the individual effect sizes for each main effect and each study (online and in-person) using reported means and standard deviations, t statistic, or directly from the data if it was available. If the main comparison was to chance performance, we first calculated log odds and then converted the effect size to SMD via the compute.es package in R (Del Re & Del Re, 2012). If a given study had multiple dependent measures or central hypotheses, we calculated an effect size and associated variance for each.
+
+## Analytic Approach 
+
+To determine whether study modality (online or in-person) moderated the size of the main effect of interest for each set of studies, we performed a random-effects multilevel meta-regression using the metafor package (Viechtbauer, 2010). The regression predicts effect size (SMD) with study modality as a fixed effect, and random intercepts fitted by study and participant. Rather than predicting the size of the online-offline difference for a particular measure, this model instead predicts individual experimental effect sizes, with the coefficient of interest being the study modality predictor. We chose this format because online and offline effect pairs were often heterogeneous (e.g., with different ages or sample sizes) and so this format allowed us to use that information in the main and moderated meta-analyses, rather than eliminating it by reducing the two studies to one difference of effect sizes. The random intercepts in our models control for dependencies between the particular studies themselves (e.g., effects yielded from a paper on false belief will be different than effects from an object recognition task), as well as between different samples that may or may not generated multiple effect sizes in our model (e.g., participants who completed a single task/measure vs participants who completed a battery of tasks with multiple main effects of interest reported as a single study). 
+
+To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at [link].
+
+
+
+

@@ -1,0 +1,10 @@
+## Confirmatory Analysis
+
+Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, p = .21, 95% CI [-.38, .084] FIXME. Additionally, we did not find any significant effect of our preregistered moderators (ps > .4) or any significant interactions between the moderators and study modality (ps > .3).
+
+
+## Exploratory Analysis
+
+We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. Funnel plot is shown in Fig TODO. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
+
+

@@ -1,0 +1,101 @@
+---
+title             : "Conducting developmental research online vs. in-person: A meta-analysis"
+shorttitle        : "Title"
+
+author: 
+  - name          : "First Author"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - "Conceptualization"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+  - name          : "Ernst-August Doelle"
+    affiliation   : "1,2"
+    role:
+      - "Writing - Review & Editing"
+      - "Supervision"
+
+affiliation:
+  - id            : "1"
+    institution   : "Wilhelm-Wundt-University"
+  - id            : "2"
+    institution   : "Konstanz Business School"
+
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+  Enter author note here.
+
+abstract: |
+  An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection with children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person, providing a synthetic view of how online experiments compare to in-person experiments. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. In addition to study modality (online vs in-person), we examined several moderators, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person (d = .68) was slightly larger than the mean effect size of their counterparts conducted online (d = .54), but this difference was not significant. Additionally, we found no significant moderating effect of dependent measure, online study method, or age. Overall, the results of the current meta-analysis suggest developmental data collected online are generally comparable to data collected in-person.
+  
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : "r-references.bib"
+
+floatsintext      : no
+linenumbers       : yes
+draft             : no
+mask              : no
+
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library(papaja)
+library(here)
+library(tidyverse)
+r_refs("r-references.bib")
+here::i_am("writing/OnlineMA_main.Rmd")
+
+knitr::opts_knit$set(root.dir = here())
+
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+# Introduction 
+
+```{r child = "writing/sections/01_introduction.Rmd"}
+```
+
+# Methods 
+
+```{r child = "writing/sections/02_methods.Rmd"}
+```
+
+# Results 
+
+
+```{r child = "writing/sections/03_results.Rmd"}
+```
+
+# Discussion
+
+
+```{r child = "writing/sections/04_discussion.Rmd"}
+```
+
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::
