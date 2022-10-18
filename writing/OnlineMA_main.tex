@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  man]{apa6}
+  man,floatsintext]{apa6}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -156,12 +156,6 @@
   }
 {}{\PatchFailed}
 \keywords{keywords\newline\indent Word count: X}
-\DeclareDelayedFloatFlavor{ThreePartTable}{table}
-\DeclareDelayedFloatFlavor{lltable}{table}
-\DeclareDelayedFloatFlavor*{longtable}{table}
-\makeatletter
-\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
-\makeatother
 \usepackage{lineno}
 
 \linenumbers
@@ -229,17 +223,17 @@ Online studies are generally conducted in one of two formats: moderated and unmo
 
 Like developmental studies more broadly, online studies have also employed a number of dependent measures, including verbal measures and looking measures. Verbal measures are typically straightforward to record, while recording looking measures is more complex. Accurate looking measures require precise camera positioning and coding schemes, and are thus more likely to deviate from their in-person counterparts compared to studies that measure children's verbal responses. To that end, automated gaze annotation is currently being developed and represents an exciting future direction in online methodology (see Erel, Potter, Jaffe-Dax, Lew-Williams, \& Bermano, 2022). We examine how the kind of dependent measure employed (looking vs.~verbal) might moderate the difference between online and in-person results.
 
-The final moderator we consider is participants' age. Online developmental studies have sampled from a wide age range, including infants (e.g., Dillon, Izard, \& Spelke, 2020), toddlers (e.g., Lo, Rosslund, Chai, Mayor, \& Kartushina, 2021), preschoolers (e.g., Schidelko, Schünemann, Rakoczy, \& Proft, 2021), and elementary schoolers {[}e.g., Chuey, Lockhart, Sheskin, and Keil (2020); Chuey et al., 2021{]}. Because online studies are often conducted in the comfort of their own homes, it is possible that children of all ages might benefit from this aspect of online studies. Conversely, because a child's environment is more difficult to moderate online, infant studies, which often rely on precise environmental setups, may suffer when conducted online. In addition, as children get older they may gain more experience with on-screen displays, which can contribute to their performance in online studies. We test these competing age moderation hypotheses. In sum, our meta-analysis addresses the question of whether effect sizes tend to differ across online and in-lab experiments with children, and whether these differences are moderated by study format, dependent variable, or participant age.
+The final moderator we consider is participants' age. Online developmental studies have sampled from a wide age range, including infants (e.g., Dillon, Izard, \& Spelke, 2020), toddlers (e.g., Lo, Rosslund, Chai, Mayor, \& Kartushina, 2021), preschoolers (e.g., Schidelko, Schünemann, Rakoczy, \& Proft, 2021), and elementary schoolers {[}e.g., Chuey, Lockhart, Sheskin, and Keil (2020); FIXMEChuey et al., 2021{]}. Because online studies are often conducted in the comfort of their own homes, it is possible that children of all ages might benefit from this aspect of online studies. Conversely, because a child's environment is more difficult to moderate online, infant studies, which often rely on precise environmental setups, may suffer when conducted online. In addition, as children get older they may gain more experience with on-screen displays, which can contribute to their performance in online studies. We test these competing age moderation hypotheses. In sum, our meta-analysis addresses the question of whether effect sizes tend to differ across online and in-lab experiments with children, and whether these differences are moderated by study format, dependent variable, or participant age.
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (CITE). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (insert url).
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url).
 
 \hypertarget{literature-search}{%
 \subsection{Literature Search}\label{literature-search}}
 
-Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott \& Schulz, 2017; Scott, Chu, \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al, 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society and ICIS listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as several unpublished but complete online replications.
+Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott, Chu, \& Schulz, 2017; Scott \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al., 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society and ICIS listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as several unpublished but complete online replications.
 
 We preregistered several eligibility criteria to filter articles from our search:
 
@@ -271,20 +265,71 @@ If a paper reported an effect size in standardized mean difference (SMD), we cod
 
 To determine whether study modality (online or in-person) moderated the size of the main effect of interest for each set of studies, we performed a random-effects multilevel meta-regression using the metafor package (Viechtbauer, 2010). The regression predicts effect size (SMD) with study modality as a fixed effect, and random intercepts fitted by study and participant. Rather than predicting the size of the online-offline difference for a particular measure, this model instead predicts individual experimental effect sizes, with the coefficient of interest being the study modality predictor. We chose this format because online and offline effect pairs were often heterogeneous (e.g., with different ages or sample sizes) and so this format allowed us to use that information in the main and moderated meta-analyses, rather than eliminating it by reducing the two studies to one difference of effect sizes. The random intercepts in our models control for dependencies between the particular studies themselves (e.g., effects yielded from a paper on false belief will be different than effects from an object recognition task), as well as between different samples that may or may not generated multiple effect sizes in our model (e.g., participants who completed a single task/measure vs participants who completed a battery of tasks with multiple main effects of interest reported as a single study).
 
-To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at {[}link{]}.
+To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at {[}FIXME link{]}.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{OnlineMA_main_files/figure-latex/forest-1} 
+
+}
+
+\caption{Forest plots of studies. In left and center plots, each row is one study, each dot is one paper and each dot is the difference between an in-person measure and corresponding online measure. On right plot, y-axis is the average age of the children in the two samples being compared. \label{forest}}\label{fig:forest}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:coeffs}Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators. \label{coeffs}}
+\centering
+\begin{tabular}[t]{lrlr}
+\toprule
+Coefficient & Estimate & Conf. Int. & P-value\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Overall}}\\
+\hspace{1em}Intercept & 0.84 & {}[0.46, 1.21] & 0.000\\
+\hspace{1em}online & -0.15 & {}[-0.38, 0.08] & 0.210\\
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Looking v Non-looking}}\\
+\hspace{1em}Intercept & 0.73 & {}[0.42, 1.04] & 0.000\\
+\hspace{1em}online & -0.29 & {}[-0.7, 0.11] & 0.155\\
+\hspace{1em}non-looking & -0.06 & {}[-0.43, 0.31] & 0.745\\
+\hspace{1em}online:non-looking & 0.23 & {}[-0.27, 0.72] & 0.375\\
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Age}}\\
+\hspace{1em}Intercept & 0.68 & {}[0.51, 0.86] & 0.000\\
+\hspace{1em}online & -0.14 & {}[-0.38, 0.1] & 0.244\\
+\hspace{1em}age\_centered\_mo & 0.00 & {}[-0.01, 0.01] & 0.731\\
+\hspace{1em}online:age\_centered\_mo & 0.01 & {}[-0.01, 0.02] & 0.342\\
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Moderated v Un-moderated}}\\
+\hspace{1em}Intercept & 0.69 & {}[0.52, 0.86] & 0.000\\
+\hspace{1em}online & -0.19 & {}[-0.45, 0.07] & 0.151\\
+\hspace{1em}unmoderated & 0.13 & {}[-0.22, 0.48] & 0.461\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \hypertarget{confirmatory-analysis}{%
 \subsection{Confirmatory Analysis}\label{confirmatory-analysis}}
 
-Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, p = .21, 95\% CI {[}-.38, .084{]} FIXME. Additionally, we did not find any significant effect of our preregistered moderators (ps \textgreater{} .4) or any significant interactions between the moderators and study modality (ps \textgreater{} .3).
+Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, p = .21, 95\% CI {[}-.38, .084{]} FIXME. Additionally, we did not find any significant effect of our preregistered moderators (ps \textgreater{} .4) or any significant interactions between the moderators and study modality (ps \textgreater{} .3). See Figure \ref(forest) and Table \ref(coeffs).
 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
 
-We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. Funnel plot is shown in Fig TODO. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.8\linewidth]{OnlineMA_main_files/figure-latex/funnel-1} 
+
+}
+
+\caption{Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \label{funnel}}\label{fig:funnel}
+\end{figure}
+
+We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. Funnel plot is shown in Figure \ref(funnel). Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -328,10 +373,13 @@ Erel, Y., Potter, C. E., Jaffe-Dax, S., Lew-Williams, C., \& Bermano, A. H. (202
 Kidd, E., \& Garcia, R. (2022). How diverse is child language acquisition research? \emph{First Language}, 01427237211066405.
 
 \leavevmode\vadjust pre{\hypertarget{ref-lo2021tablet}{}}%
-Lo, C. H., Rosslund, A., Chai, J. H., Mayor, J., \& Kartushina, N. (2021). Tablet assessment of word comprehension reveals coarse word representations in 18--⁠ 20-month-old toddlers. \emph{Infancy}, \emph{26}(4), 596--616.
+Lo, C. H., Rosslund, A., Chai, J. H., Mayor, J., \& Kartushina, N. (2021). Tablet assessment of word comprehension reveals coarse word representations in 18--20-month-old toddlers. \emph{Infancy}, \emph{26}(4), 596--616.
 
 \leavevmode\vadjust pre{\hypertarget{ref-lourenco2020no}{}}%
 Lourenco, S. F., \& Tasimi, A. (2020). No participant left behind: Conducting science during COVID-19. \emph{Trends in Cognitive Sciences}, \emph{24}(8), 583--584.
+
+\leavevmode\vadjust pre{\hypertarget{ref-moher2015preferred}{}}%
+Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., \ldots{} Stewart, L. A. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-p) 2015 statement. \emph{Systematic Reviews}, \emph{4}(1), 1--9.
 
 \leavevmode\vadjust pre{\hypertarget{ref-nielsen2017persistent}{}}%
 Nielsen, M., Haun, D., Kärtner, J., \& Legare, C. H. (2017). The persistent sampling bias in developmental psychology: A call to action. \emph{Journal of Experimental Child Psychology}, \emph{162}, 31--38.
@@ -339,8 +387,14 @@ Nielsen, M., Haun, D., Kärtner, J., \& Legare, C. H. (2017). The persistent sam
 \leavevmode\vadjust pre{\hypertarget{ref-rhodes2020advancing}{}}%
 Rhodes, M., Rizzo, M. T., Foster-Hanson, E., Moty, K., Leshin, R. A., Wang, M., \ldots{} Ocampo, J. D. (2020). Advancing developmental science via unmoderated remote research with children. \emph{Journal of Cognition and Development}, \emph{21}(4), 477--493.
 
+\leavevmode\vadjust pre{\hypertarget{ref-rosenthal1979file}{}}%
+Rosenthal, R. (1979). The file drawer problem and tolerance for null results. \emph{Psychological Bulletin}, \emph{86}(3), 638.
+
 \leavevmode\vadjust pre{\hypertarget{ref-schidelko2021online}{}}%
 Schidelko, L. P., Schünemann, B., Rakoczy, H., \& Proft, M. (2021). Online testing yields the same results as lab testing: A validation study with the false belief task. \emph{Frontiers in Psychology}, 4573.
+
+\leavevmode\vadjust pre{\hypertarget{ref-scott2017lookitB}{}}%
+Scott, K., Chu, J., \& Schulz, L. (2017). Lookit (part 2): Assessing the viability of online developmental research, results from three case studies. \emph{Open Mind}, \emph{1}(1), 15--29.
 
 \leavevmode\vadjust pre{\hypertarget{ref-scott2017lookit}{}}%
 Scott, K., \& Schulz, L. (2017). Lookit (part 1): A new online platform for developmental research. \emph{Open Mind}, \emph{1}(1), 4--14.
@@ -350,6 +404,9 @@ Sheskin, M., \& Keil, F. (2018). \emph{TheChildLab. Com a video chat platform fo
 
 \leavevmode\vadjust pre{\hypertarget{ref-sheskin2020online}{}}%
 Sheskin, M., Scott, K., Mills, C. M., Bergelson, E., Bonawitz, E., Spelke, E. S., et al.others. (2020). Online developmental science to foster innovation, access, and impact. \emph{Trends in Cognitive Sciences}, \emph{24}(9), 675--678.
+
+\leavevmode\vadjust pre{\hypertarget{ref-viechtbauer2010conducting}{}}%
+Viechtbauer, W. (2010). Conducting meta-analyses in r with the metafor package. \emph{Journal of Statistical Software}, \emph{36}(3), 1--48.
 
 \end{CSLReferences}
 
