@@ -276,16 +276,16 @@ To determine the effect of additional moderators (online study method, dependent
 
 }
 
-\caption{Forest plots of studies. In left and center plots, each row is one study, each dot is one paper and each dot is the difference between an in-person measure and corresponding online measure. On right plot, y-axis is the average age of the children in the two samples being compared. \label{forest}}\label{fig:forest}
+\caption{Forest plots of studies. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared.}\label{fig:forest}
 \end{figure}
 
-\begin{table}
+\begin{table}[!h]
 
-\caption{\label{tab:coeffs}Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators. \label{coeffs}}
+\caption{\label{tab:coeffs}Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators.}
 \centering
 \begin{tabular}[t]{lrlr}
 \toprule
-Coefficient & Estimate & Conf. Int. & P-value\\
+Coefficient & Estimate & 95\% CI & P-value\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Overall}}\\
@@ -315,7 +315,7 @@ Coefficient & Estimate & Conf. Int. & P-value\\
 \hypertarget{confirmatory-analysis}{%
 \subsection{Confirmatory Analysis}\label{confirmatory-analysis}}
 
-Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, p = .21, 95\% CI {[}-.38, .084{]} FIXME. Additionally, we did not find any significant effect of our preregistered moderators (ps \textgreater{} .4) or any significant interactions between the moderators and study modality (ps \textgreater{} .3). See Figure \ref(forest) and Table \ref(coeffs).
+Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, Est=-0.15, 95\% CI={[}-0.38, 0.08{]}, p=0.21. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \ref{tab:coeffs} for coefficient values. Figure \ref{fig:forest} shows the effect size differences of experiments by moderators.
 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
@@ -329,7 +329,7 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 \caption{Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \label{funnel}}\label{fig:funnel}
 \end{figure}
 
-We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. Funnel plot is shown in Figure \ref(funnel). Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
+We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The funnel plot is shown in Figure \ref{fig:funnel}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
