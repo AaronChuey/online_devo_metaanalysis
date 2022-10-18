@@ -1,9 +1,188 @@
+
+```{r setup}
+library(tidyverse)
+library(googledrive)
+library(readxl)
+library(metafor)
+library(assertthat)
+library(glue)
+library(wesanderson)
+library(gridExtra)
+
+source("../../scripts/compute_es.R")
+
+
+d <- readxl::read_xlsx("../../Effect size coding (online testing MA).xlsx")
+
+d <- d |>
+  rowwise() |>
+  mutate(short_cite = paste(str_c(str_split(authors, pattern = ",")[[1]][1], 
+                                  collapse = " "), ":",
+                            paste(str_split(main_title, pattern = " ")[[1]][1:2], 
+                                  collapse = " ")))
+d_calc <- d |>
+  ungroup() |>
+  mutate(idx = 1:n()) |>
+  group_by(idx) |>
+  nest() |>
+  mutate(data = map(data, function (df) {
+    es <- compute_es(participant_design = df$participant_design, 
+                     x_1 = df$x_1, x_2 = df$x_2, 
+                     SD_1 = df$SD_1, SD_2 = df$SD_2, n_1 = df$n_1, n_2 = df$n_2,
+                     t = df$t, f = df$F, d = df$d, d_var = df$d_var)
+    
+    bind_cols(df,es)
+  })) |>
+  unnest(cols = c(data)) |>
+  filter(!is.na(d_calc))
+```
+
+
+
+
+```{r}
+
+vanilla_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(alpha = .5, position=position_dodge2(width=.5)) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+  theme_minimal()
+
+age_plot = ggplot(pairs, aes(x = age, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_smooth(method="lm")+
+  geom_pointrange(alpha = .5, position=position_dodge2(width=1)) +
+  #coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+ # aes(x=reorder(short_cite,-d_diff, sum)) +
+  #scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("Age in Months") +
+    #scale_color_continuous(name="Age (Months)") +
+  theme_minimal()
+
+looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(aes(color=response_mode),alpha = .5, position=position_dodge2(width=.5)) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Non-looking")) +
+  theme_minimal()
+ 
+moderated_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
+                                 ymax=d_diff+d_diff_var)) + 
+  geom_pointrange(aes(color=method),alpha = .5, position=position_dodge2(width=.5)) +
+  coord_flip() +
+  geom_hline(yintercept = 0, lty = 2) + 
+  aes(x=reorder(short_cite,-d_diff, sum)) +
+  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  ylab("SMD difference (online - in-person)") + 
+  xlab("") +
+scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online method", labels = c("Moderated", "unmoderated")) +
+  theme_minimal()
+ 
+
+vanilla_plot
+age_plot
+looking_plot
+moderated_plot
+```
+
+
+
+
+
+
+
+```{r}
+main_mod <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = short_cite, 
+                   data = d_calc)
+#summary(main_mod)
+
+moderated_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        + as.factor(method),
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+#summary(moderated_mod)
+
+looking_mod <- rma.mv(yi = d_calc, 
+                      V = d_var_calc, 
+                      mods = ~ as.factor(expt_condition) 
+                      * as.factor(response_mode),
+                      random = ~1 | as.factor(experiment_ID) + 
+                        as.factor(same_infant), 
+                      slab = short_cite, 
+                      data = d_calc)
+#summary(looking_mod)
+
+d_calc$age_centered_mo <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
+age_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        * age_centered_mo,
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+#summary(age_mod)
+```
+
 ## Confirmatory Analysis
 
 Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, p = .21, 95% CI [-.38, .084] FIXME. Additionally, we did not find any significant effect of our preregistered moderators (ps > .4) or any significant interactions between the moderators and study modality (ps > .3).
 
 
 ## Exploratory Analysis
+
+```{r}
+online <- d_calc |> ungroup() |> filter(expt_condition=="online") |>
+  mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         online_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         online_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, response_mode, method, short_cite, online_age,online_count) |> 
+  rename(d_online=d,d_var_online=d_var)
+
+in_person <-  d_calc |> ungroup()|> filter(expt_condition=="in-person") |> 
+   mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         inperson_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         inperson_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, inperson_age, inperson_count) |> 
+  rename(d_inperson=d,d_var_inperson=d_var)
+
+pairs <- full_join(online, in_person) |> 
+  mutate(d_diff=d_online-d_inperson,
+         d_diff_var=d_var_online+d_var_inperson,
+         age=(inperson_age*inperson_count+online_age*online_count)/
+           (online_count+inperson_count))
+
+paired_mod <- rma.mv(d_diff ~ 1,  
+       V = d_diff_var, 
+       data = pairs)
+
+funnel(paired_mod)
+
+regtest(x=d_diff, vi=d_diff_var, data=pairs)
+
+```
 
 We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. Funnel plot is shown in Fig TODO. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
 
