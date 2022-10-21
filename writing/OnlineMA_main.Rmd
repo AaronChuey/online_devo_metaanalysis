@@ -37,6 +37,7 @@ keywords          : "keywords"
 wordcount         : "X"
 
 bibliography      : "r-references.bib"
+annotate_references: yes
 
 floatsintext      : yes
 linenumbers       : yes

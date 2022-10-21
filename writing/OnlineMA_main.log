@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.2.28)  21 OCT 2022 10:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.2.28)  21 OCT 2022 12:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -806,28 +806,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [19] AED endfloat: Processing end Figures and Tables [20]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 528.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 528.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 537.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 537.
 (./OnlineMA_main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 528.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 528.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 537.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 537.
  ) 
 Here is how much of TeX's memory you used:
- 17625 strings out of 481239
- 267828 string characters out of 5920377
+ 17630 strings out of 481239
+ 267896 string characters out of 5920377
  577133 words of memory out of 5000000
  32393 multiletter control sequences out of 15000+600000
- 578856 words of font info for 92 fonts, out of 8000000 for 9000
+ 578985 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  49i,11n,51p,1428b,543s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/
 public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/sh
 are/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (20 pages, 212015 bytes).
+Output written on OnlineMA_main.pdf (20 pages, 211936 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 246 compressed objects within 3 object streams
- 98 named destinations out of 1000 (max. 500000)
+ 285 PDF objects out of 1000 (max. 8388607)
+ 249 compressed objects within 3 object streams
+ 101 named destinations out of 1000 (max. 500000)
  6267 words of extra memory for PDF output out of 10000 (max. 10000000)
 
