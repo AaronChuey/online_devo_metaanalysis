@@ -33,6 +33,16 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -228,7 +238,7 @@ The final moderator we consider is participants' age. Online developmental studi
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url).
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url). The list of papers included in this meta-analysis is shown in Table \ref{tab:list}.
 
 \hypertarget{literature-search}{%
 \subsection{Literature Search}\label{literature-search}}
@@ -252,6 +262,44 @@ We preregistered several eligibility criteria to filter articles from our search
 \item
   The online and in-person methods must be directly comparable. Some alteration to the study methods is expected when adapting an in-person study to be run online (e.g., changing a preferential reaching measure into a preferential looking measure, having children refer to objects by color instead of pointing, etc). However, we excluded any studies whose methodologies altered the nature of the task or the conclusions that could be drawn from them (e.g., manipulating the identity of an object instead of its location).
 \end{enumerate}
+
+\begin{longtable}[]{@{}l@{}}
+\caption{\label{tab:list}List of papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person studies.}\tabularnewline
+\toprule()
+Papers used in this meta-analysis \\
+\midrule()
+\endfirsthead
+\toprule()
+Papers used in this meta-analysis \\
+\midrule()
+\endhead
+Lo et al. (2021) \\
+Vales et al. (2021) \\
+Chuey et al. (2021) \\
+Schidelko et al. (2021) \\
+Lapidow, Tandon, Goddu, and Walker (2021) \\
+Bánki, Eccher, Falschlehner, Hoehl, and Markova (2022) \\
+Bochynska and Dillon (2021) compared with Dillon et al. (2020) \\
+Nelson, Scheiber, Laughlin, and Demir-Lira (2021) \\
+Scott et al. (2017) compared with Téglás, Girotto, Gonzalez, and Bonatti (2007) \\
+Scott et al. (2017) compared with Pasquini, Corriveau, Koenig, and Harris (2007) \\
+Aboody, Yousif, Sheskin, and Keil (2022) \\
+Kominsky, Shafto, and Bonawitz (2021) \\
+Escudero, Pino Escobar, Casey, and Sommer (2021) \\
+Morini and Blair (2021) \\
+Silver et al. (2021) \\
+Yoon and Frank (2019) \\
+Smith-Flores, Perez, Zhang, and Feigenson (2022) compared with Stahl and Feigenson (2015) \\
+DeJesus, Venkatesh, and Kinzler (2021) \\
+Bulgarelli and Bergelson (2022) \\
+Gasparini et al. (2022) \\
+(\textbf{smith-flores2022?}) compared with Skerry and Spelke (2014) \\
+Gerard (2022) \\
+Margoni, Baillargeon, and Surian (2018) \\
+(\textbf{yuen2022?}) compared with Hamlin (2015) \\
+(\textbf{mani2022?}) \\
+\bottomrule()
+\end{longtable}
 
 \hypertarget{data-entry}{%
 \subsection{Data Entry}\label{data-entry}}
@@ -354,8 +402,20 @@ Although online data collection precludes certain research methodologies or meas
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-aboody2022says}{}}%
+Aboody, R., Yousif, S. R., Sheskin, M., \& Keil, F. C. (2022). Says who? Children consider informants' sources when deciding whom to believe. \emph{Journal of Experimental Psychology: General}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-banki2022comparing}{}}%
+Bánki, A., Eccher, M. de, Falschlehner, L., Hoehl, S., \& Markova, G. (2022). Comparing online webcam-and laboratory-based eye-tracking for the assessment of infants' audio-visual synchrony perception. \emph{Frontiers in Psychology}, 6162.
+
+\leavevmode\vadjust pre{\hypertarget{ref-bochynska2021bringing}{}}%
+Bochynska, A., \& Dillon, M. R. (2021). Bringing home baby euclid: Testing infants' basic shape discrimination online. \emph{Frontiers in Psychology}, 6002.
+
 \leavevmode\vadjust pre{\hypertarget{ref-buhrmester2016amazon}{}}%
 Buhrmester, M., Kwang, T., \& Gosling, S. D. (2016). \emph{Amazon's mechanical turk: A new source of inexpensive, yet high-quality data?}
+
+\leavevmode\vadjust pre{\hypertarget{ref-bulgarelli2022talker}{}}%
+Bulgarelli, F., \& Bergelson, E. (2022). Talker variability shapes early word representations in english-learning 8-month-olds. \emph{Infancy}, \emph{27}(2), 341--368.
 
 \leavevmode\vadjust pre{\hypertarget{ref-chuey2021moderated}{}}%
 Chuey, A., Asaba, M., Bridgers, S., Carrillo, B., Dietz, G., Garcia, T., et al.others. (2021). Moderated online data-collection for developmental research: Methods and replications. \emph{Frontiers in Psychology}, 4968.
@@ -363,14 +423,35 @@ Chuey, A., Asaba, M., Bridgers, S., Carrillo, B., Dietz, G., Garcia, T., et al.o
 \leavevmode\vadjust pre{\hypertarget{ref-chuey2020children}{}}%
 Chuey, A., Lockhart, K., Sheskin, M., \& Keil, F. (2020). Children and adults selectively generalize mechanistic knowledge. \emph{Cognition}, \emph{199}, 104231.
 
+\leavevmode\vadjust pre{\hypertarget{ref-dejesus2021young}{}}%
+DeJesus, J. M., Venkatesh, S., \& Kinzler, K. D. (2021). Young children's ability to make predictions about novel illnesses. \emph{Child Development}, \emph{92}(5), e817--e831.
+
 \leavevmode\vadjust pre{\hypertarget{ref-dillon2020infants}{}}%
 Dillon, M. R., Izard, V., \& Spelke, E. S. (2020). Infants' sensitivity to shape changes in 2D visual forms. \emph{Infancy}, \emph{25}(5), 618--639.
 
 \leavevmode\vadjust pre{\hypertarget{ref-erel2022icatcher}{}}%
 Erel, Y., Potter, C. E., Jaffe-Dax, S., Lew-Williams, C., \& Bermano, A. H. (2022). iCatcher: A neural network approach for automated coding of young children's eye movements. \emph{Infancy}, \emph{27}(4), 765--779.
 
+\leavevmode\vadjust pre{\hypertarget{ref-escudero2021four}{}}%
+Escudero, P., Pino Escobar, G., Casey, C. G., \& Sommer, K. (2021). Four-year-old's online versus face-to-face word learning via eBooks. \emph{Frontiers in Psychology}, 450.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gasparini2022online}{}}%
+Gasparini, C., Caravale, B., Focaroli, V., Paoletti, M., Pecora, G., Bellagamba, F., \ldots{} Addessi, E. (2022). Online assessment of motor, cognitive, and communicative achievements in 4-month-old infants. \emph{Children}, \emph{9}(3), 424.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gerard2022extragrammaticality}{}}%
+Gerard, J. (2022). The extragrammaticality of the acquisition of adjunct control. \emph{Language Acquisition}, \emph{29}(2), 107--134.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hamlin2015case}{}}%
+Hamlin, J. (2015). The case for social evaluation in preverbal infants: Gazing toward one's goal drives infants' preferences for helpers over hinderers in the hill paradigm. \emph{Frontiers in Psychology}, \emph{5}, 1563.
+
 \leavevmode\vadjust pre{\hypertarget{ref-kidd2022diverse}{}}%
 Kidd, E., \& Garcia, R. (2022). How diverse is child language acquisition research? \emph{First Language}, 01427237211066405.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kominsky2021there}{}}%
+Kominsky, J. F., Shafto, P., \& Bonawitz, E. (2021). {``There's something inside''}: Children's intuitions about animate agents. \emph{PloS One}, \emph{16}(5), e0251081.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lapidow2021tale}{}}%
+Lapidow, E., Tandon, T., Goddu, M., \& Walker, C. M. (2021). A tale of three platforms: Investigating preschoolers' second-order inferences using in-person, zoom, and lookit methodologies. \emph{Frontiers in Psychology}, \emph{12}, 731404.
 
 \leavevmode\vadjust pre{\hypertarget{ref-lo2021tablet}{}}%
 Lo, C. H., Rosslund, A., Chai, J. H., Mayor, J., \& Kartushina, N. (2021). Tablet assessment of word comprehension reveals coarse word representations in 18--20-month-old toddlers. \emph{Infancy}, \emph{26}(4), 596--616.
@@ -378,11 +459,23 @@ Lo, C. H., Rosslund, A., Chai, J. H., Mayor, J., \& Kartushina, N. (2021). Table
 \leavevmode\vadjust pre{\hypertarget{ref-lourenco2020no}{}}%
 Lourenco, S. F., \& Tasimi, A. (2020). No participant left behind: Conducting science during COVID-19. \emph{Trends in Cognitive Sciences}, \emph{24}(8), 583--584.
 
+\leavevmode\vadjust pre{\hypertarget{ref-margoni2018infants}{}}%
+Margoni, F., Baillargeon, R., \& Surian, L. (2018). Infants distinguish between leaders and bullies. \emph{Proceedings of the National Academy of Sciences}, \emph{115}(38), E8835--E8843.
+
 \leavevmode\vadjust pre{\hypertarget{ref-moher2015preferred}{}}%
 Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., \ldots{} Stewart, L. A. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-p) 2015 statement. \emph{Systematic Reviews}, \emph{4}(1), 1--9.
 
+\leavevmode\vadjust pre{\hypertarget{ref-morini2021webcams}{}}%
+Morini, G., \& Blair, M. (2021). Webcams, songs, and vocabulary learning: A comparison of in-person and remote data collection as a way of moving forward with child-language research. \emph{Frontiers in Psychology}, 3347.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nelson2021comparing}{}}%
+Nelson, P. M., Scheiber, F., Laughlin, H. M., \& Demir-Lira, Ö. (2021). Comparing face-to-face and online data collection methods in preterm and full-term children: An exploratory study. \emph{Frontiers in Psychology}, 5025.
+
 \leavevmode\vadjust pre{\hypertarget{ref-nielsen2017persistent}{}}%
 Nielsen, M., Haun, D., Kärtner, J., \& Legare, C. H. (2017). The persistent sampling bias in developmental psychology: A call to action. \emph{Journal of Experimental Child Psychology}, \emph{162}, 31--38.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pasquini2007preschoolers}{}}%
+Pasquini, E. S., Corriveau, K. H., Koenig, M., \& Harris, P. L. (2007). Preschoolers monitor the relative accuracy of informants. \emph{Developmental Psychology}, \emph{43}(5), 1216.
 
 \leavevmode\vadjust pre{\hypertarget{ref-rhodes2020advancing}{}}%
 Rhodes, M., Rizzo, M. T., Foster-Hanson, E., Moty, K., Leshin, R. A., Wang, M., \ldots{} Ocampo, J. D. (2020). Advancing developmental science via unmoderated remote research with children. \emph{Journal of Cognition and Development}, \emph{21}(4), 477--493.
@@ -405,8 +498,29 @@ Sheskin, M., \& Keil, F. (2018). \emph{TheChildLab. Com a video chat platform fo
 \leavevmode\vadjust pre{\hypertarget{ref-sheskin2020online}{}}%
 Sheskin, M., Scott, K., Mills, C. M., Bergelson, E., Bonawitz, E., Spelke, E. S., et al.others. (2020). Online developmental science to foster innovation, access, and impact. \emph{Trends in Cognitive Sciences}, \emph{24}(9), 675--678.
 
+\leavevmode\vadjust pre{\hypertarget{ref-silver2021measuring}{}}%
+Silver, A. M., Elliott, L., Braham, E. J., Bachman, H. J., Votruba-Drzal, E., Tamis-LeMonda, C. S., \ldots{} Libertus, M. E. (2021). Measuring emerging number knowledge in toddlers. \emph{Frontiers in Psychology}, 3057.
+
+\leavevmode\vadjust pre{\hypertarget{ref-skerry2014preverbal}{}}%
+Skerry, A. E., \& Spelke, E. S. (2014). Preverbal infants identify emotional reactions that are incongruent with goal outcomes. \emph{Cognition}, \emph{130}(2), 204--216.
+
+\leavevmode\vadjust pre{\hypertarget{ref-smith2022online}{}}%
+Smith-Flores, A. S., Perez, J., Zhang, M. H., \& Feigenson, L. (2022). Online measures of looking and learning in infancy. \emph{Infancy}, \emph{27}(1), 4--24.
+
+\leavevmode\vadjust pre{\hypertarget{ref-stahl2015observing}{}}%
+Stahl, A. E., \& Feigenson, L. (2015). Observing the unexpected enhances infants' learning and exploration. \emph{Science}, \emph{348}(6230), 91--94.
+
+\leavevmode\vadjust pre{\hypertarget{ref-teglas2007intuitions}{}}%
+Téglás, E., Girotto, V., Gonzalez, M., \& Bonatti, L. L. (2007). Intuitions of probabilities shape expectations about the future at 12 months and beyond. \emph{Proceedings of the National Academy of Sciences}, \emph{104}(48), 19156--19159.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vales2021research}{}}%
+Vales, C., Wu, C., Torrance, J., Shannon, H., States, S. L., \& Fisher, A. V. (2021). Research at a distance: Replicating semantic differentiation effects using remote data collection with children participants. \emph{Frontiers in Psychology}, \emph{12}, 697550.
+
 \leavevmode\vadjust pre{\hypertarget{ref-viechtbauer2010conducting}{}}%
 Viechtbauer, W. (2010). Conducting meta-analyses in r with the metafor package. \emph{Journal of Statistical Software}, \emph{36}(3), 1--48.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yoon2019preschool}{}}%
+Yoon, E. J., \& Frank, M. C. (2019). Preschool children's understanding of polite requests. \emph{CogSci}, 3179--3185.
 
 \end{CSLReferences}
 

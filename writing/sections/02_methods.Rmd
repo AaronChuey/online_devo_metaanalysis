@@ -1,4 +1,4 @@
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url).
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url). The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
 
 ## Literature Search 
 
@@ -18,6 +18,31 @@ We preregistered several eligibility criteria to filter articles from our search
 
 6. The online and in-person methods must be directly comparable. Some alteration to the study methods is expected when adapting an in-person study to be run online (e.g., changing a preferential reaching measure into a preferential looking measure, having children refer to objects by color instead of pointing, etc). However, we excluded any studies whose methodologies altered the nature of the task or the conclusions that could be drawn from them (e.g., manipulating the identity of an object instead of its location). 
 
+```{r}
+library(tidyverse)
+library(googledrive)
+library(readxl)
+library(metafor)
+library(assertthat)
+library(glue)
+library(wesanderson)
+library(gridExtra)
+library(here)
+source(here("scripts/compute_es.R"))
+knitr::opts_chunk$set(
+                      echo=F, warning=F, 
+                      message=F, sanitize = T)
+
+d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+```
+
+```{r list}
+d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title`, short_cite, comparison_cite) |> unique() |> 
+  mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("compared with @",comparison_cite))) |> 
+  mutate(`Papers used in this meta-analysis`=str_c(short_cite," ",comparison_cite)) |> 
+  select(`Papers used in this meta-analysis`) |> 
+  knitr::kable(caption = "List of papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person studies.", booktabs=T, format="markdown", linesep="")
+```
 ## Data Entry 
 
 All papers (320) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers’ abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age). 
