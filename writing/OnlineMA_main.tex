@@ -116,9 +116,9 @@
 
 % Create new environments so endfloat can handle them
 % \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
 
 % Enables adjusting longtable caption width to table width
 % Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
@@ -156,6 +156,15 @@
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
 \makeatother
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
 \keywords{keywords\newline\indent Word count: X}
 \usepackage{lineno}
 
@@ -169,18 +178,18 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Conducting developmental research online vs.~in-person: A meta-analysis},
-  pdfauthor={First Author1 \& Ernst-August Doelle1,2},
+  pdfauthor={Aaron Chuey1, Veronica Boyce1, Anjie Cao1, \& Michael C. Frank1},
   pdflang={en-EN},
   pdfkeywords={keywords},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Conducting developmental research online vs.~in-person: A meta-analysis}
-\author{First Author\textsuperscript{1} \& Ernst-August Doelle\textsuperscript{1,2}}
+\author{Aaron Chuey\textsuperscript{1}, Veronica Boyce\textsuperscript{1}, Anjie Cao\textsuperscript{1}, \& Michael C. Frank\textsuperscript{1}}
 \date{}
 
 
-\shorttitle{Title}
+\shorttitle{Conducting developmental research online}
 
 \authornote{
 
@@ -188,16 +197,16 @@ Add complete departmental affiliations for each author here. Each new line herei
 
 Enter author note here.
 
-The authors made the following contributions. First Author: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Ernst-August Doelle: Writing - Review \& Editing, Supervision.
+The authors made the following contributions. Aaron Chuey: Conceptualization; Veronica Boyce: Conceptualization; Anjie Cao: Conceptualization; Michael C. Frank: Conceptualization.
 
-Correspondence concerning this article should be addressed to First Author, Postal address. E-mail: \href{mailto:my@email.com}{\nolinkurl{my@email.com}}
+Correspondence concerning this article should be addressed to Aaron Chuey. E-mail: \href{mailto:chuey@stanford.edu}{\nolinkurl{chuey@stanford.edu}}
 
 }
 
-\affiliation{\vspace{0.5cm}\textsuperscript{1} Wilhelm-Wundt-University\\\textsuperscript{2} Konstanz Business School}
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Stanford University}
 
-\abstract{
-An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection with children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person, providing a synthetic view of how online experiments compare to in-person experiments. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. In addition to study modality (online vs in-person), we examined several moderators, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person (d = .68) was slightly larger than the mean effect size of their counterparts conducted online (d = .54), but this difference was not significant. Additionally, we found no significant moderating effect of dependent measure, online study method, or age. Overall, the results of the current meta-analysis suggest developmental data collected online are generally comparable to data collected in-person.
+\abstract{%
+An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection on data collected from children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. We examined several moderators of the effect of online testing, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person (d = .68) was slightly larger than the mean effect size of their counterparts conducted online (d = .54), but this difference was not significant. Additionally, we found no significant moderating effect of dependent measure, online study method, or age. Overall, the results of the current meta-analysis suggest developmental data collected online are generally comparable to data collected in-person.
 }
 
 
@@ -208,23 +217,21 @@ An increasing number of psychological experiments with children are being conduc
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-Developmental researchers are interested in studying children's behavior, primarily by measuring their behavioral responses to experimental stimuli. Study sessions typically involve visits with local families in a laboratory setting or partnering with remote sites such as schools and museums. Although these interactions are a routine part of developmental research, they are time-consuming for both researchers and participants. Typical studies with dozens of infants or young children can require weeks or months of scheduling visits to a lab or many days of visits to testing sites. In-person testing also limits the participant pool to children living relatively close to the research site. Even more so than research with adults, developmental research has been plagued by small, undiverse samples bottlenecked by the demographics of the local population, their access to researchers, as well as the cost of collecting data from them (Kidd \& Garcia, 2022; Nielsen, Haun, Kärtner, \& Legare, 2017).
+Developmental researchers are interested in studying children's behavior, primarily by measuring their behavioral responses to experimental stimuli. Study sessions typically involve visits with local families in a laboratory setting or partnering with remote sites such as schools and museums. Although these interactions are a routine part of developmental research, they are time-consuming for both researchers and participants. Typical studies with dozens of infants or young children can require weeks or months of scheduling visits to a lab or many visits to testing sites. In-person testing also limits the participant pool to children living relatively close to the research site. Additionally, developmental research has been plagued by small, non-diverse samples even more so than research with adults due to limitations imposed by the demographics of the local population as well as the high costs of collecting data from children (Kidd \& Garcia, 2022; Nielsen, Haun, Kärtner, \& Legare, 2017).
 
-Prior to the rise of video chat software, there were not any alternatives to in-person interaction for collecting experimental behavioral data from children. But with the development of inexpensive and reliable video conferencing technology in the 2010s, new frontiers began to emerge for developmental testing {[}\^{}p Observational and survey research has long been conducted through the phone or by mail {[}e.g.@fenson1994variability{]}; here we focus primarily on behavioral observation and experimental methods.
-{]}. Researchers soon experimented with conducting developmental studies through video-chat platforms, which in theory broaden the pool of participants to anyone with internet access at nearly any time and location. What began as a few research teams experimenting with online studies (e.g., Lookit: Scott \& Schulz, 2017; The Child Lab: Sheskin \& Keil, 2018; Pandas: Rhodes et al., 2020) quickly expanded to much of the field as researchers scrambled to conduct safe research during the Covid-19 pandemic. This shift in research practices has yielded many empirical publications where some or all of the data was collected online in addition to a growing literature on online methodology and best practices (for a recent review, see Chuey et al., 2021).
+Prior to the rise of video chat software, there were only limited alternatives to in-person interaction for collecting experimental behavioral data from children. However, with the development of inexpensive and reliable video conferencing technology in the 2010s, new frontiers began to emerge for developmental testing.\footnote{Observational and survey research has long been conducted through the phone or by mail {[}e.g.@fenson1994variability{]}; here we focus primarily on behavioral observation and experimental methods.} Researchers soon experimented with conducting developmental studies through video-chat platforms, which in theory broaden the pool of participants to anyone with internet access at nearly any time and location. What began as a few research teams experimenting with online studies (e.g., Lookit: Scott \& Schulz, 2017; The Child Lab: Sheskin \& Keil, 2018; Pandas: Rhodes et al., 2020) quickly expanded to much of the field as researchers scrambled to conduct safe research during the Covid-19 pandemic. This shift in research practices has yielded many empirical publications where some or all of the data were collected online in addition to a growing literature on online methodology and best practices (for a recent review, see Chuey, Asaba, et al., 2021).
 
-Some researchers may be eager to return to in-person testing, but online research is likely here to stay and even escalate as communications technologies continue to improve and become more accessible. Online testing has immense potential to change developmental science (Sheskin et al., 2020), much as crowdsourced testing of adults has changed adult behavioral science (Buhrmester, Kwang, \& Gosling, 2016). This potential has yet to be fully realized, however, as researchers are still struggling to understand the strengths and weaknesses of this method, and how to recruit diverse populations for online studies. Despite undersampling certain populations (Lourenco \& Tasimi, 2020), online studies do allow researchers to sample from a larger, broader pool of participants than ever before as access to the internet continues to increase worldwide. In turn, large, relatively low cost samples and cross cultural research from a distance may even prove viable in the coming years.
+Some researchers may be eager to return to in-person testing, but online research is likely here to stay and may increase in frequency as communications technologies improve and become more accessible. Online testing has immense potential to change developmental science (Sheskin et al., 2020), much as crowdsourced testing of adults has changed adult behavioral science (Buhrmester, Kwang, \& Gosling, 2016). This potential has yet to be fully realized, however, as researchers have yet to fully understand the strengths and weaknesses of this method, as well as how to recruit diverse populations for online studies. Despite undersampling certain populations (Lourenco \& Tasimi, 2020), online studies nonetheless allow researchers to sample from a larger, broader pool of participants than ever before as access to the internet continues to increase worldwide. Large, low cost samples and remote cross-cultural research may even become a reality for developmental researchers in the coming years.
 
-Is conducting developmental studies online an effective substitute for conducting them in-person, or do online studies yield systematically different effects? Direct comparison of effects measured in both modalities is critical to answering this question. Researchers have implemented a number of paradigms online and replicated their in-person findings, but the quality of data yielded from online studies in comparison to those conducted in-person more broadly is still largely unknown. Therefore, the current meta-analysis examines how data collected from children online compares to data collected in-person in closely-matched studies. Importantly, online studies themselves are not a monolith, and differ in a multitude of ways including the presence of a live experimenter, dependent measure, and the age of the sample being tested. We consider these three moderators in the current analysis.
+Is conducting developmental studies online an effective substitute for conducting them in-person, or do online studies yield systematically different effects? Direct comparison of effects measured in both modalities is critical to answering this question. Researchers have implemented a number of paradigms online and replicated their in-person findings, but the quality of data yielded from online studies in comparison to those conducted in-person more broadly is still largely unknown. Therefore, the current meta-analysis examines how data collected from children online compares to data collected from closely-matched studies in-person. Importantly, online studies themselves are not a monolith, and differ in a multitude of ways including the presence of a live experimenter, dependent measure, and the age of the sample being tested.
 
-\hypertarget{moderators}{%
-\section{Moderators}\label{moderators}}
-
-Online studies are generally conducted in one of two formats: moderated and unmoderated. In moderated studies, a live experimenter guides participants through a study much like they would in-person, except online, typically via video-chat. Moderated studies are often operationalized as slide share presentations or videos shared with participants while the participants' verbal responses or looking is recorded. In unmoderated studies, participants complete a study without the guidance of a live experimenter. Instead, researchers create a preprogrammed module that participants or their parents initiate and complete according to instructions. Unmoderated studies offer the potential for fast, inexpensive data collection since no experimenter needs to be present and participants can participate at any time they choose. However, since they lack an experimenter, participants' experience also deviates more from in-person studies compared to moderated studies which retain the same core social interaction between experimenter and participant. Therefore, it is possible that data collected via unmoderated sessions is comparatively noisier since an experimenter is unable to focus children's attention or course correct like they can during a live interaction. We consider this possibility in the current meta-analysis.
+Online studies are generally conducted in one of two formats: moderated and unmoderated. In moderated studies, a live experimenter guides participants through a study much like they would in-person, except online, typically via video-chat. Moderated studies are often operationalized as slide share presentations or videos shared with participants while the participants' verbal responses or looking is recorded. In unmoderated studies, conversely, participants complete a study without the guidance of a live experimenter. Instead, researchers create a preprogrammed module that participants or their parents initiate and complete according to instructions. Since no experimenter needs to be present and participants can participate at any time they choose, unmoderated studies offer the potential for fast, inexpensive data collection. However, since they lack an experimenter, participants' experiences also deviate more from in-person studies compared to moderated studies that retain the same core social interaction between experimenter and participant. Therefore, it is possible that data collected via unmoderated sessions is comparatively noisier since an experimenter is unable to focus children's attention or course correct like they can during a live interaction. We consider this possibility in the current meta-analysis.
 
 Like developmental studies more broadly, online studies have also employed a number of dependent measures, including verbal measures and looking measures. Verbal measures are typically straightforward to record, while recording looking measures is more complex. Accurate looking measures require precise camera positioning and coding schemes, and are thus more likely to deviate from their in-person counterparts compared to studies that measure children's verbal responses. To that end, automated gaze annotation is currently being developed and represents an exciting future direction in online methodology (see Erel, Potter, Jaffe-Dax, Lew-Williams, \& Bermano, 2022). We examine how the kind of dependent measure employed (looking vs.~verbal) might moderate the difference between online and in-person results.
 
-The final moderator we consider is participants' age. Online developmental studies have sampled from a wide age range, including infants (e.g., Dillon, Izard, \& Spelke, 2020), toddlers (e.g., Lo, Rosslund, Chai, Mayor, \& Kartushina, 2021), preschoolers (e.g., Schidelko, Schünemann, Rakoczy, \& Proft, 2021), and elementary schoolers {[}e.g., Chuey, Lockhart, Sheskin, and Keil (2020); FIXMEChuey et al., 2021{]}. Because online studies are often conducted in the comfort of their own homes, it is possible that children of all ages might benefit from this aspect of online studies. Conversely, because a child's environment is more difficult to moderate online, infant studies, which often rely on precise environmental setups, may suffer when conducted online. In addition, as children get older they may gain more experience with on-screen displays, which can contribute to their performance in online studies. We test these competing age moderation hypotheses. In sum, our meta-analysis addresses the question of whether effect sizes tend to differ across online and in-lab experiments with children, and whether these differences are moderated by study format, dependent variable, or participant age.
+The final moderator we consider is participants' age. Online developmental studies have sampled from a wide age range, including infants (e.g., Dillon, Izard, \& Spelke, 2020), toddlers (e.g., Lo, Rosslund, Chai, Mayor, \& Kartushina, 2021), preschoolers (e.g., Schidelko, Schünemann, Rakoczy, \& Proft, 2021), and elementary schoolers (e.g., Chuey, Lockhart, Sheskin, \& Keil, 2020; Chuey, McCarthy, et al., 2021). Because online studies are often conducted in the comfort of their own homes, it is possible that children of all ages might benefit from this aspect of online studies. Conversely, because a child's environment is more difficult to moderate online, infant studies, which often rely on precise environmental setups, may suffer more when conducted online. In addition, as children get older they may gain more experience with on-screen displays, which can contribute to their performance in online studies. We test these competing age moderation hypotheses.
+
+In sum, our meta-analysis addresses the question of whether effect sizes tend to differ across online and in-person experiments with children, and whether these differences are moderated by study format, dependent variable, or participant age.
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
@@ -266,7 +273,7 @@ Papers used in this meta-analysis \\
 \endhead
 Lo et al. (2021) \\
 Vales et al. (2021) \\
-Chuey et al. (2021) \\
+Chuey, Asaba, et al. (2021) \\
 Schidelko et al. (2021) \\
 Lapidow, Tandon, Goddu, and Walker (2021) \\
 Bánki, Eccher, Falschlehner, Hoehl, and Markova (2022) \\
@@ -302,7 +309,11 @@ If a paper reported an effect size in standardized mean difference (SMD), we cod
 \hypertarget{analytic-approach}{%
 \subsection{Analytic Approach}\label{analytic-approach}}
 
-To determine whether study modality (online or in-person) moderated the size of the main effect of interest for each set of studies, we performed a random-effects multilevel meta-regression using the metafor package (Viechtbauer, 2010). The regression predicts effect size (SMD) with study modality as a fixed effect, and random intercepts fitted by study and participant. Rather than predicting the size of the online-offline difference for a particular measure, this model instead predicts individual experimental effect sizes, with the coefficient of interest being the study modality predictor. We chose this format because online and offline effect pairs were often heterogeneous (e.g., with different ages or sample sizes) and so this format allowed us to use that information in the main and moderated meta-analyses, rather than eliminating it by reducing the two studies to one difference of effect sizes. The random intercepts in our models control for dependencies between the particular studies themselves (e.g., effects yielded from a paper on false belief will be different than effects from an object recognition task), as well as between different samples that may or may not generated multiple effect sizes in our model (e.g., participants who completed a single task/measure vs participants who completed a battery of tasks with multiple main effects of interest reported as a single study).
+To determine whether study modality (online or in-person) moderated the size of the main effect of interest for each set of studies, we performed a random-effects multilevel meta-regression using the metafor package (Viechtbauer, 2010). The regression predicts effect size (SMD) with study modality as a fixed effect.
+
+Our analysis reflects a key design choice for our meta-analysis. Naively, it might appear to be possible to predict the size of the online-offline difference for a particular study. But on examination, many papers are heterogeneous and contain multiple online studies for a given offline study, or multiple measures for the same study. In these cases, the appropriate difference was not always clear. Further, many pairs of studies differed on some value of our chosen moderators.
+
+To deal with these issues, we instead modeled individual experimental effect sizes, with the coefficient of interest being the study modality predictor (online vs.~in-person). We included two random intercepts in our models. The first random intercept controlled for variation between particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second controlled for variation between groups of infants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest).
 
 To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at {[}FIXME link{]}.
 
@@ -331,7 +342,7 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \hspace{1em}Intercept & 0.84 & {}[0.46, 1.21] & 0.000\\
 \hspace{1em}online & -0.15 & {}[-0.38, 0.08] & 0.210\\
 \addlinespace[0.3em]
-\multicolumn{4}{l}{\textbf{Looking v Non-looking}}\\
+\multicolumn{4}{l}{\textbf{Looking v Verbal}}\\
 \hspace{1em}Intercept & 0.73 & {}[0.42, 1.04] & 0.000\\
 \hspace{1em}online & -0.29 & {}[-0.7, 0.11] & 0.155\\
 \hspace{1em}non-looking & -0.06 & {}[-0.43, 0.31] & 0.745\\
@@ -368,7 +379,9 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 \caption{Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \label{funnel}}\label{fig:funnel}
 \end{figure}
 
-We conducted an exploratory analysis looking at potential publication bias. It is unclear what direction we might expect publication biases to manifest, but we examined the existence of publication bias in the differences in effect size between each online and in-lab pair of samples. This checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The funnel plot is shown in Figure \ref{fig:funnel}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies.
+We conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing \emph{or} failing to show differences between online and in-person testing.
+
+We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -379,12 +392,12 @@ It is also important to consider additional factors that could influence these r
 
 Although developmental researchers have had decades of experience designing and running experiments in-person, most have only had a few years or less of experience developing online studies. Thus, our meta-analysis might underestimate the effectiveness of online studies due to researcher and experimenter inexperience. Over the next several years, as developmental researchers develop expertise and experience with online studies, effect sizes might increase for any number of reasons, including better experimenter-participant interactions, better stimulus design, and more accurate methods of measurements (i.e., automatic looking time measures, see Erel et al., 2022). Relatedly, as new methods are developed and adapted for online experiments, researchers should not take the current findings as a blanket declaration that all online studies produce comparable results to their in-person counterparts; some might underperform, while others might outperform. Nonetheless, the current results suggest that across currently employed developmental methodologies, studies conducted with children online are generally comparable to those conducted in-person.
 
-The composition of our sample might also bias our results. To match online and in-person methods as closely as possible, we only considered direct online replications for the current meta-analysis. While this approach ensures that data were collected online and in-person using similar methods and procedures, it limits our sample size and may bias our sample. For example, perhaps researchers disproportionately choose to conduct online replications of strong or well-established effects rather than replicate more subtle, weaker effects. Nonetheless, our analysis found no significant publication bias in terms of favoring stronger online effect sizes or non-replications among the studies we sampled. We also included an open call for unpublished data in an attempt to limit the file drawer problem (see Rosenthal, 1979). Of the published and unpublished online replications that were available to include in our sample, we found comparable effect sizes online (compared to in-person); however, researchers should exercise caution as this sample may not be representative for their questions of interest.
+The composition of our sample might also bias our results. To match online and in-person methods as closely as possible, we only considered direct online replications for the current meta-analysis. While this approach ensures that data were collected online and in-person using similar methods and procedures, it limits our sample size and may bias our sample. For example, perhaps researchers disproportionately choose to conduct online replications of strong or well-established effects rather than replicate more subtle, weaker effects. Nonetheless, our analysis found no significant publication bias in terms of favoring stronger online effect sizes or non-replications among the studies we sampled. We also included an open call for unpublished data in an attempt to limit the file drawer problem (see Rosenthal, 1979). Of the published and unpublished online replications that were available to include in our sample, we found comparable effect sizes online (compared to in-person); however, researchers should exercise caution as this sample may not be representative for their particular questions of interest.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-Although online data collection precludes certain research methodologies or measures (e.g., exploration of a physical environment), the general similarity in outcomes for in-person and online studies with children paint an optimistic picture for online development research going forward. However, beyond enabling the collection of high quality, low cost data, online research also stands to benefit the broader scientific community as a whole. Conducting studies online allows researchers to sample beyond the local community surrounding their home institution. And importantly, for many online participants, an online study with a developmental researcher is their first interaction with a scientist. As online research expands among developmental researchers, we are presented with an unprecedented outreach opportunity to directly interact more closely with those we hope our research will help -- parents and children.
+Although online data collection precludes certain research methodologies or measures (e.g., exploration of a physical environment), the general similarity in outcomes for in-person and online studies with children paint an optimistic picture for online developmental research going forward. However, beyond enabling the collection of high quality, low cost data, online research also stands to benefit the broader scientific community as a whole. Conducting studies online allows researchers to sample beyond the local community surrounding their home institution. And importantly, for many online participants, an online study with a developmental researcher is their first interaction with a scientist. As online research expands among developmental researchers, we are presented with an unprecedented outreach opportunity to directly interact more closely with those we hope our research will allow us to better understand and help -- parents and children.
 
 \newpage
 
@@ -413,6 +426,9 @@ Bulgarelli, F., \& Bergelson, E. (2022). Talker variability shapes early word re
 
 \leavevmode\vadjust pre{\hypertarget{ref-chuey2020children}{}}%
 Chuey, A., Lockhart, K., Sheskin, M., \& Keil, F. (2020). Children and adults selectively generalize mechanistic knowledge. \emph{Cognition}, \emph{199}, 104231.
+
+\leavevmode\vadjust pre{\hypertarget{ref-chuey2021no}{}}%
+Chuey, A., McCarthy, A., Lockhart, K., Trouche, E., Sheskin, M., \& Keil, F. (2021). No guts, no glory: Underestimating the benefits of providing children with mechanistic details. \emph{Npj Science of Learning}, \emph{6}(1), 1--7.
 
 \leavevmode\vadjust pre{\hypertarget{ref-dejesus2021young}{}}%
 DeJesus, J. M., Venkatesh, S., \& Kinzler, K. D. (2021). Young children's ability to make predictions about novel illnesses. \emph{Child Development}, \emph{92}(5), e817--e831.
