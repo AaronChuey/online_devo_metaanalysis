@@ -1,28 +1,33 @@
 ---
 title             : "Conducting developmental research online vs. in-person: A meta-analysis"
-shorttitle        : "Title"
+shorttitle        : "Conducting developmental research online"
 
 author: 
-  - name          : "First Author"
+  - name          : "Aaron Chuey"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Postal address"
-    email         : "my@email.com"
+    email         : "chuey@stanford.edu"
     role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
-      - "Conceptualization"
-      - "Writing - Original Draft Preparation"
-      - "Writing - Review & Editing"
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
+      - "FIXME"
+  - name          : "Veronica Boyce"
+    affiliation   : "1"
+    email         : "vboyce@stanford.edu"
     role:
-      - "Writing - Review & Editing"
-      - "Supervision"
+      - "FIXME"
+  - name          : "Anjie Cao"
+    affiliation   : "1"
+    email         : "anjiecao@stanford.edu"
+    role:
+      - "FIXME"
+  - name          : "Michael C. Frank"
+    affiliation   : "1"
+    email         : "mcfrank@stanford.edu"
+    role:
+      - "FIXME"
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "Stanford University"
 
 authornote: |
   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
