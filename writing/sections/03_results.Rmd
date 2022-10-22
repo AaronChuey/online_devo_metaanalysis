@@ -98,7 +98,7 @@ looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_
   scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
-scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Non-looking")) +
+scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Verbal")) +
   theme_minimal()+
     theme(axis.text.y=element_blank(), axis.ticks.y=element_blank(), legend.position = "bottom")
 
@@ -198,7 +198,7 @@ union(pull_coeffs(looking_mod)) |>
   select(Coefficient, Estimate, `95% CI`, `P-value`) |> 
 knitr::kable(caption = "Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators.", booktabs=T, format="latex", linesep="") |> 
   pack_rows("Overall", 1, 2) %>%
-pack_rows("Looking v Non-looking", 3, 6) %>%
+pack_rows("Looking v Verbal", 3, 6) %>%
 pack_rows("Age", 7, 10) |>
   pack_rows("Moderated v Un-moderated", 11, 13) |> 
   kable_styling(latex_options = "hold_position")
@@ -227,6 +227,6 @@ funnel(paired_mod)
 
 We conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing.
 
-We analyzed publication bias in the differences in effect size between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
+We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
 
 <!-- We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies. -->
