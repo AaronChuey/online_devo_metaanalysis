@@ -369,8 +369,8 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \multicolumn{4}{l}{\textbf{Looking v Verbal}}\\
 \hspace{1em}Intercept & 0.73 & {}[0.42, 1.04] & 0.000\\
 \hspace{1em}online & -0.29 & {}[-0.7, 0.11] & 0.155\\
-\hspace{1em}non-looking & -0.06 & {}[-0.43, 0.31] & 0.745\\
-\hspace{1em}online:non-looking & 0.23 & {}[-0.27, 0.72] & 0.375\\
+\hspace{1em}verbal & -0.06 & {}[-0.43, 0.31] & 0.745\\
+\hspace{1em}online:verbal & 0.23 & {}[-0.27, 0.72] & 0.375\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Age}}\\
 \hspace{1em}Intercept & 0.68 & {}[0.51, 0.86] & 0.000\\
@@ -393,6 +393,29 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|l|l|r}
+\hline
+Modality & Method & Measure & SMD\\
+\hline
+in-person & moderated & looking & 0.091\\
+\hline
+in-person & moderated & verbal & 0.063\\
+\hline
+online & moderated & looking & 0.068\\
+\hline
+online & moderated & verbal & 0.041\\
+\hline
+online & unmoderated & looking & 0.021\\
+\hline
+online & unmoderated & verbal & 0.062\\
+\hline
+\end{tabular}
+\end{table}
+
+Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, online method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of 0.07 SMD (see Table @ref(tab:e\_coeffs)).
 
 \begin{figure}[h]
 
