@@ -221,12 +221,14 @@ paired_mod <- rma.mv(d_diff ~ 1,
 
 funnel(paired_mod)
 
-#regtest(x=d_diff, vi=d_diff_var, data=pairs)
+```
+```{r}
+funtest <- regtest(x=d_diff, vi=d_diff_var, data=pairs)
 
 ```
 
 We conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing.
 
-We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
+We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r funtest$pval |> round(4)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`].  Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
 
 <!-- We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies. -->
