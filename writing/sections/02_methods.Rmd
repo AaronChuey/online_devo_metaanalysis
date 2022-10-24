@@ -92,7 +92,7 @@ studies <- ages |> left_join(pairs) |> left_join(mod) |> left_join(condition) |>
 ```{r list}
 d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title`, short_cite, comparison_cite) |> unique() |> left_join(studies) |> 
   mutate(comparison_cite=ifelse(short_cite=="scott2017lookitB","teglas2007intuitions and @pasquini2007preschoolers", comparison_cite)) |> #this is bad practice, but we really do need to fix just this one row!
-  mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("compared with @",comparison_cite))) |> 
+  mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("and @",comparison_cite))) |> 
   mutate(`Papers used in this meta-analysis`=str_c(short_cite," ",comparison_cite)) |> 
   
   select(`Papers used in this meta-analysis`,`Num pairs`=pairs, `Method`=method, `Moderated?`=moderation, `Average age (mos)`=avg_age) |> 
