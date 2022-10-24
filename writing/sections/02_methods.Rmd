@@ -29,18 +29,74 @@ library(wesanderson)
 library(gridExtra)
 library(here)
 source(here("scripts/compute_es.R"))
+library(kableExtra)
 knitr::opts_chunk$set(
                       echo=F, warning=F, 
                       message=F, sanitize = T)
 
 d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+
+ages <- d |> select(short_cite,expt_condition, mean_age_1, mean_age_2, n_1, n_2, response_mode, method) |> 
+  mutate(avg_age=ifelse(is.na(n_2), mean_age_1, (mean_age_1*n_1+mean_age_2*n_2)/(n_1+n_2)),
+         n=ifelse(is.na(n_2),n_1, n_1+n_2)) |> 
+  group_by(short_cite) |> 
+  summarize(avg_age=weighted.mean(avg_age,n),
+            n_studies=n())
+
+mod <- d |> select(short_cite, response_mode) |> unique() |> 
+  group_by(short_cite) |> 
+  mutate(val=1) |> 
+  pivot_wider(names_from=c(response_mode), values_from=val, values_fill = 0) |> 
+  mutate(method=case_when(
+    `non-looking`==1&looking==1 ~ "both",
+    `non-looking`==1 ~ "non-looking",
+    looking==1 ~ "looking"
+  )) |> select(short_cite, method)
+
+condition <- d |> filter(expt_condition=="online") |>  select(short_cite, method) |> unique() |> 
+  group_by(short_cite) |> 
+  mutate(val=1) |> 
+  pivot_wider(names_from=c(method), values_from=val, values_fill = 0) |> 
+  mutate(moderation=case_when(
+    `unmoderated`==1&moderated==1 ~ "both",
+    `unmoderated`==1 ~ "unmoderated",
+    moderated==1 ~ "moderated"
+  )) |> select(short_cite, moderation)
+
+online <- d|> ungroup() |> filter(expt_condition=="online") |>
+  mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         online_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         online_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, response_mode, method, short_cite, online_age,online_count) |> 
+  rename(d_online=d,d_var_online=d_var)
+
+in_person <-  d |> ungroup()|> filter(expt_condition=="in-person") |> 
+   mutate(n_2=replace_na(n_2,0), 
+         mean_age_2=replace_na(mean_age_2,0),
+         inperson_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
+         inperson_count=n_1+n_2) |> 
+  select(d, d_var, effect_size_group, inperson_age, inperson_count) |> 
+  rename(d_inperson=d,d_var_inperson=d_var)
+
+pairs <- full_join(online, in_person) |> 
+  mutate(d_diff=d_online-d_inperson,
+         d_diff_var=d_var_online+d_var_inperson,
+         age=(inperson_age*inperson_count+online_age*online_count)/
+           (online_count+inperson_count)) |> 
+  group_by(short_cite) |> summarize(pairs=n())
+
+studies <- ages |> left_join(pairs) |> left_join(mod) |> left_join(condition) |> select(-n_studies) |> mutate(avg_age=round(avg_age)) |> ungroup()
 ```
 
 ```{r list}
-d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title`, short_cite, comparison_cite) |> unique() |> 
+d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title`, short_cite, comparison_cite) |> unique() |> left_join(studies) |> 
+  mutate(comparison_cite=ifelse(short_cite=="scott2017lookitB","teglas2007intuitions and @pasquini2007preschoolers", comparison_cite)) |> #this is bad practice, but we really do need to fix just this one row!
   mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("compared with @",comparison_cite))) |> 
   mutate(`Papers used in this meta-analysis`=str_c(short_cite," ",comparison_cite)) |> 
-  select(`Papers used in this meta-analysis`) |> 
+  
+  select(`Papers used in this meta-analysis`,`Num pairs`=pairs, `Method`=method, `Moderated?`=moderation, `Average age (mos)`=avg_age) |> 
+   unique() |> 
   knitr::kable(caption = "List of papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person studies.", booktabs=T, format="markdown", linesep="")
 ```
 ## Data Entry 
