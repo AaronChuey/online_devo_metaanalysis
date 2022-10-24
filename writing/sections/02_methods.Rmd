@@ -48,9 +48,9 @@ mod <- d |> select(short_cite, response_mode) |> unique() |>
   mutate(val=1) |> 
   pivot_wider(names_from=c(response_mode), values_from=val, values_fill = 0) |> 
   mutate(method=case_when(
-    `non-looking`==1&looking==1 ~ "both",
-    `non-looking`==1 ~ "non-looking",
-    looking==1 ~ "looking"
+    `non-looking`==1&looking==1 ~ "Both",
+    `non-looking`==1 ~ "Non",
+    looking==1 ~ "Look"
   )) |> select(short_cite, method)
 
 condition <- d |> filter(expt_condition=="online") |>  select(short_cite, method) |> unique() |> 
@@ -58,9 +58,9 @@ condition <- d |> filter(expt_condition=="online") |>  select(short_cite, method
   mutate(val=1) |> 
   pivot_wider(names_from=c(method), values_from=val, values_fill = 0) |> 
   mutate(moderation=case_when(
-    `unmoderated`==1&moderated==1 ~ "both",
-    `unmoderated`==1 ~ "unmoderated",
-    moderated==1 ~ "moderated"
+    `unmoderated`==1&moderated==1 ~ "Both",
+    `unmoderated`==1 ~ "Unmod",
+    moderated==1 ~ "Mod"
   )) |> select(short_cite, moderation)
 
 online <- d|> ungroup() |> filter(expt_condition=="online") |>
@@ -92,12 +92,13 @@ studies <- ages |> left_join(pairs) |> left_join(mod) |> left_join(condition) |>
 ```{r list}
 d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title`, short_cite, comparison_cite) |> unique() |> left_join(studies) |> 
   mutate(comparison_cite=ifelse(short_cite=="scott2017lookitB","teglas2007intuitions and @pasquini2007preschoolers", comparison_cite)) |> #this is bad practice, but we really do need to fix just this one row!
-  mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("and @",comparison_cite))) |> 
-  mutate(`Papers used in this meta-analysis`=str_c(short_cite," ",comparison_cite)) |> 
+  mutate(short_cite=str_c("@", short_cite), comparison_cite=ifelse(is.na(comparison_cite),"",str_c("compared to @",comparison_cite))) |> 
+  mutate(`Paper`=str_c(short_cite," ",comparison_cite)) |> 
   
-  select(`Papers used in this meta-analysis`,`Num pairs`=pairs, `Method`=method, `Moderated?`=moderation, `Average age (mos)`=avg_age) |> 
+  select(`Paper`, `Pairs`=pairs, `Look`=method, `Mod`=moderation, `Age`=avg_age) |> 
    unique() |> 
-  knitr::kable(caption = "List of papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person studies.", booktabs=T, format="markdown", linesep="")
+  arrange(Age) |> 
+  knitr::kable(caption = "Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, non-looking, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months. ", booktabs=T, format="markdown", linesep="")
 ```
 ## Data Entry 
 
