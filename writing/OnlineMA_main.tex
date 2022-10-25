@@ -267,7 +267,7 @@ We preregistered several eligibility criteria to filter articles from our search
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0485}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0583}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0388}}@{}}
-\caption{\label{tab:list}Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, non-looking, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months.}\tabularnewline
+\caption{\label{tab:list}Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, verbal, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Paper
@@ -296,30 +296,30 @@ Age
 \end{minipage} \\
 \midrule()
 \endhead
-Gasparini et al. (2022) & 5 & Non & Mod & 4 \\
+Gasparini et al. (2022) & 5 & Verb & Mod & 4 \\
 Bánki, Eccher, Falschlehner, Hoehl, and Markova (2022) & 4 & Look & Mod & 5 \\
-DeJesus, Venkatesh, and Kinzler (2021) & 3 & Non & Mod & 5 \\
+DeJesus, Venkatesh, and Kinzler (2021) & 3 & Verb & Mod & 5 \\
 Bochynska and Dillon (2021) compared to Dillon et al. (2020) & 2 & Look & Unmod & 7 \\
 Bulgarelli and Bergelson (2022) & 3 & Look & Mod & 8 \\
 todo (2022a) compared to Hamlin (2015) & 2 & Both & Mod & 9 \\
 Smith-Flores, Perez, Zhang, and Feigenson (2022) compared to Stahl and Feigenson (2015) & 3 & Look & Mod & 13 \\
 todo (2022b) compared to Skerry and Spelke (2014) & 2 & Look & Mod & 13 \\
-Lo et al. (2021) & 1 & Non & Unmod & 20 \\
+Lo et al. (2021) & 1 & Verb & Unmod & 20 \\
 Margoni, Baillargeon, and Surian (2018) & 2 & Look & Mod & 21 \\
 Chuey, Asaba, et al. (2021) & 3 & Both & Mod & 24 \\
 todo (2022c) & 1 & Look & Mod & 24 \\
-Morini and Blair (2021) & 1 & Non & Mod & 30 \\
-Silver et al. (2021) & 1 & Non & Mod & 33 \\
-Schidelko et al. (2021) & 4 & Non & Mod & 44 \\
-Lapidow, Tandon, Goddu, and Walker (2021) & 4 & Non & Both & 44 \\
+Morini and Blair (2021) & 1 & Verb & Mod & 30 \\
+Silver et al. (2021) & 1 & Verb & Mod & 33 \\
+Schidelko et al. (2021) & 4 & Verb & Mod & 44 \\
+Lapidow, Tandon, Goddu, and Walker (2021) & 4 & Verb & Both & 44 \\
 Scott et al. (2017) compared to Téglás, Girotto, Gonzalez, and Bonatti (2007) and Pasquini, Corriveau, Koenig, and Harris (2007) & 17 & Both & Unmod & 45 \\
-Yoon and Frank (2019) & 2 & Non & Unmod & 48 \\
-Kominsky, Shafto, and Bonawitz (2021) & 1 & Non & Mod & 55 \\
-Escudero, Pino Escobar, Casey, and Sommer (2021) & 2 & Non & Mod & 57 \\
-Vales et al. (2021) & 3 & Non & Mod & 58 \\
-Nelson, Scheiber, Laughlin, and Demir-Lira (2021) & 8 & Non & Mod & 59 \\
-Gerard (2022) & 1 & Non & Unmod & 60 \\
-Aboody, Yousif, Sheskin, and Keil (2022) & 1 & Non & Mod & 72 \\
+Yoon and Frank (2019) & 2 & Verb & Unmod & 48 \\
+Kominsky, Shafto, and Bonawitz (2021) & 1 & Verb & Mod & 55 \\
+Escudero, Pino Escobar, Casey, and Sommer (2021) & 2 & Verb & Mod & 57 \\
+Vales et al. (2021) & 3 & Verb & Mod & 58 \\
+Nelson, Scheiber, Laughlin, and Demir-Lira (2021) & 8 & Verb & Mod & 59 \\
+Gerard (2022) & 1 & Verb & Unmod & 60 \\
+Aboody, Yousif, Sheskin, and Keil (2022) & 1 & Verb & Mod & 72 \\
 \bottomrule()
 \end{longtable}
 
@@ -394,28 +394,26 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
 
-\begin{table}[!h]
-\centering
-\begin{tabular}{l|l|l|r}
-\hline
-Modality & Method & Measure & SMD\\
-\hline
-in-person & moderated & looking & 0.091\\
-\hline
-in-person & moderated & verbal & 0.063\\
-\hline
-online & moderated & looking & 0.068\\
-\hline
-online & moderated & verbal & 0.041\\
-\hline
-online & unmoderated & looking & 0.021\\
-\hline
-online & unmoderated & verbal & 0.062\\
-\hline
-\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}lllr@{}}
+\caption{(\#tab:e\_coeffs)Mean SMD by study modality, data-collection method, and type of dependent measure.}\tabularnewline
+\toprule()
+Modality & Method & Measure & SMD \\
+\midrule()
+\endfirsthead
+\toprule()
+Modality & Method & Measure & SMD \\
+\midrule()
+\endhead
+in-person & moderated & looking & 0.091 \\
+in-person & moderated & verbal & 0.063 \\
+online & moderated & looking & 0.068 \\
+online & moderated & verbal & 0.041 \\
+online & unmoderated & looking & 0.021 \\
+online & unmoderated & verbal & 0.062 \\
+\bottomrule()
+\end{longtable}
 
-Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, online method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of 0.07 SMD (see Table @ref(tab:e\_coeffs)).
+Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of 0.07.
 
 \begin{figure}[h]
 
@@ -426,7 +424,7 @@ Additionally, we examined which combinations of methods and measures tended to y
 \caption{Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \label{funnel}}\label{fig:funnel}
 \end{figure}
 
-We conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing \emph{or} failing to show differences between online and in-person testing.
+We also conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing \emph{or} failing to show differences between online and in-person testing.
 
 We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=0.00) and the limit estimate of the effect as standard error goes to zero is 0.37 {[}0.01, 0.72{]}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected.
 
