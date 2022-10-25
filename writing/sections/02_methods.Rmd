@@ -49,7 +49,7 @@ mod <- d |> select(short_cite, response_mode) |> unique() |>
   pivot_wider(names_from=c(response_mode), values_from=val, values_fill = 0) |> 
   mutate(method=case_when(
     `non-looking`==1&looking==1 ~ "Both",
-    `non-looking`==1 ~ "Non",
+    `non-looking`==1 ~ "Verb",
     looking==1 ~ "Look"
   )) |> select(short_cite, method)
 
@@ -98,7 +98,7 @@ d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title
   select(`Paper`, `Pairs`=pairs, `Look`=method, `Mod`=moderation, `Age`=avg_age) |> 
    unique() |> 
   arrange(Age) |> 
-  knitr::kable(caption = "Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, non-looking, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months. ", booktabs=T, format="markdown", linesep="")
+  knitr::kable(caption = "Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, verbal, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months. ", booktabs=T, format="markdown", linesep="")
 ```
 ## Data Entry 
 
