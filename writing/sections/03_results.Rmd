@@ -215,8 +215,7 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 
 ## Exploratory Analysis
 
-```{r e_coeffs, fig.pos="ht"}
-
+```{r e_coeffs}
 # library(magick)
 combined_mod <- rma.mv(yi = d_calc, 
                         V = d_var_calc, 
@@ -228,10 +227,12 @@ combined_mod <- rma.mv(yi = d_calc,
                         data = d_calc)
 #summary(combined_mod)
 
-aggregated <- aggregate(d_calc$d_var_calc, list(d_calc$same_infant), mean) |> 
+combined <- aggregate(d_calc$d_var_calc, 
+                      list(d_calc$same_infant), 
+                      mean) |> 
   rename(same_infant = Group.1,
-         mean_smd = x)
-combined <- merge(d_calc, aggregated)
+         mean_smd = x) |> 
+  merge(d_calc)
 
 grouped_calc <- combined |>
   group_by(as.factor(expt_condition), as.factor(method), as.factor(response_mode)) |> 
@@ -239,14 +240,12 @@ grouped_calc <- combined |>
 names(grouped_calc)[1] <- "Modality"
 names(grouped_calc)[2] <- "Method"
 names(grouped_calc)[3] <- "Measure"
-grouped_calc |>
-  knitr::kable(#caption = "Mean SMD by study modality, data-collection method, and type of dependent measure.", 
-    digits = 3) |> 
-  kable_styling(latex_options = "hold_position")
-  
+
+grouped_calc |> 
+  knitr::kable(caption = "Mean SMD by study modality, data-collection method, and type of dependent measure.", digits = 3, booktabs=T, format="markdown", linesep="")
 ```
 
-Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, online method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]` SMD (see Table \@ref(tab:e_coeffs)).
+Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]`.
 
 ```{r funnel, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="80%", fig.width=6, fig.height=4, fig.cap = "Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \\label{funnel}" }
 
