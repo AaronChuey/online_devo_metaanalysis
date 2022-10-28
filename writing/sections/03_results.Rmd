@@ -213,9 +213,13 @@ pack_rows("Age", 7, 10) |>
 Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, `r pull_coeffs(main_mod) |> stats_text(2)`. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \@ref(tab:coeffs) for coefficient values. Figure \@ref(fig:forest) shows the effect size differences of experiments by moderators. 
 
 
+
+
+
+
 ## Exploratory Analysis
 
-```{r e_coeffs}
+```{r ecoeffs}
 # library(magick)
 combined_mod <- rma.mv(yi = d_calc, 
                         V = d_var_calc, 
@@ -241,11 +245,19 @@ names(grouped_calc)[1] <- "Modality"
 names(grouped_calc)[2] <- "Method"
 names(grouped_calc)[3] <- "Measure"
 
-grouped_calc |> 
-  knitr::kable(caption = "Mean SMD by study modality, data-collection method, and type of dependent measure.", digits = 3, booktabs=T, format="markdown", linesep="")
+grouped_calc |>
+  knitr::kable(caption="Mean SMD by study modality, data-collection method, and type of dependent measure", booktabs=T, digits = 3, format="markdown")%>% kable_styling(full_width=T)
+
+#grouped_calc |> 
+#  knitr::kable(caption = "Mean SMD by study modality, data-collection method, and type of dependent measure.", digits = 3, booktabs=T, format="markdown")
 ```
 
-Additionally, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely too underpowered to detect a significant interaction between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]`.
+We also examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely underpowered to detect significant interactions between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]` (See Table \@ref(tab:ecoeffs)).
+
+
+
+
+
 
 ```{r funnel, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="80%", fig.width=6, fig.height=4, fig.cap = "Funnel plot of the differences in effect size between pairs of in-person and online studies. A positive observed outcome means the online study had a large effect. \\label{funnel}" }
 
@@ -263,7 +275,7 @@ funtest <- regtest(x=pairs$d_diff, vi=pairs$d_diff_var)
 
 ```
 
-We also conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing.
+Additionally, we conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing.
 
 We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r funtest$pval |> round(4)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`].  Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
 
