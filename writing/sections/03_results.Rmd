@@ -43,6 +43,79 @@ d_calc <- d_calc |>
 ```
 
 
+```{r coeffs, fig.pos="ht"}
+main_mod <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = short_cite, 
+                   data = d_calc)
+#summary(main_mod)
+
+moderated_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        + as.factor(method),
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+#summary(moderated_mod)
+
+looking_mod <- rma.mv(yi = d_calc, 
+                      V = d_var_calc, 
+                      mods = ~ as.factor(expt_condition) 
+                      * as.factor(response_mode),
+                      random = ~1 | as.factor(experiment_ID) + 
+                        as.factor(same_infant), 
+                      slab = short_cite, 
+                      data = d_calc)
+#summary(looking_mod)
+
+d_calc$age_centered_mo <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
+age_mod <- rma.mv(yi = d_calc, 
+                        V = d_var_calc, 
+                        mods = ~ as.factor(expt_condition) 
+                        * age_centered_mo,
+                        random = ~1 | as.factor(experiment_ID) + 
+                          as.factor(same_infant), 
+                        slab = short_cite, 
+                        data = d_calc)
+#summary(age_mod)
+library(stringr)
+pull_coeffs <- function(mod){
+  df <- tibble(Coefficient=rownames(mod$b), Estimate=mod$b |> round(2), `P-value`=mod$pval |> round(3), lower=mod$ci.lb |> round(2), upper=mod$ci.ub |> round(2)) |> 
+    mutate(`95% CI`=str_c("[",lower,", ", upper,"]")) |> 
+    select(Coefficient, Estimate, `95% CI`, `P-value`) |> 
+    mutate(Coefficient=str_replace_all(Coefficient,coll("as.factor(expt_condition)"),"") |> 
+             str_replace_all(coll("as.factor(response_mode)"),"") |>
+             str_replace_all(coll("as.factor(method)"),"") |>
+             str_replace_all(coll("mods"),"online") |> 
+             str_replace_all("intrcpt", "Intercept"))
+  
+  df
+}
+
+stats_text  <- function(model, row){
+  str_c("Est=", model[row,2], ", 95% CI=", model[row,3],", p=", model[row,4])
+}
+
+library(papaja)
+library(kableExtra)
+pull_coeffs(main_mod) |> 
+union(pull_coeffs(looking_mod)) |> 
+  union(pull_coeffs(age_mod)) |> 
+  union(pull_coeffs(moderated_mod)) |> 
+  select(Coefficient, Estimate, `95% CI`, `P-value`) |> 
+knitr::kable(caption = "Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators.", booktabs=T, format="latex", linesep="") |> 
+  pack_rows("Overall", 1, 2) %>%
+pack_rows("Looking v Verbal", 3, 6) %>%
+pack_rows("Age", 7, 10) |>
+  pack_rows("Moderated v Un-moderated", 11, 13) |> 
+  kable_styling(latex_options = "hold_position")
+  
+```
+
 
 
 ```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared." }
@@ -134,79 +207,6 @@ moderated_plot+looking_plot+age_plot
 
 
 
-
-```{r coeffs, fig.pos="ht"}
-main_mod <- rma.mv(yi = d_calc, 
-                   V = d_var_calc,
-                   mods = as.factor(expt_condition),
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
-                   slab = short_cite, 
-                   data = d_calc)
-#summary(main_mod)
-
-moderated_mod <- rma.mv(yi = d_calc, 
-                        V = d_var_calc, 
-                        mods = ~ as.factor(expt_condition) 
-                        + as.factor(method),
-                        random = ~1 | as.factor(experiment_ID) + 
-                          as.factor(same_infant), 
-                        slab = short_cite, 
-                        data = d_calc)
-#summary(moderated_mod)
-
-looking_mod <- rma.mv(yi = d_calc, 
-                      V = d_var_calc, 
-                      mods = ~ as.factor(expt_condition) 
-                      * as.factor(response_mode),
-                      random = ~1 | as.factor(experiment_ID) + 
-                        as.factor(same_infant), 
-                      slab = short_cite, 
-                      data = d_calc)
-#summary(looking_mod)
-
-d_calc$age_centered_mo <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
-age_mod <- rma.mv(yi = d_calc, 
-                        V = d_var_calc, 
-                        mods = ~ as.factor(expt_condition) 
-                        * age_centered_mo,
-                        random = ~1 | as.factor(experiment_ID) + 
-                          as.factor(same_infant), 
-                        slab = short_cite, 
-                        data = d_calc)
-#summary(age_mod)
-library(stringr)
-pull_coeffs <- function(mod){
-  df <- tibble(Coefficient=rownames(mod$b), Estimate=mod$b |> round(2), `P-value`=mod$pval |> round(3), lower=mod$ci.lb |> round(2), upper=mod$ci.ub |> round(2)) |> 
-    mutate(`95% CI`=str_c("[",lower,", ", upper,"]")) |> 
-    select(Coefficient, Estimate, `95% CI`, `P-value`) |> 
-    mutate(Coefficient=str_replace_all(Coefficient,coll("as.factor(expt_condition)"),"") |> 
-             str_replace_all(coll("as.factor(response_mode)"),"") |>
-             str_replace_all(coll("as.factor(method)"),"") |>
-             str_replace_all(coll("mods"),"online") |> 
-             str_replace_all("intrcpt", "Intercept"))
-  
-  df
-}
-
-stats_text  <- function(model, row){
-  str_c("Est=", model[row,2], ", 95% CI=", model[row,3],", p=", model[row,4])
-}
-
-library(papaja)
-library(kableExtra)
-pull_coeffs(main_mod) |> 
-union(pull_coeffs(looking_mod)) |> 
-  union(pull_coeffs(age_mod)) |> 
-  union(pull_coeffs(moderated_mod)) |> 
-  select(Coefficient, Estimate, `95% CI`, `P-value`) |> 
-knitr::kable(caption = "Table of coefficients for the pre-registered models. The overall model is shown first, followed by the three models with moderators.", booktabs=T, format="latex", linesep="") |> 
-  pack_rows("Overall", 1, 2) %>%
-pack_rows("Looking v Verbal", 3, 6) %>%
-pack_rows("Age", 7, 10) |>
-  pack_rows("Moderated v Un-moderated", 11, 13) |> 
-  kable_styling(latex_options = "hold_position")
-  
-```
 
 ## Confirmatory Analysis
 
