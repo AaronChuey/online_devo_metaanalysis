@@ -241,7 +241,7 @@ We conducted a literature search following the Preferred Reporting Items for Sys
 \hypertarget{literature-search}{%
 \subsection{Literature Search}\label{literature-search}}
 
-Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott, Chu, \& Schulz, 2017; Scott \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al., 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society and ICIS listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as several unpublished but complete online replications.
+Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott, Chu, \& Schulz, 2017; Scott \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al., 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society and ICIS listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as six unpublished but complete online replications.
 
 We preregistered several eligibility criteria to filter articles from our search:
 
@@ -302,12 +302,12 @@ DeJesus, Venkatesh, and Kinzler (2021) & 3 & Verb & Mod & 5 \\
 Bochynska and Dillon (2021) compared to Dillon et al. (2020) & 2 & Look & Unmod & 7 \\
 Bulgarelli and Bergelson (2022) & 3 & Look & Mod & 8 \\
 todo (2022a) compared to Hamlin (2015) & 2 & Both & Mod & 9 \\
-Smith-Flores, Perez, Zhang, and Feigenson (2022) compared to Stahl and Feigenson (2015) & 3 & Look & Mod & 13 \\
-todo (2022b) compared to Skerry and Spelke (2014) & 2 & Look & Mod & 13 \\
+Smith-Flores, Perez, Zhang, and Feigenson (2022a) compared to Stahl and Feigenson (2015) & 3 & Look & Mod & 13 \\
+Smith-Flores, Perez, Zhang, and Feigenson (2022b) compared to Skerry and Spelke (2014) & 2 & Look & Mod & 13 \\
 Lo et al. (2021) & 1 & Verb & Unmod & 20 \\
 Margoni, Baillargeon, and Surian (2018) & 2 & Look & Mod & 21 \\
 Chuey, Asaba, et al. (2021) & 3 & Both & Mod & 24 \\
-todo (2022c) & 1 & Look & Mod & 24 \\
+todo (2022b) & 1 & Look & Mod & 24 \\
 Morini and Blair (2021) & 1 & Verb & Mod & 30 \\
 Silver et al. (2021) & 1 & Verb & Mod & 33 \\
 Schidelko et al. (2021) & 4 & Verb & Mod & 44 \\
@@ -328,7 +328,7 @@ Aboody, Yousif, Sheskin, and Keil (2022) & 1 & Verb & Mod & 72 \\
 
 All papers (320) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers' abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age).
 
-If a paper reported an effect size in standardized mean difference (SMD), we coded it directly. Otherwise, we calculated the individual effect sizes for each main effect and each study (online and in-person) using reported means and standard deviations, t statistic, or directly from the data if it was available. If the main comparison was to chance performance, we first calculated log odds and then converted the effect size to SMD via the compute.es package in R (Del Re \& Del Re, 2012). If a given study had multiple dependent measures or central hypotheses, we calculated an effect size and associated variance for each.
+If a paper reported an effect size as cohen's d (referred to below as standardized mean difference, SMD), we coded it directly. Otherwise, we calculated the individual effect sizes for each main effect and each study (online and in-person) using reported means and standard deviations, t statistic, or directly from the data if it was available. If the main comparison was to chance performance, we first calculated log odds and then converted the effect size to cohen's d via the compute.es package in R (Del Re \& Del Re, 2012). If a given study had multiple dependent measures or central hypotheses, we calculated an effect size and associated variance for each.
 
 \hypertarget{analytic-approach}{%
 \subsection{Analytic Approach}\label{analytic-approach}}
@@ -337,7 +337,7 @@ To determine whether study modality (online or in-person) moderated the size of 
 
 Our analysis reflects a key design choice for our meta-analysis. Naively, it might appear to be possible to predict the size of the online-offline difference for a particular study. But on examination, many papers are heterogeneous and contain multiple online studies for a given offline study, or multiple measures for the same study. In these cases, the appropriate difference was not always clear. Further, many pairs of studies differed on some value of our chosen moderators.
 
-To deal with these issues, we instead modeled individual experimental effect sizes, with the coefficient of interest being the study modality predictor (online vs.~in-person). We included two random intercepts in our models. The first random intercept controlled for variation between particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second controlled for variation between groups of infants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest).
+To deal with these issues, we instead modeled individual experimental effect sizes, with the coefficient of interest being the study modality predictor (online vs.~in-person). We included two random intercepts in our models. The first random intercept controlled for variation between particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second controlled for variation between groups of participants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest).
 
 To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at {[}FIXME link{]}.
 
@@ -559,8 +559,11 @@ Sheskin, M., Scott, K., Mills, C. M., Bergelson, E., Bonawitz, E., Spelke, E. S.
 \leavevmode\vadjust pre{\hypertarget{ref-skerry2014preverbal}{}}%
 \textsuperscript{*} Skerry, A. E., \& Spelke, E. S. (2014). Preverbal infants identify emotional reactions that are incongruent with goal outcomes. \emph{Cognition}, \emph{130}(2), 204--216.
 
+\leavevmode\vadjust pre{\hypertarget{ref-smith-flores2022}{}}%
+Smith-Flores, A. S., Perez, J., Zhang, M. H., \& Feigenson, L. (2022b). Online measures of looking and learning in infancy. \emph{Infancy}, \emph{27}(1), 4--24.
+
 \leavevmode\vadjust pre{\hypertarget{ref-smith2022online}{}}%
-Smith-Flores, A. S., Perez, J., Zhang, M. H., \& Feigenson, L. (2022). Online measures of looking and learning in infancy. \emph{Infancy}, \emph{27}(1), 4--24.
+Smith-Flores, A. S., Perez, J., Zhang, M. H., \& Feigenson, L. (2022a). Online measures of looking and learning in infancy. \emph{Infancy}, \emph{27}(1), 4--24.
 
 \leavevmode\vadjust pre{\hypertarget{ref-stahl2015observing}{}}%
 Stahl, A. E., \& Feigenson, L. (2015). Observing the unexpected enhances infants' learning and exploration. \emph{Science}, \emph{348}(6230), 91--94.
@@ -568,14 +571,11 @@ Stahl, A. E., \& Feigenson, L. (2015). Observing the unexpected enhances infants
 \leavevmode\vadjust pre{\hypertarget{ref-teglas2007intuitions}{}}%
 \textsuperscript{*} Téglás, E., Girotto, V., Gonzalez, M., \& Bonatti, L. L. (2007). Intuitions of probabilities shape expectations about the future at 12 months and beyond. \emph{Proceedings of the National Academy of Sciences}, \emph{104}(48), 19156--19159.
 
-\leavevmode\vadjust pre{\hypertarget{ref-smith-flores2022}{}}%
-\textsuperscript{*} todo, todo. (2022b). \emph{Todo}.
-
 \leavevmode\vadjust pre{\hypertarget{ref-yuen2022}{}}%
 \textsuperscript{*} todo, todo. (2022a). \emph{Todo}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-mani2022}{}}%
-\textsuperscript{*} todo, todo. (2022c). \emph{Todo}.
+\textsuperscript{*} todo, todo. (2022b). \emph{Todo}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-vales2021research}{}}%
 \textsuperscript{*} Vales, C., Wu, C., Torrance, J., Shannon, H., States, S. L., \& Fisher, A. V. (2021). Research at a distance: Replicating semantic differentiation effects using remote data collection with children participants. \emph{Frontiers in Psychology}, \emph{12}, 697550.
