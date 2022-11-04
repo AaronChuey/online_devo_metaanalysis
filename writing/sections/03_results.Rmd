@@ -37,9 +37,14 @@ d_calc <- d |>
   })) |>
   unnest(cols = c(data)) |>
   filter(!is.na(d_calc))
+d_calc$Age <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
 d_calc <- d_calc |>
-  mutate(response_mode = case_when(response_mode == "non-looking" ~ "verbal",
-                                   response_mode == "looking" ~ "looking"))
+  mutate(response_mode = case_when(response_mode == "non-looking" ~ "Verbal",
+                                   response_mode == "looking" ~ "Looking")) %>% 
+  mutate(expt_condition = case_when(expt_condition == "online" ~ "Online",
+                                    expt_condition == "in-person" ~ "In-person")) %>% 
+  mutate(method = case_when(method == "moderated" ~ "Moderated",
+                            method == "unmoderated" ~ "Unmoderated"))
 ```
 
 
@@ -72,11 +77,10 @@ looking_mod <- rma.mv(yi = d_calc,
                       data = d_calc)
 #summary(looking_mod)
 
-d_calc$age_centered_mo <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
 age_mod <- rma.mv(yi = d_calc, 
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
-                        * age_centered_mo,
+                        * Age,
                         random = ~1 | as.factor(experiment_ID) + 
                           as.factor(same_infant), 
                         slab = short_cite, 
@@ -118,9 +122,9 @@ pack_rows("Age", 7, 10) |>
 
 
 
-```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared." }
+```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared." }
 
-online <- d_calc |> ungroup() |> filter(expt_condition=="online") |>
+online <- d_calc |> ungroup() |> filter(expt_condition=="Online") |>
   mutate(n_2=replace_na(n_2,0), 
          mean_age_2=replace_na(mean_age_2,0),
          online_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
@@ -128,7 +132,7 @@ online <- d_calc |> ungroup() |> filter(expt_condition=="online") |>
   select(d, d_var, effect_size_group, response_mode, method, short_cite, online_age,online_count) |> 
   rename(d_online=d,d_var_online=d_var)
 
-in_person <-  d_calc |> ungroup()|> filter(expt_condition=="in-person") |> 
+in_person <-  d_calc |> ungroup()|> filter(expt_condition=="In-person") |> 
    mutate(n_2=replace_na(n_2,0), 
          mean_age_2=replace_na(mean_age_2,0),
          inperson_age=(n_1*mean_age_1+n_2*mean_age_2)/(n_1+n_2),
@@ -152,18 +156,17 @@ vanilla_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_
   xlab("") +
   theme_minimal()
 
-age_plot = ggplot(pairs, aes(x = age, y = d_diff, ymin=d_diff-d_diff_var,
+age_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
-  geom_smooth(method="lm")+
-  geom_pointrange(alpha = .5, position=position_dodge2(width=1)) +
+  geom_pointrange(aes(color=age),alpha = .5, position=position_dodge2(width=.5)) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
- # aes(x=reorder(short_cite,-d_diff, sum)) +
-  #scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
+  aes(x=reorder(short_cite,-d_diff, sum)) +
   ylab("SMD difference (online - in-person)") + 
-  xlab("Age in Months") +
-    #scale_color_continuous(name="Age (Months)") +
-  theme_minimal()
+  xlab("") +
+    scale_color_continuous(name="Age (Months)") +
+  theme_minimal() +
+  theme(axis.text.y=element_blank(), axis.ticks.y=element_blank(), legend.position = "bottom")
 
 looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_var,
                                  ymax=d_diff+d_diff_var)) + 
@@ -171,7 +174,6 @@ looking_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_diff_
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
 scale_color_manual(values = wes_palette("Darjeeling1", n = 2), name = "Measure", labels = c("Looking", "Verbal")) +
@@ -185,7 +187,6 @@ moderated_plot = ggplot(pairs, aes(x = short_cite, y = d_diff, ymin=d_diff-d_dif
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
-  #scale_x_discrete(labels = c("Paper 24","Paper 23","Paper 22","Paper 21","Paper 20","Paper 19","Paper 18","Paper 17","Paper 16","Paper 15", "Paper 14", "Paper 13", "Paper 12", "Paper 11", "Paper 10", "Paper 9", "Paper 8", "Paper 7", "Paper 6", "Paper 5", "Paper 4", "Paper 3", "Paper 2", "Paper 1")) +
   ylab("SMD difference (online - in-person)") + 
   xlab("") +
 scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online method", labels = c("Moderated", "Unmoderated")) +
@@ -220,19 +221,18 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 ## Exploratory Analysis
 
 
-```{r ecoeffs}
+```{r modmeans}
 # library(magick)
 combined_mod <- rma.mv(yi = d_calc, 
                         V = d_var_calc, 
-                        mods = ~ as.factor(expt_condition) 
-                        * as.factor(method) * as.factor(response_mode),
+                        mods = ~ as.factor(expt_condition)*as.factor(method)*as.factor(response_mode),
                         random = ~1 | as.factor(experiment_ID) + 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)
 #summary(combined_mod)
 
-combined <- aggregate(d_calc$d_var_calc, 
+combined <- aggregate(d_calc$d_calc, 
                       list(d_calc$same_infant), 
                       mean) |> 
   rename(same_infant = Group.1,
@@ -247,13 +247,10 @@ names(grouped_calc)[2] <- "Method"
 names(grouped_calc)[3] <- "Measure"
 
 grouped_calc |>
-  knitr::kable(caption="Mean SMD by study modality, data-collection method, and type of dependent measure", booktabs=T, digits = 3, format="markdown")%>% kable_styling(full_width=T)
-
-#grouped_calc |> 
-#  knitr::kable(caption = "Mean SMD by study modality, data-collection method, and type of dependent measure.", digits = 3, booktabs=T, format="markdown")
+  knitr::kable(caption="Mean SMD across studies by study modality, data-collection method, and type of dependent measure", booktabs=T, digits = 3, format="markdown")%>% kable_styling(full_width=T)
 ```
 
-We also examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely underpowered to detect significant interactions between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]` (See Table \@ref(tab:ecoeffs)).
+We also examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although we cannot draw any strong conclusions about any possible multi-way interaction between study modality, data-collection method, and dependent measure due to our relatively small sample size, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of `r grouped_calc$SMD[1] - grouped_calc$SMD[5]` (See Table \@ref(tab:modmeans)). In contrast, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measured all differed by less than .2 SMD from their in-person counterparts. 
 
 
 
@@ -278,6 +275,6 @@ funtest <- regtest(x=pairs$d_diff, vi=pairs$d_diff_var)
 
 Additionally, we conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing.
 
-We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r funtest$pval |> round(4)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`].  Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
+We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r papaja::printp(funtest$pval)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`].  Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected. 
 
 <!-- We also considered the overall average age of participants in the pair of studies, as well as the response mode and method of the online sample as moderators. To that end, we found that neither age, dependent measure, nor online study method significantly moderated the difference in effect size between online and in-person studies. -->
