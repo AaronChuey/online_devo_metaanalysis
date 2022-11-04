@@ -361,20 +361,20 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Looking v Verbal}}\\
 \hspace{1em}Intercept & 0.73 & {}[0.42, 1.04] & 0.000\\
-\hspace{1em}online & -0.29 & {}[-0.7, 0.11] & 0.155\\
-\hspace{1em}verbal & -0.06 & {}[-0.43, 0.31] & 0.745\\
-\hspace{1em}online:verbal & 0.23 & {}[-0.27, 0.72] & 0.375\\
+\hspace{1em}Online & -0.29 & {}[-0.7, 0.11] & 0.155\\
+\hspace{1em}Verbal & -0.06 & {}[-0.43, 0.31] & 0.745\\
+\hspace{1em}Online:Verbal & 0.23 & {}[-0.27, 0.72] & 0.375\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Age}}\\
 \hspace{1em}Intercept & 0.68 & {}[0.51, 0.86] & 0.000\\
-\hspace{1em}online & -0.14 & {}[-0.38, 0.1] & 0.244\\
-\hspace{1em}age\_centered\_mo & 0.00 & {}[-0.01, 0.01] & 0.731\\
-\hspace{1em}online:age\_centered\_mo & 0.01 & {}[-0.01, 0.02] & 0.342\\
+\hspace{1em}Online & -0.14 & {}[-0.38, 0.1] & 0.244\\
+\hspace{1em}Age & 0.00 & {}[-0.01, 0.01] & 0.731\\
+\hspace{1em}Online:Age & 0.01 & {}[-0.01, 0.02] & 0.342\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Moderated v Un-moderated}}\\
 \hspace{1em}Intercept & 0.69 & {}[0.52, 0.86] & 0.000\\
-\hspace{1em}online & -0.19 & {}[-0.45, 0.07] & 0.151\\
-\hspace{1em}unmoderated & 0.13 & {}[-0.22, 0.48] & 0.461\\
+\hspace{1em}Online & -0.19 & {}[-0.45, 0.07] & 0.151\\
+\hspace{1em}Unmoderated & 0.13 & {}[-0.22, 0.48] & 0.461\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -385,7 +385,7 @@ Coefficient & Estimate & 95\% CI & P-value\\
 
 }
 
-\caption{Forest plots of studies. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared.}\label{fig:forest}
+\caption{Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared.}\label{fig:forest}
 \end{figure}
 
 \hypertarget{confirmatory-analysis}{%
@@ -397,7 +397,7 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
 
 \begin{longtable}[]{@{}lllr@{}}
-\caption{\label{tab:ecoeffs}Mean SMD by study modality, data-collection method, and type of dependent measure}\tabularnewline
+\caption{\label{tab:modmeans}Mean SMD across studies by study modality, data-collection method, and type of dependent measure}\tabularnewline
 \toprule()
 Modality & Method & Measure & SMD \\
 \midrule()
@@ -406,16 +406,16 @@ Modality & Method & Measure & SMD \\
 Modality & Method & Measure & SMD \\
 \midrule()
 \endhead
-in-person & moderated & looking & 0.091 \\
-in-person & moderated & verbal & 0.063 \\
-online & moderated & looking & 0.068 \\
-online & moderated & verbal & 0.041 \\
-online & unmoderated & looking & 0.021 \\
-online & unmoderated & verbal & 0.062 \\
+In-person & Moderated & Looking & 0.699 \\
+In-person & Moderated & Verbal & 0.677 \\
+Online & Moderated & Looking & 0.597 \\
+Online & Moderated & Verbal & 0.511 \\
+Online & Unmoderated & Looking & 0.177 \\
+Online & Unmoderated & Verbal & 0.570 \\
 \bottomrule()
 \end{longtable}
 
-We also examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although our model is likely underpowered to detect significant interactions between study modality, data-collection method, and dependent measure, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of 0.07 (See Table \ref{tab:ecoeffs}).
+We also examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. Although we cannot draw any strong conclusions about any possible multi-way interaction between study modality, data-collection method, and dependent measure due to our relatively small sample size, unmoderated studies with looking measures yielded the noticeably weakest effect sizes compared to their in-person counterparts, an average difference of 0.52 (See Table \ref{tab:modmeans}). In contrast, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measured all differed by less than .2 SMD from their in-person counterparts.
 
 \begin{figure}[h]
 
@@ -428,7 +428,7 @@ We also examined which combinations of methods and measures tended to yield the 
 
 Additionally, we conducted an exploratory analysis of potential publication bias. It was unclear how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing \emph{or} failing to show differences between online and in-person testing.
 
-We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=0.00) and the limit estimate of the effect as standard error goes to zero is 0.37 {[}0.01, 0.72{]}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected.
+We analyzed publication bias in the differences in effect sizes between each online and in-lab pair of samples. This analysis checks for publication bias on the basis of whether online studies match the results of the in-person studies. For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=.005) and the limit estimate of the effect as standard error goes to zero is 0.37 {[}0.01, 0.72{]}. Overall, we found no clear bias to publish papers with either larger or smaller differences in effect size than expected.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
