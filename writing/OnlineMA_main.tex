@@ -193,17 +193,13 @@
 
 \authornote{
 
-Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
-
-Enter author note here.
-
-The authors made the following contributions. Aaron Chuey: FIXME; Veronica Boyce: FIXME; Anjie Cao: FIXME; Michael C. Frank: FIXME.
+The authors made the following contributions. Aaron Chuey: Conceptualization, Methodology, Formal analysis, Data Curation, Visualization, Writing - Original Draft; Veronica Boyce: Conceptualization, Methodology, Formal analysis, Data Curation, Visualization, Writing - Review \& Editing; Anjie Cao: Conceptualization, Methodology, Formal analysis, Data Curation, Visualization, Writing - Review \& Editing; Michael C. Frank: Conceptualization, Methodology, Formal analysis, Data Curation, Visualization, Writing - Review \& Editing, Supervision.
 
 Correspondence concerning this article should be addressed to Aaron Chuey. E-mail: \href{mailto:chuey@stanford.edu}{\nolinkurl{chuey@stanford.edu}}
 
 }
 
-\affiliation{\vspace{0.5cm}\textsuperscript{1} Stanford University}
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Stanford University, Department of Psychology}
 
 \abstract{%
 An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection on data collected from children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. We examined several moderators of the effect of online testing, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person (d = .68) was slightly larger than the mean effect size of their counterparts conducted online (d = .54), but this difference was not significant. Additionally, we found no significant moderating effect of dependent measure, online study method, or age. Overall, the results of the current meta-analysis suggest developmental data collected online are generally comparable to data collected in-person.
@@ -242,7 +238,7 @@ In sum, our meta-analysis addresses the question of whether effect sizes tend to
 \caption{\label{fig:prisma}PRISMA plot detailing our study screening process.}
 \end{figure}
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015); see Figure \ref{fig:prisma}. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url). The list of papers included in this meta-analysis is shown in Table \ref{tab:list}.
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015); see Figure \ref{fig:prisma}. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at \url{https://osf.io/hjbxf}. The list of papers included in this meta-analysis is shown in Table \ref{tab:list}.
 
 \hypertarget{literature-search}{%
 \subsection{Literature Search}\label{literature-search}}
@@ -307,13 +303,13 @@ Bánki, Eccher, Falschlehner, Hoehl, and Markova (2022) & 4 & Look & Mod & 5 \\
 DeJesus, Venkatesh, and Kinzler (2021) & 3 & Verb & Mod & 5 \\
 Bochynska and Dillon (2021) compared to Dillon et al. (2020) & 2 & Look & Unmod & 7 \\
 Bulgarelli and Bergelson (2022) & 3 & Look & Mod & 8 \\
-todo (2022a) compared to Hamlin (2015) & 2 & Both & Mod & 9 \\
+Yuen and Hamlin (2022) compared to Hamlin (2015) & 2 & Both & Mod & 9 \\
 Smith-Flores, Perez, Zhang, and Feigenson (2022a) compared to Stahl and Feigenson (2015) & 3 & Look & Mod & 13 \\
 Smith-Flores, Perez, Zhang, and Feigenson (2022b) compared to Skerry and Spelke (2014) & 2 & Look & Mod & 13 \\
 Lo et al. (2021) & 1 & Verb & Unmod & 20 \\
 Margoni, Baillargeon, and Surian (2018) & 2 & Look & Mod & 21 \\
 Chuey, Asaba, et al. (2021) & 3 & Both & Mod & 24 \\
-todo (2022b) & 1 & Look & Mod & 24 \\
+Man (2022) & 1 & Look & Mod & 24 \\
 Morini and Blair (2021) & 1 & Verb & Mod & 30 \\
 Silver et al. (2021) & 1 & Verb & Mod & 33 \\
 Schidelko et al. (2021) & 4 & Verb & Mod & 44 \\
@@ -345,7 +341,7 @@ Our analysis reflects a key design choice for our meta-analysis. Naively, it mig
 
 To deal with these issues, we instead modeled individual experimental effect sizes, with the coefficient of interest being the study modality predictor (online vs.~in-person). We included two random intercepts in our models. The first random intercept controlled for variation between particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second controlled for variation between groups of participants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest).
 
-To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at {[}FIXME link{]}.
+To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered, and the code is available at \url{https://osf.io/up6qn/?view_only=91ba54134dc24787b04dd8f3b3b70e1e}.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -520,6 +516,9 @@ Lo, C. H., Rosslund, A., Chai, J. H., Mayor, J., \& Kartushina, N. (2021). Table
 \leavevmode\vadjust pre{\hypertarget{ref-lourenco2020no}{}}%
 Lourenco, S. F., \& Tasimi, A. (2020). No participant left behind: Conducting science during COVID-19. \emph{Trends in Cognitive Sciences}, \emph{24}(8), 583--584.
 
+\leavevmode\vadjust pre{\hypertarget{ref-mani2022}{}}%
+\textsuperscript{*} Man, N. (2022). \emph{Thematic priming}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-margoni2018infants}{}}%
 \textsuperscript{*} Margoni, F., Baillargeon, R., \& Surian, L. (2018). Infants distinguish between leaders and bullies. \emph{Proceedings of the National Academy of Sciences}, \emph{115}(38), E8835--E8843.
 
@@ -577,12 +576,6 @@ Stahl, A. E., \& Feigenson, L. (2015). Observing the unexpected enhances infants
 \leavevmode\vadjust pre{\hypertarget{ref-teglas2007intuitions}{}}%
 \textsuperscript{*} Téglás, E., Girotto, V., Gonzalez, M., \& Bonatti, L. L. (2007). Intuitions of probabilities shape expectations about the future at 12 months and beyond. \emph{Proceedings of the National Academy of Sciences}, \emph{104}(48), 19156--19159.
 
-\leavevmode\vadjust pre{\hypertarget{ref-yuen2022}{}}%
-\textsuperscript{*} todo, todo. (2022a). \emph{Todo}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-mani2022}{}}%
-\textsuperscript{*} todo, todo. (2022b). \emph{Todo}.
-
 \leavevmode\vadjust pre{\hypertarget{ref-vales2021research}{}}%
 \textsuperscript{*} Vales, C., Wu, C., Torrance, J., Shannon, H., States, S. L., \& Fisher, A. V. (2021). Research at a distance: Replicating semantic differentiation effects using remote data collection with children participants. \emph{Frontiers in Psychology}, \emph{12}, 697550.
 
@@ -591,6 +584,9 @@ Viechtbauer, W. (2010). Conducting meta-analyses in r with the metafor package. 
 
 \leavevmode\vadjust pre{\hypertarget{ref-yoon2019preschool}{}}%
 \textsuperscript{*} Yoon, E. J., \& Frank, M. C. (2019). Preschool children's understanding of polite requests. \emph{CogSci}, 3179--3185.
+
+\leavevmode\vadjust pre{\hypertarget{ref-yuen2022}{}}%
+\textsuperscript{*} Yuen, F., \& Hamlin, K. (2022). \emph{Replication of hamlin (2015)}.
 
 \end{CSLReferences}
 
