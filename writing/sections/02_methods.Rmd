@@ -59,7 +59,7 @@ prisma2(found = filter(d_found, source_cat == "database_search")$n,
   
 ```
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at (FIXME insert url). The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at https://osf.io/hjbxf. The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
 
 ## Literature Search 
 
@@ -175,7 +175,7 @@ Our analysis reflects a key design choice for our meta-analysis. Naively, it mig
 
 To deal with these issues, we instead modeled individual experimental effect sizes, with the coefficient of interest being the study modality predictor (online vs. in-person). We included two random intercepts in our models. The first random intercept controlled for variation between  particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second controlled for variation between groups of participants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest). 
 
-To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered and available at [FIXME link].
+To determine the effect of additional moderators (online study method, dependent measure, and participant age), we conducted three additional multilevel meta-regressions each with an additional fixed effect plus the corresponding interaction with study modality. All analysis scripts were preregistered, and the code is available at https://osf.io/up6qn/?view_only=91ba54134dc24787b04dd8f3b3b70e1e.
 
 
 
