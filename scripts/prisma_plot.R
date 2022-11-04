@@ -1,11 +1,14 @@
 library(tidyverse)
 library(here)
-library(googlesheets4)
+#library(googlesheets4)
+library(readxl)
 
 source(here("scripts/prisma_diagram.R"))
 
 # Read in Data 
-d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
+#d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
+d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
+
 
 # identify total records screend
 d_found <- d %>% 
