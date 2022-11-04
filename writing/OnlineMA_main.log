@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 NOV 2022 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 NOV 2022 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -869,11 +869,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<OnlineMA_main_files/figure-latex/forest-1.pdf, id=141, 695.59875pt x 334.24875pt>
+<OnlineMA_main_files/figure-latex/forest-1.pdf, id=141, 693.59125pt x 333.245pt>
 File: OnlineMA_main_files/figure-latex/forest-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/forest-1.pdf>
 Package pdftex.def Info: OnlineMA_main_files/figure-latex/forest-1.pdf  used on input line 384.
-(pdftex.def)             Requested size: 469.75302pt x 225.72546pt.
+(pdftex.def)             Requested size: 469.77315pt x 225.70865pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -883,10 +883,7 @@ File: OnlineMA_main_files/figure-latex/funnel-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/funnel-1.pdf>
 Package pdftex.def Info: OnlineMA_main_files/figure-latex/funnel-1.pdf  used on input line 422.
 (pdftex.def)             Requested size: 375.80888pt x 200.49356pt.
-[15 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>] [16]
-Underfull \vbox (badness 7649) has occurred while \output is active []
-
-[17] [18]
+[15 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>] [16] [17] [18]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [19]
@@ -904,17 +901,17 @@ Package rerunfilecheck Info: File `OnlineMA_main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  16217 strings out of 476931
- 265271 string characters out of 5824666
- 646434 words of memory out of 5000000
+ 265272 string characters out of 5824666
+ 646465 words of memory out of 5000000
  37045 multiletter control sequences out of 15000+600000
  542129 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,11n,77p,1374b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (23 pages, 270471 bytes).
+Output written on OnlineMA_main.pdf (23 pages, 271248 bytes).
 PDF statistics:
  330 PDF objects out of 1000 (max. 8388607)
- 278 compressed objects within 3 object streams
+ 277 compressed objects within 3 object streams
  107 named destinations out of 1000 (max. 500000)
  120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
