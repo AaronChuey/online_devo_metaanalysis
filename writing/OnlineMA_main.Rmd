@@ -86,6 +86,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 # Methods 
 
+
 ```{r child = "writing/sections/02_methods.Rmd"}
 ```
 
