@@ -219,6 +219,7 @@ Overall, the meta-analysis estimated a small negative, non-significant effect of
 
 ## Exploratory Analysis
 
+
 ```{r ecoeffs}
 # library(magick)
 combined_mod <- rma.mv(yi = d_calc, 
