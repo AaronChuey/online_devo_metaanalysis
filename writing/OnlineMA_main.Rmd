@@ -56,6 +56,17 @@ output            : papaja::apa6_pdf
 library(papaja)
 library(here)
 library(tidyverse)
+library(googledrive)
+library(readxl)
+library(metafor)
+library(assertthat)
+library(glue)
+library(wesanderson)
+library(gridExtra)
+library(here)
+
+library(readxl)
+
 r_refs("r-references.bib")
 here::i_am("writing/OnlineMA_main.Rmd")
 
