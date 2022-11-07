@@ -94,7 +94,7 @@ pull_coeffs <- function(mod){
     mutate(Coefficient=str_replace_all(Coefficient,coll("as.factor(expt_condition)"),"") |> 
              str_replace_all(coll("as.factor(response_mode)"),"") |>
              str_replace_all(coll("as.factor(method)"),"") |>
-             str_replace_all(coll("mods"),"online") |> 
+             str_replace_all(coll("mods"),"Online") |> 
              str_replace_all("intrcpt", "Intercept"))
   
   df
@@ -122,7 +122,7 @@ pack_rows("Age", 7, 10) |>
 
 
 
-```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. In left and center plots, each row is one study (paper or pair of papers). On right plot, y-axis is the average age of the children in the two samples being compared." }
+```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers)." }
 
 online <- d_calc |> ungroup() |> filter(expt_condition=="Online") |>
   mutate(n_2=replace_na(n_2,0), 
