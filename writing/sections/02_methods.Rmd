@@ -73,7 +73,7 @@ We preregistered several eligibility criteria to filter articles from our search
 
 3. The mean age of the sample should be under six years. This criterion limits the studies to those conducted on relatively younger children for whom online data collection methods have not been traditionally employed. 
 
-4. All data reported or referred to must contain codeable effect sizes. Verbal comparison alone between an online or in-person study or a qualitative description of results is not enough to determine the precise effect size of interest. 
+4. All data reported or referred to must contain codable effect sizes. Verbal comparison alone between an online or in-person study or a qualitative description of results is not enough to determine the precise effect size of interest. 
 
 5. Data collection for both the in-person and online sample must be complete; any incomplete or partial samples were not considered.
 
