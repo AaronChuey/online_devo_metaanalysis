@@ -217,6 +217,28 @@ Because our meta-analysis averaged across effects from very different paradigms 
 
 ## Exploratory Analysis
 
+```{r}
+#load equivalence testing library
+library(TOSTER)
+
+#aggregate d's by modality and study
+d_online = d_calc %>% 
+  filter(expt_condition == "Online") %>%
+  group_by(expt_num) %>% 
+  summarise(mean_d = mean(d))
+
+d_inperson = d_calc %>% 
+  filter(expt_condition == "In-person") %>% 
+  group_by(expt_num) %>% 
+  summarise(mean_d = mean(d))
+
+#equivalence threshold
+threshold = .2
+
+TOSTtwo(m1=mean(d_inperson$mean_d),m2=mean(d_online$mean_d),sd1=sd(d_inperson$mean_d),sd2=sd(d_online$mean_d),n1=nrow(d_inperson),n2=nrow(d_online),low_eqbound_d=0, high_eqbound_d=threshold, alpha = 0.05, var.equal=FALSE)
+```
+
+In addition to our multi-level meta-analysis, we conducted an equivalence test to determine whether the difference in effect size between online and in-person modalities meaningfully differed... 
 
 ```{r modmeans}
 # library(magick)
