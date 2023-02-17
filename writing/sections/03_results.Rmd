@@ -48,6 +48,9 @@ d_calc <- d_calc |>
 ```
 
 
+
+
+
 ```{r coeffs, fig.pos="ht"}
 main_mod <- rma.mv(yi = d_calc, 
                    V = d_var_calc,
@@ -120,6 +123,42 @@ pack_rows("Age", 7, 10) |>
   
 ```
 
+```{r}
+# heteorogeneity calculation for main_mod 
+get_i2 <- function(res){
+  W <- diag(1/res$vi)
+X <- model.matrix(res)
+P <- W - W %*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
+100 * sum(res$sigma2s) / (sum(res$sigma2s) + (res$k-res$p)/sum(diag(P)))
+
+}
+
+
+online_res <- rma.mv(d_calc ~ 1, 
+                   V = d_var_calc,
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = short_cite, 
+                   data = d_calc %>% filter(expt_condition == "Online"))
+
+in_person_res <- rma.mv(d_calc ~ 1, 
+                   V = d_var_calc,
+                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   slab = short_cite, 
+                   data = d_calc %>% filter(expt_condition == "In-person"))
+
+get_i2(online_res)
+get_i2(in_person_res)
+get_i2(main_mod)
+get_i2(moderated_mod)
+get_i2(looking_mod)
+get_i2(age_mod)
+```
+```
+
+```{r}
+res.R <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct="UN", data=dat)
+res.F <- rma.mv(yi, V, mods = ~ outcome - 1, data=dat)
+```
 
 
 ```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers)." }
