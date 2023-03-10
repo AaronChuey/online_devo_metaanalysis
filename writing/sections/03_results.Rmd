@@ -242,13 +242,7 @@ library(patchwork)
 moderated_plot+looking_plot+age_plot
 ```
 
-
-
-
-
-
-
-## Confirmatory Analysis
+## Planned Analysis
 
 Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, `r pull_coeffs(main_mod) |> stats_text(2)`. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \@ref(tab:coeffs) for coefficient values. Figure \@ref(fig:forest) shows the effect size differences of experiments by moderators. 
 
@@ -328,6 +322,6 @@ funtest <- regtest(x=pairs$d_diff, vi=pairs$d_diff_var)
 
 We additionally conducted an exploratory analysis of potential publication bias. It was unclear *a priori* how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing. In either case our hypothesized selection process operated on the *differences* in effect sizes between each online and in-lab pair of samples.
 
-For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r papaja::printp(funtest$pval)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`]. This analysis suggests the possibility of publication bias favoring negative comparisons between online and in-lab modalities, signaling that perhaps the true effect of online testing is zero or perhaps even positive. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test [@sterne2000]. 
+For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r papaja::printp(funtest$pval)`) and the limit estimate of the effect as standard error goes to zero is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`]. This analysis suggests the possibility of publication bias favoring  studies that have smaller effect sizes online compared to in-person, signaling that perhaps the true effect of online testing is zero or perhaps even positive. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test [@sterne2000]. 
 
 
