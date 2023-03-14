@@ -287,7 +287,12 @@ combined <- aggregate(d_calc$d_calc,
 
 grouped_calc <- combined |>
   group_by(as.factor(expt_condition), as.factor(method), as.factor(response_mode)) |> 
-  summarise(SMD = mean(mean_smd))
+  summarise(SMD = mean(mean_smd),
+            se= sd(mean_smd)/sqrt(n()-1)) |> 
+  mutate(lower=(SMD-1.96*se) |> round(3) |> as.character(),
+         higher=(SMD+1.96*se) |> round(3) |> as.character(),
+         `95% CI`=str_c("[",lower,", ",higher,"]")) |> 
+  select(-se,-lower,-higher)
 names(grouped_calc)[1] <- "Modality"
 names(grouped_calc)[2] <- "Method"
 names(grouped_calc)[3] <- "Measure"
