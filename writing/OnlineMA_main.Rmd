@@ -35,7 +35,7 @@ abstract: |
   
 keywords          : "Methodology, Meta-analysis, Development, Online studies"
 wordcount         : "X"
-
+always_allow_html: true
 bibliography      : "r-references.bib"
 annotate_references: yes
 

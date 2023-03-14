@@ -142,17 +142,17 @@ in_person_res <- rma.mv(d_calc ~ 1,
                    slab = short_cite, 
                    data = d_calc %>% filter(expt_condition == "In-person"))
 
-get_i2(online_res)
-get_i2(in_person_res)
-get_i2(main_mod)
-get_i2(moderated_mod)
-get_i2(looking_mod)
-get_i2(age_mod)
+#get_i2(online_res)
+#get_i2(in_person_res)
+#get_i2(main_mod)
+#get_i2(moderated_mod)
+#get_i2(looking_mod)
+#get_i2(age_mod)
 ```
 
 ```{r}
-res.R <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct="UN", data=dat)
-res.F <- rma.mv(yi, V, mods = ~ outcome - 1, data=dat)
+#res.R <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct="UN", data=dat)
+#res.F <- rma.mv(yi, V, mods = ~ outcome - 1, data=dat)
 ```
 
 ```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers)." }
@@ -244,7 +244,7 @@ Because our meta-analysis averaged across effects from very different paradigms 
 
 ## Exploratory Analysis
 
-```{r}
+```{r, include=F}
 #load equivalence testing library
 library(TOSTER)
 
