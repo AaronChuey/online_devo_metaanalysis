@@ -265,7 +265,7 @@ threshold = .2
 TOSTtwo(m1=mean(d_inperson$mean_d),m2=mean(d_online$mean_d),sd1=sd(d_inperson$mean_d),sd2=sd(d_online$mean_d),n1=nrow(d_inperson),n2=nrow(d_online),low_eqbound_d=-threshold, high_eqbound_d=threshold, alpha = 0.05, var.equal=FALSE)
 ```
 
-In addition to our multi-level meta-analysis, we conducted an exploratory equivalence test to determine whether the effect sizes of studies conducted online and in-person meaningfully differed from one another, defined as a difference of d = .2 or greater [@hedges2019statistical]. To aggregate the effect sizes for online and in-person studies, we first averaged the effect sizes by study then across studies by modality. The equivalence test was inconclusive, finding that the effect sizes of online and in-person studies did not significantly differ from one another, 95% CI=[-.04, .37], but that they were also not statistically equivalent either, 90% CI [-.003, .34]. 
+In addition to our multi-level meta-analysis, we conducted an exploratory equivalence test to determine whether the effect sizes of studies conducted online and in-person meaningfully differed from one another, defined as a difference of d = .2 or greater [@lakens2017equivalence]. To aggregate the effect sizes for online and in-person studies, we first averaged the effect sizes by study then across studies by modality. The equivalence test was inconclusive, finding that the effect sizes of online and in-person studies did not significantly differ from one another, 95% CI=[-.04, .37], but that they were also not statistically equivalent either, 90% CI [-.003, .34]. 
 
 ```{r modmeans}
 # library(magick)
