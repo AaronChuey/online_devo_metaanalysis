@@ -45,6 +45,7 @@ d_calc <- d_calc |>
                                     expt_condition == "in-person" ~ "In-person")) %>% 
   mutate(method = case_when(method == "moderated" ~ "Moderated",
                             method == "unmoderated" ~ "Unmoderated"))
+d_calc
 ```
 
 ```{r coeffs, fig.pos="ht"}
@@ -240,7 +241,7 @@ moderated_plot+looking_plot+age_plot
 
 Overall, the meta-analysis estimated a small negative, non-significant effect of online study modality, `r pull_coeffs(main_mod) |> stats_text(2)`. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \@ref(tab:coeffs) for coefficient values. Figure \@ref(fig:forest) shows the effect size differences of experiments by moderators. 
 
-Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all $p$s $< .0001$). Values of $\tau^2$ for the models (the between-study variance in our meta-analysis)  were `r round(main_mod$tau2,2)` (primary model), `r round(looking_mod$tau2,2)` (looking-time model), `r round(age_mod$tau2,2)` (age model), and `r round(moderated_mod$tau2,2)` (moderated vs. unmoderated model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
+Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all $p$s $< .0001$). Values of $\tau^2$ (the between-study variance in our meta-analysis) for the models  were `r round(main_mod$tau2,2)` (primary model), `r round(moderated_mod$tau2,2)` (moderated vs. unmoderated model), `r round(looking_mod$tau2,2)` (looking-time model), and `r round(age_mod$tau2,2)` (age model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
 
 ## Exploratory Analysis
 
@@ -319,6 +320,6 @@ funtest <- regtest(x=pairs$d_diff, vi=pairs$d_diff_var)
 
 We also conducted an exploratory analysis of potential publication bias. It was unclear *a priori* how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing *or* failing to show differences between online and in-person testing. In either case our hypothesized selection process operated on the *differences* in effect sizes between each online and in-lab pair of samples.
 
-For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r papaja::printp(funtest$pval)`) and the estimated effect assuming no variance is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`]. This analysis suggests the possibility of publication bias favoring  studies that have smaller effect sizes online compared to in-person, signaling that perhaps online studies may have relatively larger effect sizes on average compared to what has been reported. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test [@sterne2000]. 
+For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \@ref(fig:funnel). According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=`r papaja::printp(funtest$pval)`) and the estimated effect assuming no variance is `r funtest$est |> round(2)` [`r funtest$ci.lb |> round(2)`, `r funtest$ci.ub |> round(2)`]. This analysis suggests the possibility of publication bias favoring studies that have smaller effect sizes online compared to in-person, signaling that perhaps online studies may have relatively larger effect sizes on average compared to what has been reported. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test [@sterne2000]. 
 
 
