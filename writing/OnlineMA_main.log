@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  6 APR 2023 14:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  7 APR 2023 14:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,89 +665,50 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 218.
+(Font)              <10> on input line 223.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 218.
+(Font)              <7> on input line 223.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 218.
-[3]
-Underfull \vbox (badness 3977) has occurred while \output is active []
-
-[4]
-Underfull \vbox (badness 7649) has occurred while \output is active []
-
-[5]
-Underfull \vbox (badness 3977) has occurred while \output is active []
-
-[6]
-<OnlineMA_main_files/figure-latex/prisma-1.pdf, id=93, 463.7325pt x 493.845pt>
+(Font)              <5> on input line 223.
+[3] [4] [5] [6]
+<OnlineMA_main_files/figure-latex/prisma-1.pdf, id=97, 463.7325pt x 493.845pt>
 File: OnlineMA_main_files/figure-latex/prisma-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/prisma-1.pdf>
-Package pdftex.def Info: OnlineMA_main_files/figure-latex/prisma-1.pdf  used on input line 239.
+Package pdftex.def Info: OnlineMA_main_files/figure-latex/prisma-1.pdf  used on input line 244.
 (pdftex.def)             Requested size: 463.73135pt x 493.84378pt.
-[7 <./OnlineMA_main_files/figure-latex/prisma-1.pdf>] [8]
-Overfull \hbox (1.42117pt too wide) in paragraph at lines 279--280
+[7] [8 <./OnlineMA_main_files/figure-latex/prisma-1.pdf>] [9]
+Overfull \hbox (1.42117pt too wide) in paragraph at lines 284--285
  []\T1/lmr/m/n/12 Pairs
  []
 
 
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 281--282
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 286--287
 []\T1/lmr/m/n/12 Look  
  []
 
 
-Overfull \hbox (3.53957pt too wide) in paragraph at lines 285--286
+Overfull \hbox (3.53957pt too wide) in paragraph at lines 290--291
  []\T1/lmr/m/n/12 Age
  []
 
 
-Overfull \hbox (1.42117pt too wide) in paragraph at lines 293--294
+Overfull \hbox (1.42117pt too wide) in paragraph at lines 298--299
  []\T1/lmr/m/n/12 Pairs
  []
 
 
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 295--296
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 300--301
 []\T1/lmr/m/n/12 Look  
  []
 
 
-Overfull \hbox (3.53957pt too wide) in paragraph at lines 299--300
+Overfull \hbox (3.53957pt too wide) in paragraph at lines 304--305
  []\T1/lmr/m/n/12 Age
  []
 
 
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 303--303
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 308--308
 []|\T1/lmr/m/n/12 Verb|  
- []
-
-
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 304--304
-[]|\T1/lmr/m/n/12 Look|  
- []
-
-
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 305--305
-[]|\T1/lmr/m/n/12 Verb|  
- []
-
-
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 306--306
-[]|\T1/lmr/m/n/12 Look|  
- []
-
-
-Overfull \hbox (13.26743pt too wide) in paragraph at lines 306--306
-[]|\T1/lmr/m/n/12 Unmod|  
- []
-
-
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 307--307
-[]|\T1/lmr/m/n/12 Look|  
- []
-
-
-Overfull \hbox (4.84138pt too wide) in paragraph at lines 308--308
-[]|\T1/lmr/m/n/12 Both|  
  []
 
 
@@ -756,13 +717,13 @@ Overfull \hbox (5.16745pt too wide) in paragraph at lines 309--309
  []
 
 
-Overfull \hbox (5.16745pt too wide) in paragraph at lines 310--310
-[]|\T1/lmr/m/n/12 Look|  
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 310--310
+[]|\T1/lmr/m/n/12 Verb|  
  []
 
 
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 311--311
-[]|\T1/lmr/m/n/12 Verb|  
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 311--311
+[]|\T1/lmr/m/n/12 Look|  
  []
 
 
@@ -786,8 +747,8 @@ Overfull \hbox (5.16745pt too wide) in paragraph at lines 314--314
  []
 
 
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 315--315
-[]|\T1/lmr/m/n/12 Verb|  
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 315--315
+[]|\T1/lmr/m/n/12 Look|  
  []
 
 
@@ -796,38 +757,28 @@ Overfull \hbox (3.69623pt too wide) in paragraph at lines 316--316
  []
 
 
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 317--317
-[]|\T1/lmr/m/n/12 Verb|  
- []
-
-
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 318--318
-[]|\T1/lmr/m/n/12 Verb|  
- []
-
-
-Overfull \hbox (0.70338pt too wide) in paragraph at lines 318--318
-[]|\T1/lmr/m/n/12 Both|  
- []
-
-
-Overfull \hbox (4.84138pt too wide) in paragraph at lines 319--319
-[]|\T1/lmr/m/n/12 Both|  
- []
-
-
-Overfull \hbox (13.26743pt too wide) in paragraph at lines 319--319
+Overfull \hbox (13.26743pt too wide) in paragraph at lines 316--316
 []|\T1/lmr/m/n/12 Unmod|  
+ []
+
+
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 317--317
+[]|\T1/lmr/m/n/12 Look|  
+ []
+
+
+Overfull \hbox (4.84138pt too wide) in paragraph at lines 318--318
+[]|\T1/lmr/m/n/12 Both|  
+ []
+
+
+Overfull \hbox (5.16745pt too wide) in paragraph at lines 319--319
+[]|\T1/lmr/m/n/12 Look|  
  []
 
 
 Overfull \hbox (3.69623pt too wide) in paragraph at lines 320--320
 []|\T1/lmr/m/n/12 Verb|  
- []
-
-
-Overfull \hbox (13.26743pt too wide) in paragraph at lines 320--320
-[]|\T1/lmr/m/n/12 Unmod|  
  []
 
 
@@ -846,8 +797,18 @@ Overfull \hbox (3.69623pt too wide) in paragraph at lines 323--323
  []
 
 
-Overfull \hbox (3.69623pt too wide) in paragraph at lines 324--324
-[]|\T1/lmr/m/n/12 Verb|  
+Overfull \hbox (0.70338pt too wide) in paragraph at lines 323--323
+[]|\T1/lmr/m/n/12 Both|  
+ []
+
+
+Overfull \hbox (4.84138pt too wide) in paragraph at lines 324--324
+[]|\T1/lmr/m/n/12 Both|  
+ []
+
+
+Overfull \hbox (13.26743pt too wide) in paragraph at lines 324--324
+[]|\T1/lmr/m/n/12 Unmod|  
  []
 
 
@@ -865,31 +826,64 @@ Overfull \hbox (3.69623pt too wide) in paragraph at lines 326--326
 []|\T1/lmr/m/n/12 Verb|  
  []
 
-[9] [10] [11] [12]
+
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 327--327
+[]|\T1/lmr/m/n/12 Verb|  
+ []
+
+
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 328--328
+[]|\T1/lmr/m/n/12 Verb|  
+ []
+
+
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 329--329
+[]|\T1/lmr/m/n/12 Verb|  
+ []
+
+
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 330--330
+[]|\T1/lmr/m/n/12 Verb|  
+ []
+
+
+Overfull \hbox (13.26743pt too wide) in paragraph at lines 330--330
+[]|\T1/lmr/m/n/12 Unmod|  
+ []
+
+
+Overfull \hbox (3.69623pt too wide) in paragraph at lines 331--331
+[]|\T1/lmr/m/n/12 Verb|  
+ []
+
+[10] [11] [12]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<OnlineMA_main_files/figure-latex/forest-1.pdf, id=145, 693.59125pt x 333.245pt>
+<OnlineMA_main_files/figure-latex/forest-1.pdf, id=150, 693.59125pt x 333.245pt>
 File: OnlineMA_main_files/figure-latex/forest-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/forest-1.pdf>
-Package pdftex.def Info: OnlineMA_main_files/figure-latex/forest-1.pdf  used on input line 386.
+Package pdftex.def Info: OnlineMA_main_files/figure-latex/forest-1.pdf  used on input line 391.
 (pdftex.def)             Requested size: 469.77315pt x 225.70865pt.
 
-Underfull \vbox (badness 3547) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13 <./OnlineMA_main_files/figure-latex/forest-1.pdf>] [14] [15]
-<OnlineMA_main_files/figure-latex/funnel-1.pdf, id=187, 404.51125pt x 215.80624pt>
+[13]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[14] [15 <./OnlineMA_main_files/figure-latex/forest-1.pdf>]
+<OnlineMA_main_files/figure-latex/funnel-1.pdf, id=190, 404.51125pt x 215.80624pt>
 File: OnlineMA_main_files/figure-latex/funnel-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/funnel-1.pdf>
-Package pdftex.def Info: OnlineMA_main_files/figure-latex/funnel-1.pdf  used on input line 428.
+Package pdftex.def Info: OnlineMA_main_files/figure-latex/funnel-1.pdf  used on input line 433.
 (pdftex.def)             Requested size: 375.80888pt x 200.49356pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[16] [17 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>]
-Underfull \vbox (badness 3977) has occurred while \output is active []
+[16]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[18] [19] [20]
+[17 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>] [18] [19] [20]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [21]
@@ -903,21 +897,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [24] AED endfloat: Processing end Figures and Tables [25] (./OnlineMA_main.aux)
 Package rerunfilecheck Info: File `OnlineMA_main.out' has not changed.
-(rerunfilecheck)             Checksum: BB87DC9A208D9410F78AA829F03B8F72;1742.
+(rerunfilecheck)             Checksum: 79B200B9BED3041FF0CAEAB0A24E9E6C;1941.
  ) 
 Here is how much of TeX's memory you used:
- 16226 strings out of 476931
- 265387 string characters out of 5824666
- 648669 words of memory out of 5000000
- 37046 multiletter control sequences out of 15000+600000
+ 16230 strings out of 476931
+ 265471 string characters out of 5824666
+ 645722 words of memory out of 5000000
+ 37048 multiletter control sequences out of 15000+600000
  545124 words of font info for 93 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,77p,1456b,652s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,77p,1456b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (25 pages, 314403 bytes).
+Output written on OnlineMA_main.pdf (25 pages, 315183 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 114 named destinations out of 1000 (max. 500000)
- 120 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 371 PDF objects out of 1000 (max. 8388607)
+ 309 compressed objects within 4 object streams
+ 116 named destinations out of 1000 (max. 500000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 
