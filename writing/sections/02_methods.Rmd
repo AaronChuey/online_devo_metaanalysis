@@ -59,7 +59,7 @@ prisma2(found = filter(d_found, source_cat == "database_search")$n,
   
 ```
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at https://osf.io/hjbxf. The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at [anonymous for review]. The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
 
 ## Literature Search 
 
