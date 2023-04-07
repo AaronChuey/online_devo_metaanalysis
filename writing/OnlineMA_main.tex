@@ -116,9 +116,9 @@
 
 % Create new environments so endfloat can handle them
 % \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
 
 % Enables adjusting longtable caption width to table width
 % Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
@@ -156,6 +156,15 @@
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
 \makeatother
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
 \keywords{Methodology, Meta-analysis, Development, Online studies\newline\indent Word count: X}
 \usepackage{lineno}
 
@@ -192,7 +201,7 @@ Correspondence concerning this article should be addressed to Aaron Chuey. E-mai
 
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Stanford University, Department of Psychology}
 
-\abstract{
+\abstract{%
 An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection on data collected from children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. We examined several moderators of the effect of online testing, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person was slightly larger than the mean effect size of their counterparts conducted online, a mean difference of d=.14, but this difference was not significant, 95\% CI={[}.38, -.08{]}. Additionally, we found no significant moderating effect of dependent measure, online study method, or age.
 }
 
@@ -330,7 +339,7 @@ If a paper reported an effect size as cohen's d (referred to below as standardiz
 
 To determine whether study modality (online or in-person) moderated the size of the main effect of interest for each set of studies, we performed a preregistered random-effects multilevel meta-regression using the metafor package (Viechtbauer, 2010). The regression predicted individual study effect size (SMD) with study modality as a fixed effect, modeling individual experimental effect sizes with the coefficient of interest being the study modality predictor (online vs.~in-person). As discussed above, we did not predict a direction of effect for the study modality predictor.
 
-Our approach focused on the study modality moderator, rather than computing a online-offline difference score for each study and estimating the size of that difference directly. Although on a first glance this approach seems simpler, many papers are heterogeneous and contain multiple online studies for a single given offline study, or multiple measures within the same study. In these cases, the appropriate difference was not always clear. For this reason, we chose to enter all study effects into the meta-regression and use the study modality moderator to estimate systematic modality effects.
+Our approach focused on the study modality moderator, rather than computing a online-offline difference score for each study and estimating the size of that difference directly. Although at a first glance this approach seems simpler, many papers are heterogeneous and contain multiple online studies for a single given offline study, or multiple measures within the same study. In these cases, the appropriate difference was not always clear. For this reason, we chose to enter all study effects into the meta-regression and use the study modality moderator to estimate systematic modality effects.
 
 To ensure that differences in the total number of effect sizes across studies did not bias our analysis by overweighting studies with more measurements, we included two random intercepts in our models. The first random intercept captured variation between particular experiments (e.g., modeling the dependency between multiple measurements reported from a single experiment). The second captured variation between groups of participants (e.g., modeling the dependency between effect sizes from participants who completed a battery of tasks with multiple effects of interest).
 
@@ -430,7 +439,7 @@ For each online and in-person pair on the same study, we calculated a standard m
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-The current meta-analysis provides a birds-eye view of how developmental studies conducted online compare with closely matched counterparts conducted in-person. Our results suggest that overall, in-person developmental studies do not yield significantly larger effect sizes compared to similar studies conducted online. Further, the largest online-offline differences compatible with our estimates are still relatively small. This finding should be heartening for developmentalists interested in continuing to use online data collection as one potential modality for their work.
+The current meta-analysis provides a birds-eye view of how developmental studies conducted online compare with closely matched counterparts conducted in-person. Our results suggest that overall, in-person developmental studies do not yield significantly larger effect sizes compared to similar studies conducted online. Further, the largest online-offline differences compatible with our estimates are still relatively small. This finding should be heartening for developmentalists interested in using online data collection.
 
 We also examined whether modality effects emerged more substantially in particular settings, but did not find evidence for other moderators. The method of online data collection, type of dependent measure, and participant age did not have a significant impact on the effect of modality. Nonetheless, our lack of statistical precision, indicated by relatively wide confidence intervals, limits our ability to draw strong conclusions about the effect of any of our moderators. Future analysis is needed to determine the moderating effect, if any, that these factors exercise on the outcome of developmental studies conducted online.
 
