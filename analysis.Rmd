@@ -103,7 +103,7 @@ Check effect size computation against hand-computed where available.
 ```{r}
 ggplot(d_calc, 
        aes(x = d, y = d_calc)) + 
-  geom_pointrange(aes(ymin = d_calc - d_var_calc, ymax = d_calc + d_var_calc)) +
+  geom_pointrange(aes(ymin = d_calc - d_var_calc, ymax = d_calc + d_var_calc), size=.25) +
   geom_errorbarh(aes(xmin = d - d_var, xmax = d + d_var)) +
   geom_abline(lty =2) + 
   ggrepel::geom_label_repel(aes(label = short_cite))
@@ -211,18 +211,18 @@ moderated_plot
 
 default_mod <- rma.mv(d_calc ~ 1,  
        V = d_var_calc,
-       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
        data = d_calc)
 
 
 only_online <- rma.mv(d_calc ~ 1,  
        V = d_var_calc,
-       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
        data = d_calc %>% filter(expt_condition == "online"))
 
 only_inperson <- rma.mv(d_calc ~ 1,  
        V = d_var_calc,
-       random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+       random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
        data = d_calc %>% filter(expt_condition == "in-person"))
 ```
 
@@ -233,13 +233,12 @@ funnel(only_inperson)
 ```
 
 ```{r}
-
 #all data
-regtest(x=d_calc, vi=d_var_calc, data=d_calc)
+regtest(x=d, vi=d_var, data=d_calc)
 
-regtest(x=d_calc, vi=d_var_calc, data=d_calc %>% filter(expt_condition == "online"))
+regtest(x=d, vi=d_var, data=d_calc %>% filter(expt_condition == "online"))
 
-regtest(x=d_calc, vi=d_var_calc, data=d_calc %>% filter(expt_condition == "in-person"))
+regtest(x=d, vi=d_var, data=d_calc %>% filter(expt_condition == "in-person"))
 
 
 
@@ -257,7 +256,6 @@ from prereg:
 > Following Chuey et al. (2021), we will use a random effects meta-analytic model with a further grouping factor for each experiment pair (lab vs. online) to account for methodological grouping, e.g.:  effect size ~ online_offline + (1 |  experiment).
 
 Note that we group by experimental paradigm (`experiment_ID`) in our preregistration, but this step does not eliminate the dependency between multiple measurements from the same children (e.g., both eye-tracking and video coding of the same data from the same children) if they contribute multiple effect sizes. In order to deal with this, we include a random effect grouping term (`same_infant`). 
-
 
 ```{r}
 main_mod <- rma.mv(yi = d_calc, 
@@ -327,7 +325,7 @@ moderated_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         + as.factor(method),
-                        random = ~1 | as.factor(experiment_ID) + 
+                        random = ~1 | as.factor(experiment_ID) / 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)
@@ -350,7 +348,7 @@ looking_mod <- rma.mv(yi = d_calc,
                       V = d_var_calc, 
                       mods = ~ as.factor(expt_condition) 
                       * as.factor(response_mode),
-                      random = ~1 | as.factor(experiment_ID) + 
+                      random = ~1 | as.factor(experiment_ID) / 
                         as.factor(same_infant), 
                       slab = short_cite, 
                       data = d_calc)
@@ -375,7 +373,7 @@ age_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         * age_centered_mo,
-                        random = ~1 | as.factor(experiment_ID) + 
+                        random = ~1 | as.factor(experiment_ID) / 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)
@@ -415,7 +413,7 @@ blank_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   theme_minimal()
 
 vanilla_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
-  geom_point(alpha = 1, width = .25, height = .25, size = 4) +
+  geom_point(alpha = .7, width = .25, height = .25, size = 3) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
@@ -427,7 +425,7 @@ vanilla_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   #theme(legend.position="none")
 
 om_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
-  geom_point(aes(color = method), alpha = 1, width = .25, height = .25, size = 4) +
+  geom_point(aes(color = Online_Method), alpha = .7, width = .25, height = .25, size = 3) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
@@ -439,7 +437,7 @@ om_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   #theme(legend.position="none")
 
 m_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
-  geom_point(aes(color = Measure), alpha = 1, width = .25, height = .25, size = 4) +
+  geom_point(aes(color = Measure), alpha = .7, width = .25, height = .25, size = 3) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
@@ -451,7 +449,7 @@ m_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) +
   #theme(legend.position="none")
 
 a_plot = ggplot(d_diff, aes(x = short_cite, y = d_diff)) + 
-  geom_point(aes(color = Age), alpha = 1, width = .25, height = .25, size = 4) +
+  geom_point(aes(color = Age), alpha = .7, width = .25, height = .25, size = 3) +
   coord_flip() +
   geom_hline(yintercept = 0, lty = 2) + 
   aes(x=reorder(short_cite,-d_diff, sum)) +
