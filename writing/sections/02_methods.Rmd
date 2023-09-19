@@ -1,14 +1,14 @@
 ```{r prisma, fig.cap = "PRISMA plot detailing our study screening process; numerical values represent the number of papers at each stage of the review process."}
 library(tidyverse)
 library(here)
-#library(googlesheets4)
+library(googlesheets4)
 library(readxl)
 
 source(here("scripts/prisma_diagram.R"))
 
 # Read in Data 
-#d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
-d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
+d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
+#d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
 
 
 # identify total records screend
@@ -95,7 +95,9 @@ knitr::opts_chunk$set(
                       echo=F, warning=F, 
                       message=F, sanitize = T)
 
-d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+d <- read_sheet("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
+
+#d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
 
 ages <- d |> select(short_cite,expt_condition, mean_age_1, mean_age_2, n_1, n_2, response_mode, method) |> 
   mutate(avg_age=ifelse(is.na(n_2), mean_age_1, (mean_age_1*n_1+mean_age_2*n_2)/(n_1+n_2)),
@@ -163,7 +165,7 @@ d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title
 ```
 ## Data Entry 
 
-All papers (320) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers’ abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age). 
+All papers (233) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers’ abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age). 
 
 If a paper reported an effect size as cohen's d (referred to below as standardized mean difference, SMD), we coded it directly. Otherwise, we calculated the individual effect sizes for each main effect and each study (online and in-person) via reported means and standard deviations, t statistic, or directly from the data if it was available using analysis scripts adapted from Metalab [e.g., @bergmann2018]. If the main comparison was to chance performance, we first calculated log odds and then converted the effect size to cohen's d via the compute.es package in R (Del Re & Del Re, 2012). If a given study had multiple dependent measures or central hypotheses, we calculated an effect size and associated variance for each.
 
