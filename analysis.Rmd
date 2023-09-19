@@ -499,3 +499,15 @@ threshold = .2
 
 TOSTtwo(m1=mean(d_inperson$mean_d),m2=mean(d_online$mean_d),sd1=sd(d_inperson$mean_d),sd2=sd(d_online$mean_d),n1=nrow(d_inperson),n2=nrow(d_online),low_eqbound_d=-threshold, high_eqbound_d=threshold, alpha = 0.05, var.equal=FALSE)
 ```
+## analysis of n
+
+```{r}
+library(lme4)
+library(jtools)
+
+d_calc_n = d_calc %>% 
+  mutate(experiment_ID = as.factor(experiment_ID)) %>% 
+  mutate(same_infant = as.factor(same_infant))
+lmer(n_1 ~ expt_condition + (1 | experiment_ID / same_infant), data=d_calc_n) %>% summ()
+
+```
