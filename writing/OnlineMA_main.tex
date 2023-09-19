@@ -5,16 +5,19 @@
 \documentclass[
   man,floatsintext]{apa6}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -175,7 +178,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Conducting developmental research online vs.~in-person: A meta-analysis},
   pdfauthor={Aaron Chuey1, Veronica Boyce1, Anjie Cao1, \& Michael C. Frank1},
@@ -202,7 +205,7 @@ Correspondence concerning this article should be addressed to Aaron Chuey. E-mai
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Stanford University, Department of Psychology}
 
 \abstract{%
-An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection on data collected from children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person. Our pre-registered analysis includes 145 effect sizes calculated from 24 papers with 2440 children, ranging in age from four months to six years. We examined several moderators of the effect of online testing, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person was slightly larger than the mean effect size of their counterparts conducted online, a mean difference of d=.14, but this difference was not significant, 95\% CI={[}.38, -.08{]}. Additionally, we found no significant moderating effect of dependent measure, online study method, or age.
+An increasing number of psychological experiments with children are being conducted using online platforms, in part due to the COVID-19 pandemic. Individual replications have compared the findings of particular experiments online and in-person, but the general effect of online data collection on data collected from children is still unknown. Therefore, the current meta-analysis examines how the effect sizes of developmental studies conducted online compare to the same studies conducted in-person. Our pre-registered analysis includes 211 effect sizes calculated from 30 papers with 3282 children, ranging in age from four months to six years. We examined several moderators of the effect of online testing, including the role of dependent measure (looking vs verbal), online study method (moderated vs unmoderated), and age. The mean effect size of studies conducted in-person was slightly larger than the mean effect size of their counterparts conducted online, a mean difference of d=.12, but this difference was not significant, 95\% CI={[}.34, -.09{]}. Additionally, we found no significant moderating effect of dependent measure, online study method, or age.
 }
 
 
@@ -277,7 +280,7 @@ We preregistered several eligibility criteria to filter articles from our search
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0583}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0388}}@{}}
 \caption{\label{tab:list}Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, verbal, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months.}\tabularnewline
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Paper
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
@@ -289,9 +292,9 @@ Mod
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 Age
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Paper
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
@@ -303,18 +306,24 @@ Mod
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 Age
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Gasparini et al. (2022) & 5 & Verb & Mod & 4 \\
 Bánki, Eccher, Falschlehner, Hoehl, and Markova (2022) & 4 & Look & Mod & 5 \\
 DeJesus, Venkatesh, and Kinzler (2021) & 3 & Verb & Mod & 5 \\
+McElwain et al. (2022) & 27 & Both & Mod & 6 \\
 Bochynska and Dillon (2021) compared to Dillon et al. (2020) & 2 & Look & Unmod & 7 \\
 Bulgarelli and Bergelson (2022) & 3 & Look & Mod & 8 \\
 Yuen and Hamlin (2022) compared to Hamlin (2015) & 2 & Both & Mod & 9 \\
+Beckner et al. (2023) & 1 & Look & Unmod & 9 \\
 Smith-Flores, Perez, Zhang, and Feigenson (2022a) compared to Stahl and Feigenson (2015) & 3 & Look & Mod & 13 \\
 Smith-Flores, Perez, Zhang, and Feigenson (2022b) compared to Skerry and Spelke (2014) & 2 & Look & Mod & 13 \\
 Lo et al. (2021) & 1 & Verb & Unmod & 19 \\
 Margoni, Baillargeon, and Surian (2018) & 2 & Look & Mod & 21 \\
+Steffan et al. (2023) & 1 & Look & Mod & 22 \\
+Nguyen, Fitzpatrick, and Floccia (n.d.) & 2 & Verb & Mod & 22 \\
 Chuey, Asaba, et al. (2021) & 3 & Both & Mod & 24 \\
 Man (2022) & 1 & Look & Mod & 24 \\
 Morini and Blair (2021) & 1 & Verb & Mod & 30 \\
@@ -328,14 +337,15 @@ Escudero, Pino Escobar, Casey, and Sommer (2021) & 2 & Verb & Mod & 57 \\
 Vales et al. (2021) & 3 & Verb & Mod & 58 \\
 Nelson, Scheiber, Laughlin, and Demir-Lira (2021) & 8 & Verb & Mod & 59 \\
 Gerard (2022) & 1 & Verb & Unmod & 60 \\
+Wang and Roberts (2023) & 1 & Verb & Mod & 60 \\
+Aboody, Huey, and Jara-Ettinger (2022) & 1 & Verb & Mod & 60 \\
 Aboody, Yousif, Sheskin, and Keil (2022) & 1 & Verb & Mod & 72 \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{data-entry}{%
 \subsection{Data Entry}\label{data-entry}}
 
-All papers (320) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers' abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age).
+All papers (233) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers' abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age).
 
 If a paper reported an effect size as cohen's d (referred to below as standardized mean difference, SMD), we coded it directly. Otherwise, we calculated the individual effect sizes for each main effect and each study (online and in-person) via reported means and standard deviations, t statistic, or directly from the data if it was available using analysis scripts adapted from Metalab (e.g., Bergmann et al., 2018). If the main comparison was to chance performance, we first calculated log odds and then converted the effect size to cohen's d via the compute.es package in R (Del Re \& Del Re, 2012). If a given study had multiple dependent measures or central hypotheses, we calculated an effect size and associated variance for each.
 
@@ -363,28 +373,48 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Overall}}\\
-\hspace{1em}Intercept & 0.84 & {}[0.46, 1.21] & 0.000\\
-\hspace{1em}Online & -0.15 & {}[-0.38, 0.08] & 0.210\\
+\hspace{1em}Intercept & 0.75 & {}[0.4, 1.09] & 0.000\\
+\hspace{1em}Online & -0.12 & {}[-0.34, 0.09] & 0.254\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Looking v Verbal}}\\
-\hspace{1em}Intercept & 0.73 & {}[0.42, 1.04] & 0.000\\
-\hspace{1em}Online & -0.29 & {}[-0.7, 0.11] & 0.155\\
-\hspace{1em}Verbal & -0.06 & {}[-0.43, 0.31] & 0.745\\
-\hspace{1em}Online:Verbal & 0.23 & {}[-0.27, 0.72] & 0.375\\
+\hspace{1em}Intercept & 0.65 & {}[0.49, 0.82] & 0.000\\
+\hspace{1em}Online & -0.15 & {}[-0.39, 0.09] & 0.227\\
+\hspace{1em}Verbal & -0.05 & {}[-0.13, 0.04] & 0.292\\
+\hspace{1em}Online:Verbal & 0.04 & {}[-0.14, 0.21] & 0.693\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Age}}\\
-\hspace{1em}Intercept & 0.68 & {}[0.51, 0.86] & 0.000\\
-\hspace{1em}Online & -0.14 & {}[-0.38, 0.1] & 0.244\\
-\hspace{1em}Age & 0.00 & {}[-0.01, 0.01] & 0.731\\
-\hspace{1em}Online:Age & 0.01 & {}[-0.01, 0.02] & 0.342\\
+\hspace{1em}Intercept & 0.62 & {}[0.46, 0.78] & 0.000\\
+\hspace{1em}Online & -0.14 & {}[-0.37, 0.08] & 0.207\\
+\hspace{1em}Age & 0.00 & {}[-0.01, 0.01] & 0.843\\
+\hspace{1em}Online:Age & 0.00 & {}[-0.01, 0.01] & 0.526\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Moderated v Un-moderated}}\\
-\hspace{1em}Intercept & 0.69 & {}[0.52, 0.86] & 0.000\\
-\hspace{1em}Online & -0.19 & {}[-0.45, 0.07] & 0.151\\
-\hspace{1em}Unmoderated & 0.13 & {}[-0.22, 0.48] & 0.461\\
+\hspace{1em}Intercept & 0.62 & {}[0.47, 0.78] & 0.000\\
+\hspace{1em}Online & -0.16 & {}[-0.39, 0.08] & 0.184\\
+Unmoderated & 0.12 & {}[-0.21, 0.45] & 0.467\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{longtable}[]{@{}lllrl@{}}
+\caption{\label{tab:modmeans}Mean SMD across studies by study modality, data-collection method, and type of dependent measure}\tabularnewline
+\toprule\noalign{}
+Modality & Method & Measure & SMD & 95\% CI \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Modality & Method & Measure & SMD & 95\% CI \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+In-person & Moderated & Looking & 0.752 & {[}0.439, 1.065{]} \\
+In-person & Moderated & Verbal & 0.492 & {[}0.286, 0.698{]} \\
+Online & Moderated & Looking & 0.562 & {[}0.278, 0.847{]} \\
+Online & Moderated & Verbal & 0.372 & {[}0.218, 0.525{]} \\
+Online & Unmoderated & Looking & 0.160 & {[}0.034, 0.286{]} \\
+Online & Unmoderated & Verbal & 1.227 & {[}0.285, 2.169{]} \\
+\end{longtable}
 
 \begin{figure}[h]
 
@@ -398,35 +428,14 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \hypertarget{planned-analysis}{%
 \subsection{Planned Analysis}\label{planned-analysis}}
 
-Overall, the meta-analysis revealed a small negative, non-significant effect of online study modality, Est=-0.15, 95\% CI={[}-0.38, 0.08{]}, p=0.21. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \ref{tab:coeffs} for coefficient values. Figure \ref{fig:forest} shows the effect size differences of experiments by moderators.
+Overall, the meta-analysis revealed a small negative, non-significant effect of online study modality, Est=-0.12, 95\% CI={[}-0.34, 0.09{]}, p=0.254. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \ref{tab:coeffs} for coefficient values. Figure \ref{fig:forest} shows the effect size differences of experiments by moderators.
 
 Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all \(p\)s \(< .0001\)). Values of \(\tau^2\) (the between-study variance in our meta-analysis) for the models were 0.23 (primary model), 0.23 (moderated vs.~unmoderated model), 0.23 (looking-time model), and 0.23 (age model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
 
-In addition to our multi-level meta-analysis, we conducted an exploratory equivalence test to determine whether the effect sizes of studies conducted online and in-person meaningfully differed from one another, defined as a difference of d = .2 or greater (Lakens, 2017). To aggregate the effect sizes for online and in-person studies, we first averaged the effect sizes by study then across studies by modality. The equivalence test was inconclusive, finding that the effect sizes of online and in-person studies did not significantly differ from one another, 95\% CI={[}-.04, .37{]}, but that they were also not statistically equivalent either, 90\% CI {[}-.003, .34{]}.\footnote{We follow (\textbf{lakens2017?}) in using the 90\% confidence interval for equivalence testing.}
-
-\begin{longtable}[]{@{}lllrl@{}}
-\caption{\label{tab:modmeans}Mean SMD across studies by study modality, data-collection method, and type of dependent measure}\tabularnewline
-\toprule()
-Modality & Method & Measure & SMD & 95\% CI \\
-\midrule()
-\endfirsthead
-\toprule()
-Modality & Method & Measure & SMD & 95\% CI \\
-\midrule()
-\endhead
-In-person & Moderated & Looking & 0.699 & {[}0.42, 0.977{]} \\
-In-person & Moderated & Verbal & 0.677 & {[}0.521, 0.833{]} \\
-Online & Moderated & Looking & 0.597 & {[}0.395, 0.798{]} \\
-Online & Moderated & Verbal & 0.511 & {[}0.364, 0.658{]} \\
-Online & Unmoderated & Looking & 0.177 & {[}-0.004, 0.358{]} \\
-Online & Unmoderated & Verbal & 0.570 & {[}0.294, 0.845{]} \\
-\bottomrule()
-\end{longtable}
-
-To investigate why the effect sizes of online and in-person studies in our sample might not be statistically equivalent, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. We fit a meta-analytic model containing method, response mode, and modality as well as their two- and three-way interactions, with the same random effects structure as our previous model. We cannot draw any strong conclusions about these noisy estimates due to our relatively small sample size. That said, unmoderated online studies with looking measures were estimated to have the weakest effect sizes compared with their in-person counterparts, an average difference of 0.52 (See Table \ref{tab:modmeans}). In contrast, as estimated by this model, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measured all were predicted to differ by less than .2 SMD from their in-person counterparts.
+In addition to our multi-level meta-analysis, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. We fit a meta-analytic model containing method, response mode, and modality as well as their two- and three-way interactions, with the same random effects structure as our previous model. We cannot draw any strong conclusions about these noisy estimates due to our relatively small sample size. That said, unmoderated online studies with looking measures were estimated to have noticeably smaller effect sizes compared to both their moderated online and in-person counterparts, to the extent that their 95\% confidence intervals do not overlap (See Table \ref{tab:modmeans}). In contrast, as estimated by this model, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measures showed no such differences from their in-person counterparts.
 
 \begin{figure}[h]
 
@@ -439,7 +448,7 @@ To investigate why the effect sizes of online and in-person studies in our sampl
 
 We also conducted an exploratory analysis of potential publication bias. It was unclear \emph{a priori} how we might expect publication biases to manifest themselves, given that there is some possibility of notoriety for either showing \emph{or} failing to show differences between online and in-person testing. In either case our hypothesized selection process operated on the \emph{differences} in effect sizes between each online and in-lab pair of samples.
 
-For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=.005) and the estimated effect assuming no variance is 0.37 {[}0.01, 0.72{]}. This analysis suggests the possibility of publication bias favoring studies that have smaller effect sizes online compared to in-person, signaling that perhaps online studies may have relatively larger effect sizes on average compared to what has been reported. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test (Sterne, Gavaghan, \& Egger, 2000).
+For each online and in-person pair on the same study, we calculated a standard mean difference in effect size between the two studies as well as the variance of this difference. The resulting funnel plot is shown in Figure \ref{fig:funnel}. According to Egger's regression test for funnel plot asymmetry, this plot is asymmetric (p=.005) and the estimated effect assuming no variance is 0.26 {[}-0.03, 0.55{]}. This analysis suggests the possibility of publication bias favoring studies that have smaller effect sizes online compared to in-person, signaling that perhaps online studies may have relatively larger effect sizes on average compared to what has been reported. We interpret this conclusion with caution, however, noting the large width of the estimated CI and the relatively low power of Egger's test (Sterne, Gavaghan, \& Egger, 2000).
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -468,11 +477,17 @@ Our meta-analysis found that, across closely matched developmental studies condu
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-aboody2022preschoolers}{}}%
+Aboody, R., Huey, H., \& Jara-Ettinger, J. (2022). Preschoolers decide who is knowledgeable, who to inform, and who to trust via a causal understanding of how knowledge relates to action. \emph{Cognition}, \emph{228}, 105212.
+
 \leavevmode\vadjust pre{\hypertarget{ref-aboody2022says}{}}%
 \textsuperscript{*} Aboody, R., Yousif, S. R., Sheskin, M., \& Keil, F. C. (2022). Says who? Children consider informants' sources when deciding whom to believe. \emph{Journal of Experimental Psychology: General}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-banki2022comparing}{}}%
 \textsuperscript{*} Bánki, A., Eccher, M. de, Falschlehner, L., Hoehl, S., \& Markova, G. (2022). Comparing online webcam-and laboratory-based eye-tracking for the assessment of infants' audio-visual synchrony perception. \emph{Frontiers in Psychology}, 6162.
+
+\leavevmode\vadjust pre{\hypertarget{ref-beckner2023investigation}{}}%
+Beckner, A. G., Voss, A. T., Phillips, L., King, K., Casasola, M., \& Oakes, L. M. (2023). An investigation of mental rotation in infancy using change detection. \emph{Infant Behavior and Development}, \emph{71}, 101834.
 
 \leavevmode\vadjust pre{\hypertarget{ref-bergmann2018}{}}%
 \textsuperscript{*} Bergmann, C., Tsuji, S., Piccinini, P. E., Lewis, M. L., Braginsky, M., Frank, M. C., \& Cristia, A. (2018). Promoting replicability in developmental research through meta-analyses: Insights from language acquisition research. \emph{Child Development}, \emph{89}(6), 1996--2009.
@@ -528,9 +543,6 @@ Kidd, E., \& Garcia, R. (2022). How diverse is child language acquisition resear
 \leavevmode\vadjust pre{\hypertarget{ref-kominsky2021there}{}}%
 \textsuperscript{*} Kominsky, J. F., Shafto, P., \& Bonawitz, E. (2021). {``There's something inside''}: Children's intuitions about animate agents. \emph{PloS One}, \emph{16}(5), e0251081.
 
-\leavevmode\vadjust pre{\hypertarget{ref-lakens2017equivalence}{}}%
-Lakens, D. (2017). Equivalence tests: A practical primer for t tests, correlations, and meta-analyses. \emph{Social Psychological and Personality Science}, \emph{8}(4), 355--362.
-
 \leavevmode\vadjust pre{\hypertarget{ref-lapidow2021tale}{}}%
 \textsuperscript{*} Lapidow, E., Tandon, T., Goddu, M., \& Walker, C. M. (2021). A tale of three platforms: Investigating preschoolers' second-order inferences using in-person, zoom, and lookit methodologies. \emph{Frontiers in Psychology}, \emph{12}, 731404.
 
@@ -546,6 +558,9 @@ Lourenco, S. F., \& Tasimi, A. (2020). No participant left behind: Conducting sc
 \leavevmode\vadjust pre{\hypertarget{ref-margoni2018infants}{}}%
 \textsuperscript{*} Margoni, F., Baillargeon, R., \& Surian, L. (2018). Infants distinguish between leaders and bullies. \emph{Proceedings of the National Academy of Sciences}, \emph{115}(38), E8835--E8843.
 
+\leavevmode\vadjust pre{\hypertarget{ref-mcelwain2022zoom}{}}%
+McElwain, N. L., Hu, Y., Li, X., Fisher, M. C., Baldwin, J. C., \& Bodway, J. M. (2022). Zoom, zoom, baby! Assessing mother-infant interaction during the still face paradigm and infant language development via a virtual visit procedure. \emph{Frontiers in Psychology}, \emph{12}, 734492.
+
 \leavevmode\vadjust pre{\hypertarget{ref-moher2015preferred}{}}%
 Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., \ldots{} Stewart, L. A. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-p) 2015 statement. \emph{Systematic Reviews}, \emph{4}(1), 1--9.
 
@@ -554,6 +569,9 @@ Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., \l
 
 \leavevmode\vadjust pre{\hypertarget{ref-nelson2021comparing}{}}%
 \textsuperscript{*} Nelson, P. M., Scheiber, F., Laughlin, H. M., \& Demir-Lira, Ö. (2021). Comparing face-to-face and online data collection methods in preterm and full-term children: An exploratory study. \emph{Frontiers in Psychology}, 5025.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nguyenadapting}{}}%
+Nguyen, D., Fitzpatrick, N., \& Floccia, C. (n.d.). \emph{ADAPTING LANGUAGE DEVELOPMENT RESEARCH PARADIGMS TO ONLINE TESTING}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-nielsen2017persistent}{}}%
 Nielsen, M., Haun, D., Kärtner, J., \& Legare, C. H. (2017). The persistent sampling bias in developmental psychology: A call to action. \emph{Journal of Experimental Child Psychology}, \emph{162}, 31--38.
@@ -597,6 +615,9 @@ Sheskin, M., Scott, K., Mills, C. M., Bergelson, E., Bonawitz, E., Spelke, E. S.
 \leavevmode\vadjust pre{\hypertarget{ref-stahl2015observing}{}}%
 \textsuperscript{*} Stahl, A. E., \& Feigenson, L. (2015). Observing the unexpected enhances infants' learning and exploration. \emph{Science}, \emph{348}(6230), 91--94.
 
+\leavevmode\vadjust pre{\hypertarget{ref-steffan2023validation}{}}%
+Steffan, A., Zimmer, L., Arias-Trejo, N., Bohn, M., Ben, R. D., Flores-Coronado, M. A., et al.others. (2023). \emph{Validation of an open source, remote web-based eye-tracking method (WebGazer) for research in early childhood}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-sterne2000}{}}%
 Sterne, J. A., Gavaghan, D., \& Egger, M. (2000). Publication and related bias in meta-analysis: Power of statistical tests and prevalence in the literature. \emph{Journal of Clinical Epidemiology}, \emph{53}(11), 1119--1129.
 
@@ -608,6 +629,9 @@ Sterne, J. A., Gavaghan, D., \& Egger, M. (2000). Publication and related bias i
 
 \leavevmode\vadjust pre{\hypertarget{ref-viechtbauer2010conducting}{}}%
 Viechtbauer, W. (2010). Conducting meta-analyses in r with the metafor package. \emph{Journal of Statistical Software}, \emph{36}(3), 1--48.
+
+\leavevmode\vadjust pre{\hypertarget{ref-wang2023being}{}}%
+Wang, M. M., \& Roberts, S. O. (2023). Being from a highly resourced context predicts believing that others are highly resourced: An early developing worldview that stymies resource sharing. \emph{Journal of Experimental Child Psychology}, \emph{230}, 105624.
 
 \leavevmode\vadjust pre{\hypertarget{ref-yoon2019preschool}{}}%
 \textsuperscript{*} Yoon, E. J., \& Frank, M. C. (2019). Preschool children's understanding of polite requests. \emph{CogSci}, 3179--3185.
