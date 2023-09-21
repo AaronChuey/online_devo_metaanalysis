@@ -1,8 +1,4 @@
 ```{r prisma, fig.cap = "PRISMA plot detailing our study screening process; numerical values represent the number of papers at each stage of the review process."}
-library(tidyverse)
-library(here)
-library(googlesheets4)
-library(readxl)
 
 source(here("scripts/prisma_diagram.R"))
 
@@ -80,17 +76,8 @@ We preregistered several eligibility criteria to filter articles from our search
 6. The online and in-person methods must be directly comparable. Some alteration to the study methods is expected when adapting an in-person study to be run online (e.g., having children refer to objects by color instead of pointing). However, we excluded any studies whose methodologies altered the nature of the task or the conclusions that could be drawn from them (e.g., manipulating the identity of an object instead of its location).
 
 ```{r}
-library(tidyverse)
-library(googledrive)
-library(readxl)
-library(metafor)
-library(assertthat)
-library(glue)
-library(wesanderson)
-library(gridExtra)
-library(here)
 source(here("scripts/compute_es.R"))
-library(kableExtra)
+
 knitr::opts_chunk$set(
                       echo=F, warning=F, 
                       message=F, sanitize = T)
@@ -163,6 +150,7 @@ d |> filter(expt_condition=="in-person") |> select(main_title, `comparison-title
   arrange(Age) |> 
   knitr::kable(caption = "Papers used in this meta-analysis. Some papers contained both online and in-person results, others contained online replications compared to previous in-person papers. Pairs is number of online -- in-person pairs contributed by each paper (set). Look is whether the studies are use looking, verbal, or both types of dependent measures. Mod is whether the online studies were moderated, unmoderated, or both. Age is the average age of the participants in months. ", booktabs=T, format="markdown", linesep="")
 ```
+
 ## Data Entry 
 
 All papers (233) yielded by our search procedure went through three rounds of evaluation to determine if they met our inclusion criteria. First, we screened the titles of the papers to determine whether they might include an online experiment. Those that clearly did not meet one or more of our inclusion criteria were excluded from further evaluation. Next, we performed a similar evaluation based on the papers’ abstracts, before a final round based on the article as a whole. All remaining papers were entered into a spreadsheet that coded the necessary information for us to calculate the size of the main effect(s) of interest and their associated variance (sample size, group means and standard deviation, and t and F statistics when applicable), as well as our preregistered moderators (study modality, data collection method, dependent measure, and participant age). 
