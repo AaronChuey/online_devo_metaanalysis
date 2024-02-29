@@ -47,6 +47,7 @@ tablelist         : no
 footnotelist      : no
 
 classoption       : "man"
+csl               : "apa7.csl"
 output            : papaja::apa6_pdf
 ---
 

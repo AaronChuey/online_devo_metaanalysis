@@ -1,23 +1,63 @@
 ```{r prisma, fig.cap = "PRISMA plot detailing our study screening process; numerical values represent the number of papers at each stage of the systematic search."}
 
-source(here("scripts/prisma_diagram.R"))
+#source(here("scripts/prisma_diagram.R"))
+
+
+#devtools::install_github("prisma-flowdiagram/PRISMA2020")
+library(PRISMA2020)
+library(tidyverse)
+library(here)
+library(googledrive)
 
 # Read in Data 
-d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
-#d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
+#d <- read_sheet("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
+#Veronica was having Oath problems
+#f <- googledrive::as_dribble("https://docs.google.com/spreadsheets/d/1ctTyXRj0Sd037P0zTd-eulFQjrWEbuOx-c-n5VAcwr0/edit#gid=0")
+#googledrive::drive_download(f, path=here("Online Testing Paper Decision Spreadsheet.xlsx"), overwrite=T)
+#g <- googledrive::as_dribble("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
+#googledrive::drive_download(g, path=here("Effect size coding (online testing MA).xlsx"), overwrite=T)
 
 
-# identify total records screend
-d_found <- d %>% 
-  mutate(
-    source_cat = case_when(
-      Source %in% c("Frontiers", "Lookit1", 
-                    "Lookit2", "Rhodes", "Sheskin&Keil") ~ "database_search", 
-      TRUE ~ "expert_opinion"
-    )) %>% 
-  group_by(source_cat) %>% 
-  count()
- 
+
+d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
+
+per_expt <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+
+foo <- read_csv(here("data/PRISMA.csv")) 
+
+d_found <- d %>% group_by(Source) |> tally()
+
+d_database <- d_found |> filter(Source %in% c("Lookit1", 
+                    "Lookit2", "Rhodes", "Sheskin&Keil")) |> 
+  mutate(Source=case_when(
+    Source=="Lookit1" ~ "Lookit Part 1 ",
+    Source=="Lookit2" ~ "Lookit Part 2 ",
+    Source=="Sheskin&Keil" ~ "The Child Lab ",
+    Source=="Rhodes" ~ "Pandas "
+  )) |> #hilariously can't put commas because that's used as the splitting character in the prisma diagram maker...so can't put real citations for these
+  summarize(blah = str_c(Source,n,sep=" , ", collapse=" ; ")) 
+  
+foo$boxtext[4] <- "Identification of studies via forward citation search, Frontiers special issue, and listservs"
+foo$n[6] <- d_database[[1]]
+foo$boxtext[5] <- "Forward citation search"
+foo$n[5] <- d |> filter(Source %in% c( "Lookit1", 
+                    "Lookit2", "Rhodes", "Sheskin&Keil")) |> nrow()
+
+d_other <- d_found |> filter(!Source %in% c("Lookit1", 
+                    "Lookit2", "Rhodes", "Sheskin&Keil")) |> 
+  mutate(Source=case_when(
+    Source=="ICIS" ~ "ICIS listserv",
+    Source=="cogdevsoc" ~ "CDS listserv",
+    Source=="Frontiers" ~ "Frontiers Special Issue articles",
+    T ~ Source
+  )) |> 
+  summarize(blah = str_c(Source,n,sep=" , ", collapse=" ; "))
+
+foo$n[8] <- d_other[[1]]
+foo$boxtext[7] <- "Other sources"
+foo$n[7] <- d |> filter(!Source %in% c( "Lookit1", 
+                    "Lookit2", "Rhodes", "Sheskin&Keil", "Zaadnoordijk&Cusack")) |> nrow()
+
 # identify total duplicates records 
 d_duplicate <- d %>% 
   mutate(duplicate = case_when(
@@ -27,32 +67,46 @@ d_duplicate <- d %>%
   group_by(duplicate) %>% 
   count()
 
-# identify records screened 
+foo$n[13] <- d_duplicate[2,2]
+
 d_record_screened <- d %>% 
+  filter(Title_screening_decision != "duplicate")
+
+foo$n[16] <- d_record_screened |> nrow()
+
+d_record_screened_summary <- d %>% 
   filter(Title_screening_decision != "duplicate") %>% 
-  group_by(Title_screening_decision) %>% 
+  group_by(Title_screening_decision,Abstract_screening_decision) %>% 
   count()
 
-# final decision 
+foo$n[17] <- d_record_screened_summary[1,3]+d_record_screened_summary[2,3] #counts both the excluded at title and at abstract stages
+foo$n[18] <- d_record_screened_summary[3,3]
+foo$n[22] <- d_record_screened_summary[3,3]
+
+
 d_full_text <- d %>% 
-  filter(Title_screening_decision == "yes") %>% 
-  filter(!is.na(Eligibility_decision)) %>% 
-  group_by(Eligibility_decision) %>% 
-  count()
+  filter(Abstract_screening_decision == "yes") %>% 
+  filter(Eligibility_decision=="no") |> 
+  group_by(Criterion_for_exclusion) %>% 
+  mutate(Criterion_for_exclusion=case_when(
+    Criterion_for_exclusion=="Participants" ~"Participant mean age > 6 years",
+    Criterion_for_exclusion=="Comparison" ~ "No in-person sample for comparison",
+    Criterion_for_exclusion=="Comparability" ~ "In-person and online samples not comparable",
+    T ~ Criterion_for_exclusion
+  )) |> 
+  count() |> ungroup() |> summarize(blah = str_c(Criterion_for_exclusion,n,sep=" , ", collapse=" ; "))
+
+foo$n[23] <- d_full_text[[1]]
 
 
-prisma2(found = filter(d_found, source_cat == "database_search")$n, 
-       found_other = filter(d_found, source_cat == "expert_opinion")$n, 
-       no_dupes = filter(d_duplicate, duplicate == "no")$n, 
-       screened = filter(d_duplicate, duplicate == "no")$n, 
-       screen_exclusions =  filter(d_duplicate, duplicate == "no")$n - sum(d_full_text$n), 
-       full_text = sum(d_full_text$n), 
-       full_text_exclusion = filter(d_full_text, Eligibility_decision == "no")$n, 
-       quantitative = filter(d_full_text, Eligibility_decision == "yes")$n,
-       font_size = 10, 
-       dpi = 72)
+foo$n[27] <- d |> filter(Eligibility_decision=="yes") |> nrow()
 
-  
+#per_expt |> distinct(paper_ID) |> nrow()
+#per_expt |> nrow()
+foo$n[26] <- per_expt |> distinct(expt_num) |> nrow()
+foo$boxtext[26] <- "Experimental measures included in review"
+foo$boxtext[27] <- "Reports of included studies"
+PRISMA_data(foo) |> PRISMA_flowdiagram(previous=F, other=F, detail_databases = T, detail_registers = T, fontsize=10,side_boxes=F)
 ```
 
 We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at [https://osf.io/hjbxf](). The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
@@ -82,9 +136,9 @@ knitr::opts_chunk$set(
                       echo=F, warning=F, 
                       message=F, sanitize = T)
 
-d <- read_sheet("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
+#d <- read_sheet("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
 
-#d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
 
 ages <- d |> select(short_cite,expt_condition, mean_age_1, mean_age_2, n_1, n_2, response_mode, method) |> 
   mutate(avg_age=ifelse(is.na(n_2), mean_age_1, (mean_age_1*n_1+mean_age_2*n_2)/(n_1+n_2)),
