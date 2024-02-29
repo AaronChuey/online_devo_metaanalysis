@@ -49,6 +49,8 @@ d_other <- d_found |> filter(!Source %in% c("Lookit1",
     Source=="ICIS" ~ "ICIS listserv",
     Source=="cogdevsoc" ~ "CDS listserv",
     Source=="Frontiers" ~ "Frontiers Special Issue articles",
+    Source=="Zaadnoordijk&Cusack" ~ "List from Zaadnoordijk & Cusack",
+    Source=="etc" ~ "personal communication",
     T ~ Source
   )) |> 
   summarize(blah = str_c(Source,n,sep=" , ", collapse=" ; "))
@@ -56,7 +58,7 @@ d_other <- d_found |> filter(!Source %in% c("Lookit1",
 foo$n[8] <- d_other[[1]]
 foo$boxtext[7] <- "Other sources"
 foo$n[7] <- d |> filter(!Source %in% c( "Lookit1", 
-                    "Lookit2", "Rhodes", "Sheskin&Keil", "Zaadnoordijk&Cusack")) |> nrow()
+                    "Lookit2", "Rhodes", "Sheskin&Keil")) |> nrow()
 
 # identify total duplicates records 
 d_duplicate <- d %>% 
@@ -106,7 +108,8 @@ foo$n[27] <- d |> filter(Eligibility_decision=="yes") |> nrow()
 foo$n[26] <- per_expt |> distinct(expt_num) |> nrow()
 foo$boxtext[26] <- "Experimental measures included in review"
 foo$boxtext[27] <- "Reports of included studies"
-PRISMA_data(foo) |> PRISMA_flowdiagram(previous=F, other=F, detail_databases = T, detail_registers = T, fontsize=10,side_boxes=F)
+ PRISMA_data(foo) |> PRISMA_flowdiagram(previous=F, other=F, detail_databases = T, detail_registers = T, fontsize=12,side_boxes=F)
+
 ```
 
 We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure [@moher2015preferred]; see Figure \@ref(fig:prisma). For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at [https://osf.io/hjbxf](). The list of papers included in this meta-analysis is shown in Table \@ref(tab:list).
