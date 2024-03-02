@@ -8,6 +8,8 @@ library(assertthat)
 library(glue)
 library(wesanderson)
 library(gridExtra)
+library(ggpubr)
+library(kableExtra)
 library(here)
 source(here("scripts/compute_es.R"))
 knitr::opts_chunk$set(
@@ -149,7 +151,7 @@ in_person_res <- rma.mv(d_calc ~ 1,
 #get_i2(age_mod)
 ```
 
-```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers)." }
+```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers); each row contains every effect size contributed by a study. A: SMD by study and online method (moderated vs unmoderated). B: SMD by study and measurement type (looking vs verbal). C: SMD by study and mean participant age (months)." }
 
 online <- d_calc |> ungroup() |> filter(expt_condition=="Online") |>
   mutate(n_2=replace_na(n_2,0), 
@@ -215,7 +217,12 @@ scale_color_manual(values = wes_palette("Cavalcanti1", n = 2), name = "Online me
 #age_plot
 #looking_plot
 
-moderated_plot+looking_plot+age_plot
+#moderated_plot+looking_plot+age_plot
+
+ggarrange(moderated_plot, looking_plot, age_plot,
+          labels = c("A", "B", "C"),
+          ncol = 3,
+          nrow = 1)
 ```
 
 ## Planned Analysis
@@ -243,8 +250,9 @@ combined <- d_calc %>%
 
 grouped_calc <- combined |>
   group_by(as.factor(expt_condition), as.factor(method), as.factor(response_mode)) |> 
-  summarise(SMD = mean(mean_smd),
-            se= sd(mean_smd)/sqrt(n()-1)) |> 
+  summarise(count = n(),
+            SMD = mean(mean_smd),
+            se = sd(mean_smd)/sqrt(n()-1)) |> 
   mutate(lower=(SMD-1.96*se) |> round(3) |> as.character(),
          higher=(SMD+1.96*se) |> round(3) |> as.character(),
          `95% CI`=str_c("[",lower,", ",higher,"]")) |> 
@@ -252,6 +260,7 @@ grouped_calc <- combined |>
 names(grouped_calc)[1] <- "Modality"
 names(grouped_calc)[2] <- "Method"
 names(grouped_calc)[3] <- "Measure"
+names(grouped_calc)[4] <- "N (Effect-size Pairs)"
 
 grouped_calc |>
   knitr::kable(caption="Mean SMD across studies by study modality, data-collection method, and type of dependent measure", booktabs=T, digits = 3, format="markdown")%>% kable_styling(full_width=T)
