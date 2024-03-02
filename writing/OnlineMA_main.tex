@@ -148,13 +148,13 @@
   {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
 \makeatother
 
+% \usepackage{etoolbox}
 \makeatletter
-\usepackage{etoolbox}
-\patchcmd{\maketitle}
+\patchcmd{\HyOrg@maketitle}
   {\section{\normalfont\normalsize\abstractname}}
   {\section*{\normalfont\normalsize\abstractname}}
   {}{\typeout{Failed to patch abstract.}}
-\patchcmd{\maketitle}
+\patchcmd{\HyOrg@maketitle}
   {\section{\protect\normalfont{\@title}}}
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
@@ -247,12 +247,12 @@ We stress that our goal here is not to provide a conclusive, binary answer to th
 \caption{\label{fig:prisma}PRISMA plot detailing our study screening process; numerical values represent the number of papers at each stage of the systematic search.}
 \end{figure}
 
-We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Moher et al., 2015); see Figure \ref{fig:prisma}. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at \href{}{https://osf.io/hjbxf}. The list of papers included in this meta-analysis is shown in Table \ref{tab:list}.
+We conducted a literature search following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) procedure (Page et al., 2021); see Figure \ref{fig:prisma}. For each set of studies determined to be an online replication, we calculated the effect size(s) and associated variance for the main effect of interest. We then conducted a series of random-effects multilevel meta-regressions to estimate the effect of online data collection, as well as three possible moderators (online study method, type of dependent measure, and participant age). Our preregistered data selection, coding, and analysis plan can be found at \href{}{https://osf.io/hjbxf}. The list of papers included in this meta-analysis is shown in Table \ref{tab:list}.
 
 \hypertarget{literature-search}{%
 \subsection{Literature Search}\label{literature-search}}
 
-Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers; as a result, we could not conduct a completely systematic review. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott et al., 2017; Scott \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al., 2020). We also included all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society (CDS) and International Congress of Infant Studies (ICIS) listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as six unpublished but complete online replications.
+Our goal was to find as many published and unpublished online replications of developmental studies as possible. However, because there is no common nomenclature for online replications and the studies themselves cover a wide range of research questions and methodologies, searching via specific terms or keywords was difficult and produced many irrelevant papers; as a result, we could not conduct a completely systematic review. Instead, we preregistered a forward citation search strategy based on key papers on online developmental research. We used the papers that conducted initial validation of popular online testing platforms as our seeds, including Lookit (Scott et al., 2017; Scott \& Schulz, 2017), The Child Lab (Sheskin \& Keil, 2018), and Pandas (Rhodes et al., 2020). Any paper that cited at least one of these papers was considered for inclusion in our meta-analysis. We also considered all papers published in the Frontiers in Psychology Special Issue: Empirical Research at a Distance: New Methods for Developmental Science, which largely focused on online developmental studies and replications. Finally, we posted a call for contributions to the Cognitive Development Society (CDS) and International Congress of Infant Studies (ICIS) listservs, two popular emailing lists frequented by developmental researchers. This call yielded several publications our initial search strategy missed, as well as six unpublished but complete online replications.
 
 We preregistered several eligibility criteria to filter articles from our search:
 
@@ -401,7 +401,7 @@ Unmoderated & 0.11 & {}[-0.22, 0.43] & 0.515\\
 
 }
 
-\caption{Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers).}\label{fig:forest}
+\caption{Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers); each row contains every effect size contributed by a study. A: SMD by study and online method (moderated vs unmoderated). B: SMD by study and measurement type (looking vs verbal). C: SMD by study and mean participant age (months).}\label{fig:forest}
 \end{figure}
 
 \hypertarget{planned-analysis}{%
@@ -414,24 +414,54 @@ Because our meta-analysis averaged across effects from very different paradigms 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory Analysis}\label{exploratory-analysis}}
 
-\begin{longtable}[]{@{}lllrl@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1370}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1644}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1096}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.3014}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0822}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2055}}@{}}
 \caption{\label{tab:modmeans}Mean SMD across studies by study modality, data-collection method, and type of dependent measure}\tabularnewline
 \toprule\noalign{}
-Modality & Method & Measure & SMD & 95\% CI \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Modality
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Measure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+N (Effect-size Pairs)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SMD
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+95\% CI
+\end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Modality & Method & Measure & SMD & 95\% CI \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Modality
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Measure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+N (Effect-size Pairs)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SMD
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+95\% CI
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-In-person & Moderated & Looking & 0.752 & {[}0.439, 1.065{]} \\
-In-person & Moderated & Verbal & 0.492 & {[}0.286, 0.698{]} \\
-Online & Moderated & Looking & 0.573 & {[}0.264, 0.882{]} \\
-Online & Moderated & Verbal & 0.372 & {[}0.218, 0.525{]} \\
-Online & Unmoderated & Looking & 0.214 & {[}0.062, 0.367{]} \\
-Online & Unmoderated & Verbal & 1.227 & {[}0.285, 2.169{]} \\
+In-person & Moderated & Looking & 15 & 0.752 & {[}0.439, 1.065{]} \\
+In-person & Moderated & Verbal & 34 & 0.492 & {[}0.286, 0.698{]} \\
+Online & Moderated & Looking & 12 & 0.573 & {[}0.264, 0.882{]} \\
+Online & Moderated & Verbal & 27 & 0.372 & {[}0.218, 0.525{]} \\
+Online & Unmoderated & Looking & 5 & 0.214 & {[}0.062, 0.367{]} \\
+Online & Unmoderated & Verbal & 6 & 1.227 & {[}0.285, 2.169{]} \\
 \end{longtable}
 
 In addition to our multi-level meta-analysis, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. We fit a meta-analytic model containing method, response mode, and modality as well as their two- and three-way interactions, with the same random effects structure as our previous model. We cannot draw any strong conclusions about these noisy estimates due to our relatively small sample size. That said, descriptively, unmoderated online studies with looking measures were estimated to have noticeably smaller effect sizes compared to both their moderated online and in-person counterparts (See Table \ref{tab:modmeans}). In contrast, as estimated by this model, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measures did not show such large differences from their in-person counterparts.
@@ -458,7 +488,7 @@ We also examined whether modality effects emerged more substantially in particul
 
 The current analysis is coarse-grained, considering only one particular dichotomy within study modality: in-person vs online. Yet, there are many ways that developmental studies can be further subdivided. For example, studies are conducted both in quiet spaces (e.g., in lab, at home) and loud spaces (e.g., parks, museums). Therefore, online studies might over- or under-perform relative to studies conducted in particular in-person locations. Our moderators are also correspondingly course-grained, particularly dependent measure (looking vs verbal). Because our small sample size renders our analysis underpowered to detect weaker effects of moderators, the current results and their interpretation are subject to change as online methods improve and comparisons to in-person studies are better understood.
 
-Unmoderated studies with looking measures had the noticeably smallest effect sizes relative to their in-person counterparts. This could reflect the difficulty of both collecting and coding looking data online using participants' own webcams without significant real-time instruction. Indeed, it is possible that effect sizes suffer without a live experimenter eliciting and sustaining infants' attention. However, smaller effect sizes online could instead reflect genuinely smaller effect sizes of the underlying effect rather than a lack of online studies' sensitivity. Developmental research has suffered from many failures to replicate in the past, especially studies with infants (e.g., Davis-Kean \& Ellis, 2019), and many of the online studies in our sample were conducted after their in-person counterparts, sometimes years later. Therefore, it is possible that smaller online effect sizes simply represent a more accurate estimation of the true (smaller) effect rather than an effect of study modaility per se.
+Unmoderated studies with looking measures had the noticeably smallest effect sizes relative to their in-person counterparts. This could reflect the difficulty of both collecting and coding looking data online using participants' own webcams without significant real-time instruction. Indeed, it is possible that effect sizes suffer without a live experimenter eliciting and sustaining infants' attention or guiding parents as they position and orient their infant. However, smaller effect sizes online could instead reflect genuinely smaller effect sizes of the underlying effect rather than a lack of online studies' sensitivity. Developmental research has suffered from many failures to replicate in the past, especially studies with infants (e.g., Davis-Kean \& Ellis, 2019), and many of the online studies in our sample were conducted after their in-person counterparts, sometimes years later. Therefore, it is possible that smaller online effect sizes simply represent a more accurate estimation of the true (smaller) effect rather than an effect of study modaility per se.
 
 The composition of our sample might also bias our results. To match online and in-person methods as closely as possible, we only considered direct online replications for the current meta-analysis. While this approach ensures that data were collected online and in-person using similar methods and procedures, it limits our sample size and may bias our sample. For example, perhaps researchers disproportionately choose to conduct online replications of strong or well-established effects rather than replicate more subtle, weaker effects. Nonetheless, our analysis found that if publication bias exists, it likely favors stronger in-person effect sizes or non-replications among the studies we sampled. We also included an open call for unpublished data in an attempt to limit the file drawer problem (see Rosenthal, 1979).
 
@@ -572,9 +602,6 @@ McClure, E. R., Chentsova-Dutton, Y. E., Holochwost, S. J., Parrott, W., \& Barr
 \leavevmode\vadjust pre{\hypertarget{ref-mcelwain2022zoom}{}}%
 McElwain, N. L., Hu, Y., Li, X., Fisher, M. C., Baldwin, J. C., \& Bodway, J. M. (2022). Zoom, zoom, baby! Assessing mother-infant interaction during the still face paradigm and infant language development via a virtual visit procedure. \emph{Frontiers in Psychology}, \emph{12}, 734492.
 
-\leavevmode\vadjust pre{\hypertarget{ref-moher2015preferred}{}}%
-Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., Shekelle, P., \& Stewart, L. A. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-p) 2015 statement. \emph{Systematic Reviews}, \emph{4}(1), 1--9.
-
 \leavevmode\vadjust pre{\hypertarget{ref-morini2021webcams}{}}%
 Morini, G., \& Blair, M. (2021). Webcams, songs, and vocabulary learning: A comparison of in-person and remote data collection as a way of moving forward with child-language research. \emph{Frontiers in Psychology}, 3347.
 
@@ -586,6 +613,9 @@ Nguyen, D., Fitzpatrick, N., \& Floccia, C. (2022). \emph{Adapting language deve
 
 \leavevmode\vadjust pre{\hypertarget{ref-nielsen2017persistent}{}}%
 Nielsen, M., Haun, D., Kärtner, J., \& Legare, C. H. (2017). The persistent sampling bias in developmental psychology: A call to action. \emph{Journal of Experimental Child Psychology}, \emph{162}, 31--38.
+
+\leavevmode\vadjust pre{\hypertarget{ref-page2021prisma}{}}%
+Page, M. J., McKenzie, J. E., Bossuyt, P. M., Boutron, I., Hoffmann, T. C., Mulrow, C. D., Shamseer, L., Tetzlaff, J. M., Akl, E. A., Brennan, S. E., et al. (2021). The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. \emph{International Journal of Surgery}, \emph{88}, 105906.
 
 \leavevmode\vadjust pre{\hypertarget{ref-pasquini2007preschoolers}{}}%
 Pasquini, E. S., Corriveau, K. H., Koenig, M., \& Harris, P. L. (2007). Preschoolers monitor the relative accuracy of informants. \emph{Developmental Psychology}, \emph{43}(5), 1216.
