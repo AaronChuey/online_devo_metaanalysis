@@ -151,7 +151,7 @@ in_person_res <- rma.mv(d_calc ~ 1,
 #get_i2(age_mod)
 ```
 
-```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each dot is the difference between and in-person measure and a corresponding online measure. Each row is one study (paper or pair of papers); each row contains every effect size contributed by a study. A: SMD by study and online method (moderated vs unmoderated). B: SMD by study and measurement type (looking vs verbal). C: SMD by study and mean participant age (months)." }
+```{r forest, fig.env="figure", fig.pos = "h", fig.align = "center",out.width="100%", fig.width=10, fig.height=5, fig.cap = "Forest plots of studies, sorted by difference in SMD. Each row is one study (paper or pair of papers) and contains every effect size pair contributed by that study. Each dot represents the difference between a single in-person measure and a corresponding online measure. A: Difference in SMD by study and online method (moderated vs unmoderated). B: Difference in SMD by study and measurement type (looking vs verbal). C: Difference in SMD by study and mean participant age (months)." }
 
 online <- d_calc |> ungroup() |> filter(expt_condition=="Online") |>
   mutate(n_2=replace_na(n_2,0), 
