@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  1 MAR 2024 17:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  1 MAR 2024 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -960,18 +960,18 @@ Package rerunfilecheck Info: File `OnlineMA_main.out' has not changed.
 (rerunfilecheck)             Checksum: BB87DC9A208D9410F78AA829F03B8F72;1742.
  ) 
 Here is how much of TeX's memory you used:
- 16232 strings out of 476931
- 265544 string characters out of 5824666
- 653056 words of memory out of 5000000
+ 16233 strings out of 476931
+ 265558 string characters out of 5824666
+ 653113 words of memory out of 5000000
  37044 multiletter control sequences out of 15000+600000
  542129 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,11n,77p,1621b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (26 pages, 303436 bytes).
+Output written on OnlineMA_main.pdf (26 pages, 303027 bytes).
 PDF statistics:
- 373 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 123 named destinations out of 1000 (max. 500000)
+ 374 PDF objects out of 1000 (max. 8388607)
+ 313 compressed objects within 4 object streams
+ 124 named destinations out of 1000 (max. 500000)
  120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
