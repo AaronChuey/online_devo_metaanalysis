@@ -4,7 +4,7 @@
 
 
 #devtools::install_github("prisma-flowdiagram/PRISMA2020")
-library(PRISMA2020)
+#library(PRISMA2020) this is too restrictive, so we edited the source code instead
 library(tidyverse)
 library(here)
 library(googledrive)
@@ -17,6 +17,9 @@ library(googledrive)
 #g <- googledrive::as_dribble("https://docs.google.com/spreadsheets/d/1OIrWIsqjuXVBQYdu90AjJ9b--15GfwTjwvqtOhq11oo/edit#gid=0")
 #googledrive::drive_download(g, path=here("Effect size coding (online testing MA).xlsx"), overwrite=T)
 
+source(here("scripts/utils.R"))
+source(here("scripts/globals.R"))
+source(here("scripts/PRISMA_flowdiagram.R"))
 
 
 d <- readxl::read_xlsx(here("Online Testing Paper Decision Spreadsheet.xlsx"))
@@ -37,7 +40,6 @@ d_database <- d_found |> filter(Source %in% c("Lookit1",
   )) |> #hilariously can't put commas because that's used as the splitting character in the prisma diagram maker...so can't put real citations for these
   summarize(blah = str_c(Source,n,sep=" , ", collapse=" ; ")) 
   
-foo$boxtext[4] <- "Identification of studies via forward citation search, Frontiers special issue, and listservs"
 foo$n[6] <- d_database[[1]]
 foo$boxtext[5] <- "Forward citation search"
 foo$n[5] <- d |> filter(Source %in% c( "Lookit1", 
@@ -70,6 +72,8 @@ d_duplicate <- d %>%
   count()
 
 foo$n[13] <- d_duplicate[2,2]
+foo$n[14]=NA
+foo$n[15]=NA
 
 d_record_screened <- d %>% 
   filter(Title_screening_decision != "duplicate")
