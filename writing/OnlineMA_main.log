@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 MAR 2024 12:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 MAR 2024 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -908,11 +908,10 @@ Overfull \hbox (3.69623pt too wide) in paragraph at lines 341--341
 []|\T1/lmr/m/n/12 Verb|  
  []
 
-[10] [11] [12]
+[10] [11] [12] [13]
 
 Package hyperref Warning: Suppressing link with empty target on input line 360.
 
-[13]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -921,10 +920,10 @@ File: OnlineMA_main_files/figure-latex/forest-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/forest-1.pdf>
 Package pdftex.def Info: OnlineMA_main_files/figure-latex/forest-1.pdf  used on input line 400.
 (pdftex.def)             Requested size: 469.74974pt x 227.59705pt.
-[14 <./OnlineMA_main_files/figure-latex/forest-1.pdf>]
-Underfull \vbox (badness 2057) has occurred while \output is active []
 
-[15]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14]
 Overfull \hbox (2.47998pt too wide) in paragraph at lines 463--463
 []|\T1/lmr/m/n/12 Unmoderated|  
  []
@@ -934,13 +933,19 @@ Overfull \hbox (2.47998pt too wide) in paragraph at lines 464--464
 []|\T1/lmr/m/n/12 Unmoderated|  
  []
 
-[16]
+[15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[16 <./OnlineMA_main_files/figure-latex/forest-1.pdf>]
 <OnlineMA_main_files/figure-latex/funnel-1.pdf, id=187, 404.51125pt x 215.80624pt>
 File: OnlineMA_main_files/figure-latex/funnel-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/funnel-1.pdf>
 Package pdftex.def Info: OnlineMA_main_files/figure-latex/funnel-1.pdf  used on input line 471.
 (pdftex.def)             Requested size: 375.80888pt x 200.49356pt.
-[17 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>] [18] [19] [20] [21]
+[17 <./OnlineMA_main_files/figure-latex/funnel-1.pdf>] [18] [19]
+Underfull \vbox (badness 3977) has occurred while \output is active []
+
+[20] [21]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
 [22]
@@ -960,18 +965,18 @@ Package rerunfilecheck Info: File `OnlineMA_main.out' has not changed.
 (rerunfilecheck)             Checksum: BB87DC9A208D9410F78AA829F03B8F72;1742.
  ) 
 Here is how much of TeX's memory you used:
- 16234 strings out of 476931
- 265565 string characters out of 5824666
- 653113 words of memory out of 5000000
+ 16235 strings out of 476931
+ 265591 string characters out of 5824666
+ 653115 words of memory out of 5000000
  37044 multiletter control sequences out of 15000+600000
  542129 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,11n,77p,1621b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,77p,1681b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (27 pages, 304048 bytes).
+Output written on OnlineMA_main.pdf (27 pages, 304100 bytes).
 PDF statistics:
- 378 PDF objects out of 1000 (max. 8388607)
- 316 compressed objects within 4 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 379 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 126 named destinations out of 1000 (max. 500000)
  120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
