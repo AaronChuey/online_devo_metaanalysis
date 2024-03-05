@@ -55,7 +55,7 @@ d_calc <- d_calc |>
 main_mod <- rma.mv(yi = d_calc, 
                    V = d_var_calc,
                    mods = as.factor(expt_condition),
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
                    slab = short_cite, 
                    data = d_calc)
 #summary(main_mod)
@@ -64,7 +64,7 @@ moderated_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         + as.factor(method),
-                        random = ~1 | as.factor(experiment_ID) + 
+                        random = ~1 | as.factor(experiment_ID) / 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)
@@ -74,7 +74,7 @@ looking_mod <- rma.mv(yi = d_calc,
                       V = d_var_calc, 
                       mods = ~ as.factor(expt_condition) 
                       * as.factor(response_mode),
-                      random = ~1 | as.factor(experiment_ID) + 
+                      random = ~1 | as.factor(experiment_ID) / 
                         as.factor(same_infant), 
                       slab = short_cite, 
                       data = d_calc)
@@ -84,7 +84,7 @@ age_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         * Age,
-                        random = ~1 | as.factor(experiment_ID) + 
+                        random = ~1 | as.factor(experiment_ID) / 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)
@@ -133,13 +133,13 @@ P <- W - W %*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
 
 online_res <- rma.mv(d_calc ~ 1, 
                    V = d_var_calc,
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
                    slab = short_cite, 
                    data = d_calc %>% filter(expt_condition == "Online"))
 
 in_person_res <- rma.mv(d_calc ~ 1, 
                    V = d_var_calc,
-                   random = ~1 | as.factor(experiment_ID) + as.factor(same_infant), 
+                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
                    slab = short_cite, 
                    data = d_calc %>% filter(expt_condition == "In-person"))
 
@@ -238,7 +238,7 @@ Because our meta-analysis averaged across effects from very different paradigms 
 combined_mod <- rma.mv(yi = d_calc, 
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition)*as.factor(method)*as.factor(response_mode),
-                        random = ~1 | as.factor(experiment_ID) + 
+                        random = ~1 | as.factor(experiment_ID) / 
                           as.factor(same_infant), 
                         slab = short_cite, 
                         data = d_calc)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 MAR 2024 18:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.3)  4 MAR 2024 19:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -973,7 +973,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  72i,11n,77p,1681b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/aaron/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/aaron/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (27 pages, 303596 bytes).
+Output written on OnlineMA_main.pdf (27 pages, 303610 bytes).
 PDF statistics:
  379 PDF objects out of 1000 (max. 8388607)
  317 compressed objects within 4 object streams
