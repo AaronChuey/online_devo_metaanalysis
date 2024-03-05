@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.1)  4 MAR 2024 17:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.1)  4 MAR 2024 17:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,13 +754,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
 [5] [6]
-<OnlineMA_main_files/figure-latex/prisma-1.pdf, id=43, 219.82124pt x 270.00874p
+<OnlineMA_main_files/figure-latex/prisma-1.pdf, id=43, 201.75375pt x 270.00874p
 t>
 File: OnlineMA_main_files/figure-latex/prisma-1.pdf Graphic file (type pdf)
 <use OnlineMA_main_files/figure-latex/prisma-1.pdf>
 Package pdftex.def Info: OnlineMA_main_files/figure-latex/prisma-1.pdf  used on
  input line 246.
-(pdftex.def)             Requested size: 219.82404pt x 270.01219pt.
+(pdftex.def)             Requested size: 201.75632pt x 270.01219pt.
 
 Package hyperref Warning: Suppressing link with empty target on input line 250.
 
@@ -1053,7 +1053,7 @@ ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share
 /fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/typ
 e1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb>
-Output written on OnlineMA_main.pdf (26 pages, 309184 bytes).
+Output written on OnlineMA_main.pdf (26 pages, 309220 bytes).
 PDF statistics:
  368 PDF objects out of 1000 (max. 8388607)
  307 compressed objects within 4 object streams

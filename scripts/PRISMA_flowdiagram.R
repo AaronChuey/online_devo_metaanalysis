@@ -374,11 +374,11 @@ PRISMA_flowdiagram <- function( #nolint
       ":",
       paste(
         paste(
-          "\n",
+          "\n", stringr::str_wrap(paste(
           dbr_excluded[, 1],
-          " (n = ", dbr_excluded[, 2], ")",
+          " (n = ", dbr_excluded[, 2], ")"),width=35),
         sep = ""
-        ),
+        ), 
       collapse = ""
       )
     )
