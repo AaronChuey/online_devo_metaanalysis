@@ -261,7 +261,10 @@ Note that we group by experimental paradigm (`experiment_ID`) in our preregistra
 main_mod <- rma.mv(yi = d_calc, 
                    V = d_var_calc,
                    mods = as.factor(expt_condition),
-                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
+                   random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                    slab = short_cite, 
                    data = d_calc)
 summary(main_mod)
@@ -325,8 +328,10 @@ moderated_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         + as.factor(method),
-                        random = ~1 | as.factor(experiment_ID) / 
-                          as.factor(same_infant), 
+                        random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                         slab = short_cite, 
                         data = d_calc)
 summary(moderated_mod)
@@ -348,8 +353,10 @@ looking_mod <- rma.mv(yi = d_calc,
                       V = d_var_calc, 
                       mods = ~ as.factor(expt_condition) 
                       * as.factor(response_mode),
-                      random = ~1 | as.factor(experiment_ID) / 
-                        as.factor(same_infant), 
+                      random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                       slab = short_cite, 
                       data = d_calc)
 summary(looking_mod)
@@ -373,8 +380,10 @@ age_mod <- rma.mv(yi = d_calc,
                         V = d_var_calc, 
                         mods = ~ as.factor(expt_condition) 
                         * age_centered_mo,
-                        random = ~1 | as.factor(experiment_ID) / 
-                          as.factor(same_infant), 
+                        random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                         slab = short_cite, 
                         data = d_calc)
 summary(age_mod)

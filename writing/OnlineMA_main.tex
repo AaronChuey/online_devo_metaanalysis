@@ -372,25 +372,24 @@ Coefficient & Estimate & 95\% CI & P-value\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Overall}}\\
-\hspace{1em}Intercept & 0.57 & {}[0.34, 0.8] & 0.000\\
-\hspace{1em}Online & -0.05 & {}[-0.17, 0.07] & 0.408\\
+\hspace{1em}Intercept & 0.65 & {}[0.4, 0.9] & 0.000\\
+\hspace{1em}Online & -0.05 & {}[-0.17, 0.07] & 0.455\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Looking v Verbal}}\\
-\hspace{1em}Intercept & 0.57 & {}[0.4, 0.73] & 0.000\\
-\hspace{1em}Online & -0.12 & {}[-0.28, 0.04] & 0.150\\
-\hspace{1em}Verbal & -0.06 & {}[-0.15, 0.02] & 0.144\\
-\hspace{1em}Online:Verbal & 0.10 & {}[-0.06, 0.25] & 0.235\\
+\hspace{1em}Intercept & 0.65 & {}[0.45, 0.85] & 0.000\\
+\hspace{1em}Online & -0.14 & {}[-0.32, 0.04] & 0.133\\
+\hspace{1em}Verbal & -0.06 & {}[-0.19, 0.06] & 0.311\\
+\hspace{1em}Online:Verbal & 0.13 & {}[-0.06, 0.31] & 0.185\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Age}}\\
-\hspace{1em}Intercept & 0.54 & {}[0.38, 0.71] & 0.000\\
-\hspace{1em}Online & -0.10 & {}[-0.23, 0.03] & 0.131\\
-\hspace{1em}Age & 0.00 & {}[-0.01, 0] & 0.459\\
-\hspace{1em}Online:Age & 0.01 & {}[0, 0.01] & 0.056\\
+\hspace{1em}Intercept & 0.60 & {}[0.42, 0.79] & 0.000\\
+\hspace{1em}Online & -0.08 & {}[-0.2, 0.04] & 0.207\\
+\hspace{1em}Age & 0.00 & {}[0, 0.01] & 0.523\\
+\hspace{1em}Online:Age & 0.00 & {}[0, 0.01] & 0.124\\
 \addlinespace[0.3em]
 \multicolumn{4}{l}{\textbf{Moderated v Un-moderated}}\\
-\hspace{1em}Intercept & 0.52 & {}[0.36, 0.67] & 0.000\\
-\hspace{1em}Online & -0.03 & {}[-0.17, 0.1] & 0.654\\
-Unmoderated & -0.08 & {}[-0.32, 0.16] & 0.516\\
+\hspace{1em}Online & -0.01 & {}[-0.15, 0.12] & 0.834\\
+\hspace{1em}Unmoderated & -0.13 & {}[-0.37, 0.12] & 0.314\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -407,7 +406,7 @@ Unmoderated & -0.08 & {}[-0.32, 0.16] & 0.516\\
 \hypertarget{planned-analysis}{%
 \subsection{Planned Analysis}\label{planned-analysis}}
 
-Overall, the meta-analysis revealed a small negative, non-significant effect of online study modality, Est=-0.05, 95\% CI={[}-0.17, 0.07{]}, p=0.408. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \ref{tab:coeffs} for coefficient values. Figure \ref{fig:forest} shows the effect size differences of experiments by moderators.
+Overall, the meta-analysis revealed a small negative, non-significant effect of online study modality, Est=-0.05, 95\% CI={[}-0.17, 0.07{]}, p=0.455. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \ref{tab:coeffs} for coefficient values. Figure \ref{fig:forest} shows the effect size differences of experiments by moderators.
 
 Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all \(p\)s \(< .0001\)). Values of \(\tau^2\) (the between-study variance in our meta-analysis) for all models were 0 (primary model), 0 (moderated vs.~unmoderated model), 0 (looking-time model), and 0 (age model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
 
@@ -456,12 +455,12 @@ SMD
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-In-person & Moderated & Looking & 15 & 0.752 & {[}0.439, 1.065{]} \\
-In-person & Moderated & Verbal & 34 & 0.492 & {[}0.286, 0.698{]} \\
+In-person & Moderated & Looking & 14 & 0.797 & {[}0.476, 1.119{]} \\
+In-person & Moderated & Verbal & 36 & 0.509 & {[}0.325, 0.694{]} \\
 Online & Moderated & Looking & 12 & 0.573 & {[}0.264, 0.882{]} \\
-Online & Moderated & Verbal & 27 & 0.372 & {[}0.218, 0.525{]} \\
+Online & Moderated & Verbal & 30 & 0.439 & {[}0.294, 0.585{]} \\
 Online & Unmoderated & Looking & 5 & 0.214 & {[}0.062, 0.367{]} \\
-Online & Unmoderated & Verbal & 6 & 1.227 & {[}0.285, 2.169{]} \\
+Online & Unmoderated & Verbal & 5 & 1.311 & {[}0.193, 2.429{]} \\
 \end{longtable}
 
 In addition to our multi-level meta-analysis, we examined which combinations of methods and measures tended to yield the strongest and weakest effect sizes relative to their in-person counterparts. We fit a meta-analytic model containing method, response mode, and modality as well as their two- and three-way interactions, with the same random effects structure as our previous model. We cannot draw any strong conclusions about these noisy estimates due to our relatively small sample size. That said, descriptively, unmoderated online studies with looking measures were estimated to have noticeably smaller effect sizes compared to both their moderated online and in-person counterparts (See Table \ref{tab:modmeans}). In contrast, as estimated by this model, moderated online studies with looking and verbal measures as well as unmoderated online studies with verbal measures did not show such large differences from their in-person counterparts.
