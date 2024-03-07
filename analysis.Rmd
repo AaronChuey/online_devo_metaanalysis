@@ -268,6 +268,7 @@ main_mod <- rma.mv(yi = d_calc,
                    slab = short_cite, 
                    data = d_calc)
 summary(main_mod)
+round(main_mod$sigma2, 3)
 ```
 
 Check unweighted means. This incorrect approach is a good way to spot check if something is badly wrong. Indeed the mean difference is that online study ES are around .19 smaller. But a lot of the smallest ES are grouped within specific studies...
@@ -335,6 +336,7 @@ moderated_mod <- rma.mv(yi = d_calc,
                         slab = short_cite, 
                         data = d_calc)
 summary(moderated_mod)
+moderated_mod$tau2
 ```
 Sanity check of these estimated with unweighted means. Obviously incorrect, but if this looks different, we should debug. 
 

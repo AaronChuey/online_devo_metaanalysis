@@ -142,13 +142,19 @@ P <- W - W %*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
 
 online_res <- rma.mv(d_calc ~ 1, 
                    V = d_var_calc,
-                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
+                   random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                    slab = short_cite, 
                    data = d_calc %>% filter(expt_condition == "Online"))
 
 in_person_res <- rma.mv(d_calc ~ 1, 
                    V = d_var_calc,
-                   random = ~1 | as.factor(experiment_ID) / as.factor(same_infant), 
+                   random = ~1 | as.factor(paper_ID)/
+                     as.factor(experiment_ID)/
+                     as.factor(same_infant)/
+                     as.factor(idx), 
                    slab = short_cite, 
                    data = d_calc %>% filter(expt_condition == "In-person"))
 
@@ -238,7 +244,7 @@ ggarrange(moderated_plot, looking_plot, age_plot,
 
 Overall, the meta-analysis revealed a small negative, non-significant effect of online study modality, `r pull_coeffs(main_mod) |> stats_text(2)`. Additionally, we did not find any significant effect of our preregistered moderators or any significant interactions between the moderators and study modality. See Table \@ref(tab:coeffs) for coefficient values. Figure \@ref(fig:forest) shows the effect size differences of experiments by moderators. 
 
-Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all $p$s $< .0001$). Values of $\tau^2$ (the between-study variance in our meta-analysis) for all models were `r round(main_mod$tau2,2)` (primary model), `r round(moderated_mod$tau2,2)` (moderated vs. unmoderated model), `r round(looking_mod$tau2,2)` (looking-time model), and `r round(age_mod$tau2,2)` (age model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
+Because our meta-analysis averaged across effects from very different paradigms (which could yield different effect sizes independent of the effect of testing modality), we expected substantial heterogeneity. Consistent with that expectation, all tests for residual heterogeneity were highly significant (all $p$s $< .0001$). Values of $\sigma^2$ (the mean random effect variance of the model for each nested level, from level 1-4) for all models were `r round(main_mod$sigma2,2)` (primary model), `r round(moderated_mod$sigma2,2)` (moderated vs. unmoderated model), `r round(looking_mod$sigma2,2)` (looking-time model), and `r round(age_mod$sigma2,2)` (age model), respectively, confirming the impression that these moderators did not reduce heterogeneity.
 
 ## Exploratory Analysis
 
