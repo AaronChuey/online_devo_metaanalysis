@@ -1,0 +1,202 @@
+---
+title: "Random effects meta-analysis"
+author: "Mike Frank"
+date: "2024-03-05"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(metafor)
+library(here)
+library(assertthat)
+source(here("scripts/compute_es.R"))
+knitr::opts_chunk$set(
+  echo=F, warning=F, 
+  message=F, sanitize = T)
+
+d <- readxl::read_xlsx(here("Effect size coding (online testing MA).xlsx"))
+
+d <- d |>
+  rowwise() |>
+  mutate(short_cite = paste(str_c(str_split(authors, pattern = ",")[[1]][1], 
+                                  collapse = " "), ":",
+                            paste(str_split(main_title, pattern = " ")[[1]][1:2], 
+                                  collapse = " ")))
+d_calc <- d |>
+  ungroup() |>
+  mutate(idx = 1:n()) |>
+  group_by(idx) |>
+  nest() |>
+  mutate(data = map(data, function (df) {
+    es <- compute_es(participant_design = df$participant_design, 
+                     x_1 = df$x_1, x_2 = df$x_2, 
+                     SD_1 = df$SD_1, SD_2 = df$SD_2, n_1 = df$n_1, n_2 = df$n_2,
+                     t = df$t, f = df$F, d = df$d, d_var = df$d_var)
+    
+    bind_cols(df,es)
+  })) |>
+  unnest(cols = c(data)) |>
+  filter(!is.na(d_calc))
+d_calc$Age <- d_calc$mean_age_1 - mean(d_calc$mean_age_1)
+d_calc <- d_calc |>
+  mutate(response_mode = case_when(response_mode == "non-looking" ~ "Verbal",
+                                   response_mode == "looking" ~ "Looking")) %>% 
+  mutate(expt_condition = case_when(expt_condition == "online" ~ "Online",
+                                    expt_condition == "in-person" ~ "In-person")) %>% 
+  mutate(method = case_when(method == "moderated" ~ "Moderated",
+                            method == "unmoderated" ~ "Unmoderated"))
+```
+
+Let's explore nesting effects.
+
+This is a standard 2-level random effects meta analysis.
+
+```{r}
+noranef <- rma(yi = d_calc, 
+               vi = d_var_calc,
+               mods = as.factor(expt_condition),
+               slab = short_cite, 
+               data = d_calc)
+summary(noranef)
+```
+We can use `rma.mv` to produce the same result by nesting effects within `idx`, which is our unique identifier. 
+
+```{r}
+noranef2 <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(idx),
+                   slab = short_cite, 
+                   data = d_calc)
+summary(noranef2)
+```
+
+If we nest index within experiment, that gives us study-level grouping. 
+
+```{r}
+mod2 <- rma.mv(yi = d_calc, 
+               V = d_var_calc,
+               mods = as.factor(expt_condition),
+               random = ~1 | as.factor(experiment_ID) / as.factor(idx), 
+               slab = short_cite, 
+               data = d_calc)
+summary(mod2)
+```
+Note, in our analysis, we haven't been nesting `idx` explicitly. Does this matter? 
+
+```{r}
+mod2_noidx <- rma.mv(yi = d_calc, 
+                     V = d_var_calc,
+                     mods = as.factor(expt_condition),
+                     random = ~1 | as.factor(experiment_ID), 
+                     slab = short_cite, 
+                     data = d_calc)
+summary(mod2_noidx)
+
+```
+
+**YES** - it does and this was a mistake. We were assuming that there was no random distribution at the level of effects within an experiment.
+
+We could also nest all of this within paper if we wanted, for another level of grouping. 
+
+```{r}
+mod3 <- rma.mv(yi = d_calc, 
+               V = d_var_calc,
+               mods = as.factor(expt_condition),
+               random = ~1 | as.factor(paper_ID) / as.factor(experiment_ID) / as.factor(idx), 
+               slab = short_cite, 
+               data = d_calc)
+summary(mod3)
+```
+
+So that's a random effect structure that accounts for much of the grouping within our dataset. If you look at the variance components, all of these seem to be doing something, which is good.  
+
+The only issue is that sometimes the same infants are in multiple conditions and sometimes not. (Meaning there is another level of grouping). How often does this happen?  
+
+```{r}
+d_calc |>
+  select(paper_ID, experiment_ID, same_infant, idx)
+```
+
+Answer - quite a lot. So we need to deal with this grouping. 
+
+The problem is that sometimes `same_infant` is within experiment, and sometimes it cross-cuts experiments. 
+
+Paper 358 has the same six groups of kids with 9 different measures. So lots of different groups of kids doing different measures. We want `same_infant` nested within `experiment_id` here. 
+
+But then something like paper 12 has 2 experiments but the same samples did all of them. 
+
+How do we deal with this? You can try a specification like this one - but it seems not to work at all - it creates a fourth level of grouping and the third and forth are identical from a levels/variance perspective. 
+
+```{r}
+mod_same <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(paper_ID) / as.factor(experiment_ID) / as.factor(idx) + as.factor(paper_ID) / as.factor(same_infant) / as.factor(idx), 
+                   slab = short_cite, 
+                   data = d_calc)
+summary(mod_same)
+```
+
+What if we **just** use `same_infant` and not `experiment_ID`? This has 90 levels instead of 48 but also seems not completely appropriate. 
+
+```{r}
+mod_same2 <- rma.mv(yi = d_calc, 
+                    V = d_var_calc,
+                    mods = as.factor(expt_condition),
+                    random = ~1 | as.factor(paper_ID) / as.factor(same_infant) / as.factor(idx), 
+                    slab = short_cite, 
+                    data = d_calc)
+mod_same2
+```
+I believe based on all this exploration that `metafor` can fit highly *nested* random effects structures but not *crossed* random effect structures. This is problematic because we do have crossing of random effects. 
+
+We can pretend we don't and just nest experiment within same-infant but this is incorrect. The model will still fit, but I think then basically what is happening is that we are actually uniqifying experiments within same infant, e.g., not taking advantage of the idea that there is a shared experimental effect size even if there are two groups of infants. 
+
+```{r}
+mod_same3 <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(paper_ID) / as.factor(same_infant) / as.factor(experiment_ID) / as.factor(idx), 
+                   slab = short_cite, 
+                   data = d_calc)
+summary(mod_same3)
+```
+
+We can also do the same thing with `experiment_ID` inside `same_infant` - also inappropriate but in the opposite direction. 
+
+```{r}
+mod_same4 <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 | as.factor(paper_ID) / as.factor(experiment_ID) / as.factor(same_infant) / as.factor(idx), 
+                   slab = short_cite, 
+                   data = d_calc)
+summary(mod_same4)
+```
+I tend to think this last model is actually the best one. The reason is that there are more `same_infant` markers grouped within experiments than cutting across. So paper 358 is more representative than paper 12. You can see this because there are 48 experiments, with 107 `same_infant` groups within them. Whereas if we nest the other way, there are 90 `same_infant` groups with 107 experiments within them. So I *think* we get more bang for our buck with this grouping. 
+
+For kicks - compare to the same model without the paper ID and the idx. Does it do the same thing?
+
+```{r}
+mod_same5 <- rma.mv(yi = d_calc, 
+                   V = d_var_calc,
+                   mods = as.factor(expt_condition),
+                   random = ~1 |  as.factor(experiment_ID) / as.factor(same_infant) , 
+                   slab = short_cite, 
+                   data = d_calc)
+summary(mod_same5)
+```
+The answer is, very close - not numerically identical but similar. Maybe there's just not enough variance to partition into four different levels. 
+
+Let's look at tau^2 in the 4L model.
+
+```{r}
+summary(mod_same4)
+
+```
+
+
+
