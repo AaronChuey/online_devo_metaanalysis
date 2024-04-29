@@ -132,7 +132,7 @@ We preregistered several eligibility criteria to filter articles from our search
 
 4. All data reported or referred to must contain codable effect sizes. Verbal comparison alone between an online or in-person study or a qualitative description of results is not enough to determine the precise effect size of interest. 
 
-5. Data collection for both the in-person and online sample must be complete; any incomplete or partial samples were not considered.
+5. Data collection for both the in-person and online sample must be complete; any incomplete or partial samples were not considered. This criterion aimed to limit the inclusion of effect size estimates that might be biased by missing data, although in practice no datasets were excluded for being incomplete.
 
 6. The online and in-person methods must be directly comparable. Some alteration to the study methods is expected when adapting an in-person study to be run online (e.g., having children refer to objects by color instead of pointing). However, we excluded any studies whose methodologies altered the nature of the task or the conclusions that could be drawn from them (e.g., changing the identity of a hidden object instead of its location in a false belief task).
 
